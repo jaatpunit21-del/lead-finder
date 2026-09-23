@@ -1,0 +1,20 @@
+{
+  "name": "business-finder",
+  "version": "1.0.0",
+  "description": "Scrapes Google Maps and validates WhatsApp presence for USA & Canada businesses without websites",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "puppeteer": "^22.10.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "qrcode": "^1.5.3",
+    "whatsapp-web.js": "^1.34.7",
+    "ws": "^8.17.0"
+  },
+  "private": true
+}

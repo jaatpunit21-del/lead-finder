@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #FAF8F4; /* luxury-cream */
+    color: #111111; /* luxury-black */
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 0.02em;
+  }
+}
+
+@layer utilities {
+  .text-shadow-gold {
+    text-shadow: 0 2px 10px rgba(199, 168, 107, 0.2);
+  }
+  
+  .glassmorphism {
+    background: rgba(15, 39, 68, 0.85); /* Midnight Blue with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(199, 168, 107, 0.15); /* Soft Gold border */
+  }
+
+  .glassmorphism-light {
+    background: rgba(250, 248, 244, 0.85); /* Warm White with opacity */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(199, 168, 107, 0.1);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #DFCA9E 0%, #C7A86B 50%, #A3854B 100%);
+  }
+
+  .gold-border-glow {
+    box-shadow: 0 0 15px rgba(199, 168, 107, 0.15);
+    border: 1px solid rgba(199, 168, 107, 0.3);
+  }
+
+  .gold-border-glow:hover {
+    box-shadow: 0 0 25px rgba(199, 168, 107, 0.3);
+    border: 1px solid rgba(199, 168, 107, 0.6);
+  }
+}
+
+/* Animations for Fade-in Observer */
+.reveal {
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1.2s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Custom Scrollbar for premium experience */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF8F4;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C7A86B;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #A3854B;
+}
+
+/* Masonry Grid styles */
+.masonry-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-gap: 20px;
+}
+
+@media (min-width: 768px) {
+  .masonry-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .masonry-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

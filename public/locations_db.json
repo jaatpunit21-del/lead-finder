@@ -1,0 +1,4574 @@
+[
+  {
+    "name": "California",
+    "code": "CA",
+    "country": "USA",
+    "population": 38965193,
+    "cities": [
+      {
+        "name": "Los Angeles",
+        "population": 3884307
+      },
+      {
+        "name": "San Diego",
+        "population": 1355896
+      },
+      {
+        "name": "San Jose",
+        "population": 998537
+      },
+      {
+        "name": "San Francisco",
+        "population": 837442
+      },
+      {
+        "name": "Fresno",
+        "population": 509924
+      },
+      {
+        "name": "Sacramento",
+        "population": 479686
+      },
+      {
+        "name": "Long Beach",
+        "population": 469428
+      },
+      {
+        "name": "Oakland",
+        "population": 406253
+      },
+      {
+        "name": "Bakersfield",
+        "population": 363630
+      },
+      {
+        "name": "Anaheim",
+        "population": 345012
+      },
+      {
+        "name": "Santa Ana",
+        "population": 334227
+      },
+      {
+        "name": "Riverside",
+        "population": 316619
+      },
+      {
+        "name": "Stockton",
+        "population": 298118
+      },
+      {
+        "name": "Chula Vista",
+        "population": 256780
+      },
+      {
+        "name": "Irvine",
+        "population": 236716
+      },
+      {
+        "name": "Fremont",
+        "population": 224922
+      },
+      {
+        "name": "San Bernardino",
+        "population": 213708
+      },
+      {
+        "name": "Modesto",
+        "population": 204933
+      },
+      {
+        "name": "Oxnard",
+        "population": 203007
+      },
+      {
+        "name": "Fontana",
+        "population": 203003
+      },
+      {
+        "name": "Moreno Valley",
+        "population": 201175
+      },
+      {
+        "name": "Huntington Beach",
+        "population": 197575
+      },
+      {
+        "name": "Glendale",
+        "population": 196021
+      },
+      {
+        "name": "Santa Clarita",
+        "population": 179590
+      },
+      {
+        "name": "Garden Grove",
+        "population": 175140
+      },
+      {
+        "name": "Oceanside",
+        "population": 172794
+      },
+      {
+        "name": "Santa Rosa",
+        "population": 171990
+      },
+      {
+        "name": "Rancho Cucamonga",
+        "population": 171386
+      },
+      {
+        "name": "Ontario",
+        "population": 167500
+      },
+      {
+        "name": "Elk Grove",
+        "population": 161007
+      },
+      {
+        "name": "Lancaster",
+        "population": 159523
+      },
+      {
+        "name": "Corona",
+        "population": 159503
+      },
+      {
+        "name": "Palmdale",
+        "population": 157161
+      },
+      {
+        "name": "Salinas",
+        "population": 155662
+      },
+      {
+        "name": "Hayward",
+        "population": 151574
+      },
+      {
+        "name": "Pomona",
+        "population": 151348
+      },
+      {
+        "name": "Escondido",
+        "population": 148738
+      },
+      {
+        "name": "Sunnyvale",
+        "population": 147559
+      },
+      {
+        "name": "Torrance",
+        "population": 147478
+      },
+      {
+        "name": "Orange",
+        "population": 139969
+      },
+      {
+        "name": "Pasadena",
+        "population": 139731
+      },
+      {
+        "name": "Fullerton",
+        "population": 138981
+      },
+      {
+        "name": "Thousand Oaks",
+        "population": 128731
+      },
+      {
+        "name": "Visalia",
+        "population": 127763
+      },
+      {
+        "name": "Roseville",
+        "population": 127035
+      },
+      {
+        "name": "Simi Valley",
+        "population": 126181
+      },
+      {
+        "name": "Concord",
+        "population": 125880
+      },
+      {
+        "name": "Victorville",
+        "population": 121096
+      },
+      {
+        "name": "Santa Clara",
+        "population": 120245
+      },
+      {
+        "name": "Vallejo",
+        "population": 118837
+      },
+      {
+        "name": "Berkeley",
+        "population": 116768
+      },
+      {
+        "name": "El Monte",
+        "population": 115708
+      },
+      {
+        "name": "Downey",
+        "population": 113242
+      },
+      {
+        "name": "Costa Mesa",
+        "population": 112174
+      },
+      {
+        "name": "Inglewood",
+        "population": 111542
+      },
+      {
+        "name": "Carlsbad",
+        "population": 110972
+      },
+      {
+        "name": "Fairfield",
+        "population": 109320
+      },
+      {
+        "name": "San Buenaventura (Ventura)",
+        "population": 108817
+      },
+      {
+        "name": "West Covina",
+        "population": 107740
+      },
+      {
+        "name": "Richmond",
+        "population": 107571
+      },
+      {
+        "name": "Murrieta",
+        "population": 107479
+      },
+      {
+        "name": "Antioch",
+        "population": 107100
+      },
+      {
+        "name": "Temecula",
+        "population": 106780
+      },
+      {
+        "name": "Norwalk",
+        "population": 106589
+      },
+      {
+        "name": "Daly City",
+        "population": 104739
+      },
+      {
+        "name": "Burbank",
+        "population": 104709
+      },
+      {
+        "name": "Santa Maria",
+        "population": 102216
+      },
+      {
+        "name": "El Cajon",
+        "population": 102211
+      },
+      {
+        "name": "Rialto",
+        "population": 101910
+      },
+      {
+        "name": "San Mateo",
+        "population": 101128
+      },
+      {
+        "name": "Clovis",
+        "population": 99769
+      },
+      {
+        "name": "Jurupa Valley",
+        "population": 98030
+      },
+      {
+        "name": "Compton",
+        "population": 97877
+      },
+      {
+        "name": "Vista",
+        "population": 96929
+      },
+      {
+        "name": "Mission Viejo",
+        "population": 96346
+      },
+      {
+        "name": "South Gate",
+        "population": 95677
+      },
+      {
+        "name": "Vacaville",
+        "population": 94275
+      },
+      {
+        "name": "Carson",
+        "population": 92599
+      },
+      {
+        "name": "Santa Monica",
+        "population": 92472
+      },
+      {
+        "name": "Hesperia",
+        "population": 92147
+      },
+      {
+        "name": "Westminster",
+        "population": 91739
+      },
+      {
+        "name": "Redding",
+        "population": 91119
+      },
+      {
+        "name": "Santa Barbara",
+        "population": 90412
+      },
+      {
+        "name": "San Marcos",
+        "population": 89387
+      },
+      {
+        "name": "Chico",
+        "population": 88077
+      },
+      {
+        "name": "San Leandro",
+        "population": 87965
+      },
+      {
+        "name": "Newport Beach",
+        "population": 87273
+      },
+      {
+        "name": "Whittier",
+        "population": 86635
+      },
+      {
+        "name": "Hawthorne",
+        "population": 86199
+      },
+      {
+        "name": "Citrus Heights",
+        "population": 85285
+      },
+      {
+        "name": "Livermore",
+        "population": 85156
+      },
+      {
+        "name": "Tracy",
+        "population": 84691
+      },
+      {
+        "name": "Alhambra",
+        "population": 84577
+      },
+      {
+        "name": "Indio",
+        "population": 83539
+      },
+      {
+        "name": "Menifee",
+        "population": 83447
+      },
+      {
+        "name": "Buena Park",
+        "population": 82882
+      },
+      {
+        "name": "Hemet",
+        "population": 81750
+      },
+      {
+        "name": "Lakewood",
+        "population": 81121
+      },
+      {
+        "name": "Merced",
+        "population": 81102
+      },
+      {
+        "name": "Chino",
+        "population": 80988
+      },
+      {
+        "name": "Redwood City",
+        "population": 80872
+      },
+      {
+        "name": "Lake Forest",
+        "population": 79312
+      },
+      {
+        "name": "Napa",
+        "population": 79068
+      },
+      {
+        "name": "Tustin",
+        "population": 78327
+      },
+      {
+        "name": "Mountain View",
+        "population": 77846
+      },
+      {
+        "name": "Bellflower",
+        "population": 77593
+      },
+      {
+        "name": "Baldwin Park",
+        "population": 76635
+      },
+      {
+        "name": "Chino Hills",
+        "population": 76572
+      },
+      {
+        "name": "Alameda",
+        "population": 76419
+      },
+      {
+        "name": "Upland",
+        "population": 75413
+      },
+      {
+        "name": "San Ramon",
+        "population": 74513
+      },
+      {
+        "name": "Pleasanton",
+        "population": 74110
+      },
+      {
+        "name": "Folsom",
+        "population": 73098
+      },
+      {
+        "name": "Union City",
+        "population": 72528
+      },
+      {
+        "name": "Perris",
+        "population": 72326
+      },
+      {
+        "name": "Manteca",
+        "population": 71948
+      },
+      {
+        "name": "Lynwood",
+        "population": 71371
+      },
+      {
+        "name": "Apple Valley",
+        "population": 70924
+      },
+      {
+        "name": "Turlock",
+        "population": 70365
+      },
+      {
+        "name": "Redlands",
+        "population": 69999
+      },
+      {
+        "name": "Milpitas",
+        "population": 69783
+      },
+      {
+        "name": "Rancho Cordova",
+        "population": 67911
+      },
+      {
+        "name": "Redondo Beach",
+        "population": 67815
+      },
+      {
+        "name": "Yorba Linda",
+        "population": 67032
+      },
+      {
+        "name": "Walnut Creek",
+        "population": 66900
+      },
+      {
+        "name": "Pittsburg",
+        "population": 66695
+      },
+      {
+        "name": "Palo Alto",
+        "population": 66642
+      },
+      {
+        "name": "Davis",
+        "population": 66205
+      },
+      {
+        "name": "South San Francisco",
+        "population": 66174
+      },
+      {
+        "name": "Camarillo",
+        "population": 66086
+      },
+      {
+        "name": "Yuba City",
+        "population": 65416
+      },
+      {
+        "name": "San Clemente",
+        "population": 65040
+      },
+      {
+        "name": "Laguna Niguel",
+        "population": 64652
+      },
+      {
+        "name": "Pico Rivera",
+        "population": 63771
+      },
+      {
+        "name": "Montebello",
+        "population": 63495
+      },
+      {
+        "name": "Lodi",
+        "population": 63338
+      },
+      {
+        "name": "Madera",
+        "population": 63105
+      },
+      {
+        "name": "Santa Cruz",
+        "population": 62864
+      },
+      {
+        "name": "La Habra",
+        "population": 61653
+      },
+      {
+        "name": "Encinitas",
+        "population": 61588
+      },
+      {
+        "name": "Tulare",
+        "population": 61170
+      },
+      {
+        "name": "Monterey Park",
+        "population": 61085
+      },
+      {
+        "name": "Cupertino",
+        "population": 60189
+      },
+      {
+        "name": "Gardena",
+        "population": 59957
+      },
+      {
+        "name": "National City",
+        "population": 59834
+      },
+      {
+        "name": "Rocklin",
+        "population": 59738
+      },
+      {
+        "name": "Petaluma",
+        "population": 59440
+      },
+      {
+        "name": "San Rafael",
+        "population": 58994
+      },
+      {
+        "name": "Huntington Park",
+        "population": 58879
+      },
+      {
+        "name": "La Mesa",
+        "population": 58642
+      },
+      {
+        "name": "Arcadia",
+        "population": 57639
+      },
+      {
+        "name": "Lake Elsinore",
+        "population": 57525
+      },
+      {
+        "name": "Fountain Valley",
+        "population": 56707
+      },
+      {
+        "name": "Woodland",
+        "population": 56590
+      },
+      {
+        "name": "Diamond Bar",
+        "population": 56449
+      },
+      {
+        "name": "Santee",
+        "population": 56105
+      },
+      {
+        "name": "Eastvale",
+        "population": 55191
+      },
+      {
+        "name": "Porterville",
+        "population": 55174
+      },
+      {
+        "name": "Brentwood",
+        "population": 55000
+      },
+      {
+        "name": "Paramount",
+        "population": 54980
+      },
+      {
+        "name": "Hanford",
+        "population": 54686
+      },
+      {
+        "name": "Rosemead",
+        "population": 54561
+      },
+      {
+        "name": "Highland",
+        "population": 54291
+      },
+      {
+        "name": "Novato",
+        "population": 54194
+      },
+      {
+        "name": "Colton",
+        "population": 53243
+      },
+      {
+        "name": "Cathedral City",
+        "population": 52977
+      },
+      {
+        "name": "Yucaipa",
+        "population": 52536
+      },
+      {
+        "name": "Watsonville",
+        "population": 52477
+      },
+      {
+        "name": "Delano",
+        "population": 52403
+      },
+      {
+        "name": "Placentia",
+        "population": 52206
+      },
+      {
+        "name": "Dublin",
+        "population": 52105
+      },
+      {
+        "name": "Gilroy",
+        "population": 51701
+      },
+      {
+        "name": "Glendora",
+        "population": 51074
+      },
+      {
+        "name": "Palm Desert",
+        "population": 50508
+      },
+      {
+        "name": "Aliso Viejo",
+        "population": 50175
+      },
+      {
+        "name": "West Sacramento",
+        "population": 49891
+      },
+      {
+        "name": "Cerritos",
+        "population": 49707
+      },
+      {
+        "name": "Poway",
+        "population": 49417
+      },
+      {
+        "name": "Rancho Santa Margarita",
+        "population": 49228
+      },
+      {
+        "name": "La Mirada",
+        "population": 49133
+      },
+      {
+        "name": "Cypress",
+        "population": 49087
+      },
+      {
+        "name": "Covina",
+        "population": 48508
+      },
+      {
+        "name": "Azusa",
+        "population": 47842
+      },
+      {
+        "name": "Ceres",
+        "population": 46714
+      },
+      {
+        "name": "San Luis Obispo",
+        "population": 46377
+      },
+      {
+        "name": "Palm Springs",
+        "population": 46281
+      },
+      {
+        "name": "San Jacinto",
+        "population": 45851
+      },
+      {
+        "name": "Lincoln",
+        "population": 45237
+      },
+      {
+        "name": "Newark",
+        "population": 44096
+      },
+      {
+        "name": "Lompoc",
+        "population": 43509
+      },
+      {
+        "name": "El Centro",
+        "population": 43363
+      },
+      {
+        "name": "Danville",
+        "population": 43341
+      },
+      {
+        "name": "Coachella",
+        "population": 43092
+      },
+      {
+        "name": "Bell Gardens",
+        "population": 42889
+      },
+      {
+        "name": "Rancho Palos Verdes",
+        "population": 42448
+      },
+      {
+        "name": "San Bruno",
+        "population": 42443
+      },
+      {
+        "name": "Rohnert Park",
+        "population": 41398
+      },
+      {
+        "name": "Brea",
+        "population": 40963
+      },
+      {
+        "name": "Morgan Hill",
+        "population": 40836
+      },
+      {
+        "name": "Campbell",
+        "population": 40584
+      },
+      {
+        "name": "Beaumont",
+        "population": 40481
+      },
+      {
+        "name": "La Puente",
+        "population": 40435
+      },
+      {
+        "name": "San Gabriel",
+        "population": 40275
+      },
+      {
+        "name": "Culver City",
+        "population": 39428
+      },
+      {
+        "name": "Calexico",
+        "population": 39389
+      },
+      {
+        "name": "La Quinta",
+        "population": 39331
+      },
+      {
+        "name": "Stanton",
+        "population": 38623
+      },
+      {
+        "name": "Pacifica",
+        "population": 38606
+      },
+      {
+        "name": "Oakley",
+        "population": 38194
+      },
+      {
+        "name": "Montclair",
+        "population": 38027
+      },
+      {
+        "name": "Martinez",
+        "population": 37165
+      },
+      {
+        "name": "Monrovia",
+        "population": 37101
+      }
+    ]
+  },
+  {
+    "name": "Texas",
+    "code": "TX",
+    "country": "USA",
+    "population": 30503301,
+    "cities": [
+      {
+        "name": "Houston",
+        "population": 2195914
+      },
+      {
+        "name": "San Antonio",
+        "population": 1409019
+      },
+      {
+        "name": "Dallas",
+        "population": 1257676
+      },
+      {
+        "name": "Austin",
+        "population": 885400
+      },
+      {
+        "name": "Fort Worth",
+        "population": 792727
+      },
+      {
+        "name": "El Paso",
+        "population": 674433
+      },
+      {
+        "name": "Arlington",
+        "population": 379577
+      },
+      {
+        "name": "Corpus Christi",
+        "population": 316381
+      },
+      {
+        "name": "Plano",
+        "population": 274409
+      },
+      {
+        "name": "Laredo",
+        "population": 248142
+      },
+      {
+        "name": "Lubbock",
+        "population": 239538
+      },
+      {
+        "name": "Garland",
+        "population": 234566
+      },
+      {
+        "name": "Irving",
+        "population": 228653
+      },
+      {
+        "name": "Amarillo",
+        "population": 196429
+      },
+      {
+        "name": "Grand Prairie",
+        "population": 183372
+      },
+      {
+        "name": "Brownsville",
+        "population": 181860
+      },
+      {
+        "name": "Pasadena",
+        "population": 152735
+      },
+      {
+        "name": "McKinney",
+        "population": 148559
+      },
+      {
+        "name": "Mesquite",
+        "population": 143484
+      },
+      {
+        "name": "Killeen",
+        "population": 137147
+      },
+      {
+        "name": "Frisco",
+        "population": 136791
+      },
+      {
+        "name": "McAllen",
+        "population": 136639
+      },
+      {
+        "name": "Waco",
+        "population": 129030
+      },
+      {
+        "name": "Carrollton",
+        "population": 126700
+      },
+      {
+        "name": "Midland",
+        "population": 123933
+      },
+      {
+        "name": "Denton",
+        "population": 123099
+      },
+      {
+        "name": "Abilene",
+        "population": 120099
+      },
+      {
+        "name": "Beaumont",
+        "population": 117796
+      },
+      {
+        "name": "Odessa",
+        "population": 110720
+      },
+      {
+        "name": "Round Rock",
+        "population": 109821
+      },
+      {
+        "name": "Wichita Falls",
+        "population": 104898
+      },
+      {
+        "name": "Richardson",
+        "population": 104475
+      },
+      {
+        "name": "Lewisville",
+        "population": 101074
+      },
+      {
+        "name": "Tyler",
+        "population": 100223
+      },
+      {
+        "name": "Pearland",
+        "population": 100065
+      },
+      {
+        "name": "College Station",
+        "population": 100050
+      },
+      {
+        "name": "San Angelo",
+        "population": 97492
+      },
+      {
+        "name": "Allen",
+        "population": 92020
+      },
+      {
+        "name": "League City",
+        "population": 90983
+      },
+      {
+        "name": "Sugar Land",
+        "population": 83860
+      },
+      {
+        "name": "Longview",
+        "population": 81443
+      },
+      {
+        "name": "Mission",
+        "population": 81050
+      },
+      {
+        "name": "Edinburg",
+        "population": 80836
+      },
+      {
+        "name": "Bryan",
+        "population": 78709
+      },
+      {
+        "name": "Baytown",
+        "population": 75418
+      },
+      {
+        "name": "Pharr",
+        "population": 73790
+      },
+      {
+        "name": "Temple",
+        "population": 70190
+      },
+      {
+        "name": "Missouri City",
+        "population": 70185
+      },
+      {
+        "name": "Flower Mound",
+        "population": 68609
+      },
+      {
+        "name": "North Richland Hills",
+        "population": 67317
+      },
+      {
+        "name": "Harlingen",
+        "population": 65665
+      },
+      {
+        "name": "Victoria",
+        "population": 65098
+      },
+      {
+        "name": "New Braunfels",
+        "population": 63279
+      },
+      {
+        "name": "Conroe",
+        "population": 63032
+      },
+      {
+        "name": "Cedar Park",
+        "population": 61238
+      },
+      {
+        "name": "Mansfield",
+        "population": 60872
+      },
+      {
+        "name": "Rowlett",
+        "population": 58043
+      },
+      {
+        "name": "Georgetown",
+        "population": 54898
+      },
+      {
+        "name": "Port Arthur",
+        "population": 54135
+      },
+      {
+        "name": "San Marcos",
+        "population": 54076
+      },
+      {
+        "name": "Pflugerville",
+        "population": 53752
+      },
+      {
+        "name": "Euless",
+        "population": 53224
+      },
+      {
+        "name": "DeSoto",
+        "population": 51483
+      },
+      {
+        "name": "Grapevine",
+        "population": 50195
+      },
+      {
+        "name": "Galveston",
+        "population": 48733
+      },
+      {
+        "name": "Bedford",
+        "population": 48592
+      },
+      {
+        "name": "Cedar Hill",
+        "population": 46663
+      },
+      {
+        "name": "Texas City",
+        "population": 46081
+      },
+      {
+        "name": "Wylie",
+        "population": 44575
+      },
+      {
+        "name": "Haltom City",
+        "population": 43580
+      },
+      {
+        "name": "Keller",
+        "population": 42907
+      },
+      {
+        "name": "Rockwall",
+        "population": 40922
+      },
+      {
+        "name": "Burleson",
+        "population": 40714
+      },
+      {
+        "name": "Coppell",
+        "population": 40342
+      },
+      {
+        "name": "Huntsville",
+        "population": 39795
+      },
+      {
+        "name": "Duncanville",
+        "population": 39605
+      },
+      {
+        "name": "The Colony",
+        "population": 39458
+      },
+      {
+        "name": "Sherman",
+        "population": 39296
+      },
+      {
+        "name": "Hurst",
+        "population": 38448
+      },
+      {
+        "name": "Lancaster",
+        "population": 38071
+      },
+      {
+        "name": "Friendswood",
+        "population": 37587
+      },
+      {
+        "name": "Texarkana",
+        "population": 37442
+      },
+      {
+        "name": "Weslaco",
+        "population": 37093
+      }
+    ]
+  },
+  {
+    "name": "Florida",
+    "code": "FL",
+    "country": "USA",
+    "population": 22610726,
+    "cities": [
+      {
+        "name": "Jacksonville",
+        "population": 842583
+      },
+      {
+        "name": "Miami",
+        "population": 417650
+      },
+      {
+        "name": "Tampa",
+        "population": 352957
+      },
+      {
+        "name": "Orlando",
+        "population": 255483
+      },
+      {
+        "name": "St. Petersburg",
+        "population": 249688
+      },
+      {
+        "name": "Hialeah",
+        "population": 233394
+      },
+      {
+        "name": "Tallahassee",
+        "population": 186411
+      },
+      {
+        "name": "Fort Lauderdale",
+        "population": 172389
+      },
+      {
+        "name": "Port St. Lucie",
+        "population": 171016
+      },
+      {
+        "name": "Cape Coral",
+        "population": 165831
+      },
+      {
+        "name": "Pembroke Pines",
+        "population": 162329
+      },
+      {
+        "name": "Hollywood",
+        "population": 146526
+      },
+      {
+        "name": "Miramar",
+        "population": 130288
+      },
+      {
+        "name": "Gainesville",
+        "population": 127488
+      },
+      {
+        "name": "Coral Springs",
+        "population": 126604
+      },
+      {
+        "name": "Miami Gardens",
+        "population": 111378
+      },
+      {
+        "name": "Clearwater",
+        "population": 109703
+      },
+      {
+        "name": "Palm Bay",
+        "population": 104898
+      },
+      {
+        "name": "Pompano Beach",
+        "population": 104410
+      },
+      {
+        "name": "West Palm Beach",
+        "population": 102436
+      },
+      {
+        "name": "Lakeland",
+        "population": 100710
+      },
+      {
+        "name": "Davie",
+        "population": 96830
+      },
+      {
+        "name": "Miami Beach",
+        "population": 91026
+      },
+      {
+        "name": "Plantation",
+        "population": 90268
+      },
+      {
+        "name": "Sunrise",
+        "population": 90116
+      },
+      {
+        "name": "Boca Raton",
+        "population": 89407
+      },
+      {
+        "name": "Deltona",
+        "population": 86290
+      },
+      {
+        "name": "Palm Coast",
+        "population": 78740
+      },
+      {
+        "name": "Largo",
+        "population": 78409
+      },
+      {
+        "name": "Deerfield Beach",
+        "population": 78041
+      },
+      {
+        "name": "Melbourne",
+        "population": 77508
+      },
+      {
+        "name": "Boynton Beach",
+        "population": 71097
+      },
+      {
+        "name": "Lauderhill",
+        "population": 69813
+      },
+      {
+        "name": "Weston",
+        "population": 68388
+      },
+      {
+        "name": "Fort Myers",
+        "population": 68190
+      },
+      {
+        "name": "Kissimmee",
+        "population": 65173
+      },
+      {
+        "name": "Homestead",
+        "population": 64079
+      },
+      {
+        "name": "Delray Beach",
+        "population": 64072
+      },
+      {
+        "name": "Tamarac",
+        "population": 63155
+      },
+      {
+        "name": "Daytona Beach",
+        "population": 62316
+      },
+      {
+        "name": "North Miami",
+        "population": 61007
+      },
+      {
+        "name": "Wellington",
+        "population": 60202
+      },
+      {
+        "name": "North Port",
+        "population": 59212
+      },
+      {
+        "name": "Jupiter",
+        "population": 58298
+      },
+      {
+        "name": "Ocala",
+        "population": 57468
+      },
+      {
+        "name": "Port Orange",
+        "population": 57203
+      },
+      {
+        "name": "Coconut Creek",
+        "population": 56792
+      },
+      {
+        "name": "Sanford",
+        "population": 56002
+      },
+      {
+        "name": "Margate",
+        "population": 55456
+      },
+      {
+        "name": "Sarasota",
+        "population": 53326
+      },
+      {
+        "name": "Pensacola",
+        "population": 52703
+      },
+      {
+        "name": "Bradenton",
+        "population": 51763
+      },
+      {
+        "name": "Palm Beach Gardens",
+        "population": 50699
+      },
+      {
+        "name": "Doral",
+        "population": 50213
+      },
+      {
+        "name": "Pinellas Park",
+        "population": 49998
+      },
+      {
+        "name": "Coral Gables",
+        "population": 49631
+      },
+      {
+        "name": "Bonita Springs",
+        "population": 47547
+      },
+      {
+        "name": "Apopka",
+        "population": 45587
+      },
+      {
+        "name": "Titusville",
+        "population": 44206
+      },
+      {
+        "name": "Cutler Bay",
+        "population": 43328
+      },
+      {
+        "name": "Oakland Park",
+        "population": 43286
+      },
+      {
+        "name": "North Miami Beach",
+        "population": 43250
+      },
+      {
+        "name": "Fort Pierce",
+        "population": 43074
+      },
+      {
+        "name": "North Lauderdale",
+        "population": 42757
+      },
+      {
+        "name": "Altamonte Springs",
+        "population": 42150
+      },
+      {
+        "name": "St. Cloud",
+        "population": 40918
+      },
+      {
+        "name": "Ocoee",
+        "population": 39172
+      },
+      {
+        "name": "Greenacres",
+        "population": 38696
+      },
+      {
+        "name": "Ormond Beach",
+        "population": 38661
+      },
+      {
+        "name": "Hallandale Beach",
+        "population": 38632
+      },
+      {
+        "name": "Winter Garden",
+        "population": 37711
+      },
+      {
+        "name": "Aventura",
+        "population": 37199
+      },
+      {
+        "name": "Panama City",
+        "population": 36877
+      }
+    ]
+  },
+  {
+    "name": "New York",
+    "code": "NY",
+    "country": "USA",
+    "population": 19571216,
+    "cities": [
+      {
+        "name": "New York",
+        "population": 8405837
+      },
+      {
+        "name": "Buffalo",
+        "population": 258959
+      },
+      {
+        "name": "Rochester",
+        "population": 210358
+      },
+      {
+        "name": "Yonkers",
+        "population": 199766
+      },
+      {
+        "name": "Syracuse",
+        "population": 144669
+      },
+      {
+        "name": "Albany",
+        "population": 98424
+      },
+      {
+        "name": "New Rochelle",
+        "population": 79446
+      },
+      {
+        "name": "Mount Vernon",
+        "population": 68224
+      },
+      {
+        "name": "Schenectady",
+        "population": 65902
+      },
+      {
+        "name": "Utica",
+        "population": 61808
+      },
+      {
+        "name": "White Plains",
+        "population": 57866
+      },
+      {
+        "name": "Hempstead",
+        "population": 55361
+      },
+      {
+        "name": "Troy",
+        "population": 49974
+      },
+      {
+        "name": "Niagara Falls",
+        "population": 49468
+      },
+      {
+        "name": "Binghamton",
+        "population": 46444
+      },
+      {
+        "name": "Freeport",
+        "population": 43167
+      },
+      {
+        "name": "Valley Stream",
+        "population": 37659
+      }
+    ]
+  },
+  {
+    "name": "Ontario",
+    "code": "ON",
+    "country": "Canada",
+    "population": 15608369,
+    "cities": [
+      {
+        "name": "Toronto",
+        "population": 5213000
+      },
+      {
+        "name": "Ottawa",
+        "population": 1145000
+      },
+      {
+        "name": "Hamilton",
+        "population": 721053
+      },
+      {
+        "name": "Oshawa",
+        "population": 450963
+      },
+      {
+        "name": "Kitchener",
+        "population": 417001
+      },
+      {
+        "name": "London",
+        "population": 346765
+      },
+      {
+        "name": "Windsor",
+        "population": 319246
+      },
+      {
+        "name": "Barrie",
+        "population": 182041
+      },
+      {
+        "name": "Sudbury",
+        "population": 157857
+      },
+      {
+        "name": "Sarnia",
+        "population": 144172
+      }
+    ]
+  },
+  {
+    "name": "Pennsylvania",
+    "code": "PA",
+    "country": "USA",
+    "population": 12961683,
+    "cities": [
+      {
+        "name": "Philadelphia",
+        "population": 1553165
+      },
+      {
+        "name": "Pittsburgh",
+        "population": 305841
+      },
+      {
+        "name": "Allentown",
+        "population": 118577
+      },
+      {
+        "name": "Erie",
+        "population": 100671
+      },
+      {
+        "name": "Reading",
+        "population": 87893
+      },
+      {
+        "name": "Scranton",
+        "population": 75806
+      },
+      {
+        "name": "Bethlehem",
+        "population": 75018
+      },
+      {
+        "name": "Lancaster",
+        "population": 59325
+      },
+      {
+        "name": "Harrisburg",
+        "population": 49188
+      },
+      {
+        "name": "Altoona",
+        "population": 45796
+      },
+      {
+        "name": "York",
+        "population": 43935
+      },
+      {
+        "name": "State College",
+        "population": 41757
+      },
+      {
+        "name": "Wilkes-Barre",
+        "population": 41108
+      }
+    ]
+  },
+  {
+    "name": "Illinois",
+    "code": "IL",
+    "country": "USA",
+    "population": 12549689,
+    "cities": [
+      {
+        "name": "Chicago",
+        "population": 2718782
+      },
+      {
+        "name": "Aurora",
+        "population": 199963
+      },
+      {
+        "name": "Rockford",
+        "population": 150251
+      },
+      {
+        "name": "Joliet",
+        "population": 147806
+      },
+      {
+        "name": "Naperville",
+        "population": 144864
+      },
+      {
+        "name": "Springfield",
+        "population": 117006
+      },
+      {
+        "name": "Peoria",
+        "population": 116513
+      },
+      {
+        "name": "Elgin",
+        "population": 110145
+      },
+      {
+        "name": "Waukegan",
+        "population": 88826
+      },
+      {
+        "name": "Cicero",
+        "population": 84103
+      },
+      {
+        "name": "Champaign",
+        "population": 83424
+      },
+      {
+        "name": "Bloomington",
+        "population": 78902
+      },
+      {
+        "name": "Arlington Heights",
+        "population": 75994
+      },
+      {
+        "name": "Evanston",
+        "population": 75570
+      },
+      {
+        "name": "Schaumburg",
+        "population": 74907
+      },
+      {
+        "name": "Decatur",
+        "population": 74710
+      },
+      {
+        "name": "Bolingbrook",
+        "population": 73936
+      },
+      {
+        "name": "Palatine",
+        "population": 69350
+      },
+      {
+        "name": "Skokie",
+        "population": 65176
+      },
+      {
+        "name": "Des Plaines",
+        "population": 58918
+      },
+      {
+        "name": "Orland Park",
+        "population": 58590
+      },
+      {
+        "name": "Tinley Park",
+        "population": 57282
+      },
+      {
+        "name": "Oak Lawn",
+        "population": 57073
+      },
+      {
+        "name": "Berwyn",
+        "population": 56758
+      },
+      {
+        "name": "Mount Prospect",
+        "population": 54771
+      },
+      {
+        "name": "Normal",
+        "population": 54664
+      },
+      {
+        "name": "Wheaton",
+        "population": 53648
+      },
+      {
+        "name": "Hoffman Estates",
+        "population": 52398
+      },
+      {
+        "name": "Oak Park",
+        "population": 52066
+      },
+      {
+        "name": "Downers Grove",
+        "population": 49670
+      },
+      {
+        "name": "Elmhurst",
+        "population": 45556
+      },
+      {
+        "name": "Glenview",
+        "population": 45417
+      },
+      {
+        "name": "Lombard",
+        "population": 43907
+      },
+      {
+        "name": "DeKalb",
+        "population": 43849
+      },
+      {
+        "name": "Moline",
+        "population": 43116
+      },
+      {
+        "name": "Belleville",
+        "population": 42895
+      },
+      {
+        "name": "Buffalo Grove",
+        "population": 41778
+      },
+      {
+        "name": "Urbana",
+        "population": 41752
+      },
+      {
+        "name": "Plainfield",
+        "population": 41734
+      },
+      {
+        "name": "Bartlett",
+        "population": 41679
+      },
+      {
+        "name": "Quincy",
+        "population": 40915
+      },
+      {
+        "name": "Crystal Lake",
+        "population": 40388
+      },
+      {
+        "name": "Carol Stream",
+        "population": 40379
+      },
+      {
+        "name": "Streamwood",
+        "population": 40351
+      },
+      {
+        "name": "Romeoville",
+        "population": 39650
+      },
+      {
+        "name": "Rock Island",
+        "population": 38877
+      },
+      {
+        "name": "Hanover Park",
+        "population": 38510
+      },
+      {
+        "name": "Carpentersville",
+        "population": 38241
+      },
+      {
+        "name": "Wheeling",
+        "population": 38015
+      },
+      {
+        "name": "Park Ridge",
+        "population": 37839
+      },
+      {
+        "name": "Addison",
+        "population": 37385
+      },
+      {
+        "name": "Calumet City",
+        "population": 37240
+      }
+    ]
+  },
+  {
+    "name": "Ohio",
+    "code": "OH",
+    "country": "USA",
+    "population": 11785935,
+    "cities": [
+      {
+        "name": "Columbus",
+        "population": 822553
+      },
+      {
+        "name": "Cleveland",
+        "population": 390113
+      },
+      {
+        "name": "Cincinnati",
+        "population": 297517
+      },
+      {
+        "name": "Toledo",
+        "population": 282313
+      },
+      {
+        "name": "Akron",
+        "population": 198100
+      },
+      {
+        "name": "Dayton",
+        "population": 143355
+      },
+      {
+        "name": "Parma",
+        "population": 80429
+      },
+      {
+        "name": "Canton",
+        "population": 72535
+      },
+      {
+        "name": "Youngstown",
+        "population": 65184
+      },
+      {
+        "name": "Lorain",
+        "population": 63710
+      },
+      {
+        "name": "Hamilton",
+        "population": 62258
+      },
+      {
+        "name": "Springfield",
+        "population": 59357
+      },
+      {
+        "name": "Kettering",
+        "population": 55870
+      },
+      {
+        "name": "Elyria",
+        "population": 53956
+      },
+      {
+        "name": "Lakewood",
+        "population": 51143
+      },
+      {
+        "name": "Cuyahoga Falls",
+        "population": 49267
+      },
+      {
+        "name": "Middletown",
+        "population": 48630
+      },
+      {
+        "name": "Euclid",
+        "population": 48139
+      },
+      {
+        "name": "Newark",
+        "population": 47777
+      },
+      {
+        "name": "Mentor",
+        "population": 46979
+      },
+      {
+        "name": "Mansfield",
+        "population": 46454
+      },
+      {
+        "name": "Beavercreek",
+        "population": 45712
+      },
+      {
+        "name": "Cleveland Heights",
+        "population": 45394
+      },
+      {
+        "name": "Strongsville",
+        "population": 44730
+      },
+      {
+        "name": "Dublin",
+        "population": 43607
+      },
+      {
+        "name": "Fairfield",
+        "population": 42635
+      },
+      {
+        "name": "Findlay",
+        "population": 41512
+      },
+      {
+        "name": "Warren",
+        "population": 40768
+      },
+      {
+        "name": "Lancaster",
+        "population": 39325
+      },
+      {
+        "name": "Lima",
+        "population": 38355
+      },
+      {
+        "name": "Huber Heights",
+        "population": 38142
+      },
+      {
+        "name": "Westerville",
+        "population": 37530
+      },
+      {
+        "name": "Grove City",
+        "population": 37490
+      }
+    ]
+  },
+  {
+    "name": "Georgia",
+    "code": "GA",
+    "country": "USA",
+    "population": 11029227,
+    "cities": [
+      {
+        "name": "Atlanta",
+        "population": 447841
+      },
+      {
+        "name": "Columbus",
+        "population": 202824
+      },
+      {
+        "name": "Augusta-Richmond County",
+        "population": 197350
+      },
+      {
+        "name": "Savannah",
+        "population": 142772
+      },
+      {
+        "name": "Athens-Clarke County",
+        "population": 119980
+      },
+      {
+        "name": "Sandy Springs",
+        "population": 99770
+      },
+      {
+        "name": "Roswell",
+        "population": 94034
+      },
+      {
+        "name": "Macon",
+        "population": 89981
+      },
+      {
+        "name": "Johns Creek",
+        "population": 82788
+      },
+      {
+        "name": "Albany",
+        "population": 76185
+      },
+      {
+        "name": "Warner Robins",
+        "population": 72531
+      },
+      {
+        "name": "Alpharetta",
+        "population": 62298
+      },
+      {
+        "name": "Marietta",
+        "population": 59089
+      },
+      {
+        "name": "Valdosta",
+        "population": 56481
+      },
+      {
+        "name": "Smyrna",
+        "population": 53438
+      },
+      {
+        "name": "Brookhaven",
+        "population": 50603
+      },
+      {
+        "name": "Dunwoody",
+        "population": 47591
+      },
+      {
+        "name": "Peachtree Corners",
+        "population": 40059
+      }
+    ]
+  },
+  {
+    "name": "North Carolina",
+    "code": "NC",
+    "country": "USA",
+    "population": 10835491,
+    "cities": [
+      {
+        "name": "Charlotte",
+        "population": 792862
+      },
+      {
+        "name": "Raleigh",
+        "population": 431746
+      },
+      {
+        "name": "Greensboro",
+        "population": 279639
+      },
+      {
+        "name": "Durham",
+        "population": 245475
+      },
+      {
+        "name": "Winston-Salem",
+        "population": 236441
+      },
+      {
+        "name": "Fayetteville",
+        "population": 204408
+      },
+      {
+        "name": "Cary",
+        "population": 151088
+      },
+      {
+        "name": "Wilmington",
+        "population": 112067
+      },
+      {
+        "name": "High Point",
+        "population": 107741
+      },
+      {
+        "name": "Greenville",
+        "population": 89130
+      },
+      {
+        "name": "Asheville",
+        "population": 87236
+      },
+      {
+        "name": "Concord",
+        "population": 83506
+      },
+      {
+        "name": "Gastonia",
+        "population": 73209
+      },
+      {
+        "name": "Jacksonville",
+        "population": 69079
+      },
+      {
+        "name": "Chapel Hill",
+        "population": 59635
+      },
+      {
+        "name": "Rocky Mount",
+        "population": 56954
+      },
+      {
+        "name": "Burlington",
+        "population": 51510
+      },
+      {
+        "name": "Huntersville",
+        "population": 50458
+      },
+      {
+        "name": "Wilson",
+        "population": 49628
+      },
+      {
+        "name": "Kannapolis",
+        "population": 44359
+      },
+      {
+        "name": "Apex",
+        "population": 42214
+      },
+      {
+        "name": "Hickory",
+        "population": 40361
+      }
+    ]
+  },
+  {
+    "name": "Michigan",
+    "code": "MI",
+    "country": "USA",
+    "population": 10037268,
+    "cities": [
+      {
+        "name": "Detroit",
+        "population": 688701
+      },
+      {
+        "name": "Grand Rapids",
+        "population": 192294
+      },
+      {
+        "name": "Warren",
+        "population": 134873
+      },
+      {
+        "name": "Sterling Heights",
+        "population": 131224
+      },
+      {
+        "name": "Ann Arbor",
+        "population": 117025
+      },
+      {
+        "name": "Lansing",
+        "population": 113972
+      },
+      {
+        "name": "Flint",
+        "population": 99763
+      },
+      {
+        "name": "Dearborn",
+        "population": 95884
+      },
+      {
+        "name": "Livonia",
+        "population": 95208
+      },
+      {
+        "name": "Troy",
+        "population": 82821
+      },
+      {
+        "name": "Westland",
+        "population": 82578
+      },
+      {
+        "name": "Farmington Hills",
+        "population": 81295
+      },
+      {
+        "name": "Kalamazoo",
+        "population": 75548
+      },
+      {
+        "name": "Wyoming",
+        "population": 74100
+      },
+      {
+        "name": "Southfield",
+        "population": 73006
+      },
+      {
+        "name": "Rochester Hills",
+        "population": 72952
+      },
+      {
+        "name": "Taylor",
+        "population": 61817
+      },
+      {
+        "name": "St. Clair Shores",
+        "population": 60070
+      },
+      {
+        "name": "Pontiac",
+        "population": 59887
+      },
+      {
+        "name": "Royal Oak",
+        "population": 58946
+      },
+      {
+        "name": "Novi",
+        "population": 57960
+      },
+      {
+        "name": "Dearborn Heights",
+        "population": 56620
+      },
+      {
+        "name": "Battle Creek",
+        "population": 51848
+      },
+      {
+        "name": "Saginaw",
+        "population": 50303
+      },
+      {
+        "name": "Kentwood",
+        "population": 50233
+      },
+      {
+        "name": "East Lansing",
+        "population": 48554
+      },
+      {
+        "name": "Roseville",
+        "population": 47555
+      },
+      {
+        "name": "Portage",
+        "population": 47523
+      },
+      {
+        "name": "Midland",
+        "population": 42181
+      },
+      {
+        "name": "Lincoln Park",
+        "population": 37313
+      },
+      {
+        "name": "Muskegon",
+        "population": 37213
+      }
+    ]
+  },
+  {
+    "name": "New Jersey",
+    "code": "NJ",
+    "country": "USA",
+    "population": 9290841,
+    "cities": [
+      {
+        "name": "Newark",
+        "population": 278427
+      },
+      {
+        "name": "Jersey City",
+        "population": 257342
+      },
+      {
+        "name": "Paterson",
+        "population": 145948
+      },
+      {
+        "name": "Elizabeth",
+        "population": 127558
+      },
+      {
+        "name": "Clifton",
+        "population": 85390
+      },
+      {
+        "name": "Trenton",
+        "population": 84349
+      },
+      {
+        "name": "Camden",
+        "population": 76903
+      },
+      {
+        "name": "Passaic",
+        "population": 70868
+      },
+      {
+        "name": "Union City",
+        "population": 68247
+      },
+      {
+        "name": "Bayonne",
+        "population": 65028
+      },
+      {
+        "name": "East Orange",
+        "population": 64544
+      },
+      {
+        "name": "Vineland",
+        "population": 61050
+      },
+      {
+        "name": "New Brunswick",
+        "population": 55831
+      },
+      {
+        "name": "Hoboken",
+        "population": 52575
+      },
+      {
+        "name": "West New York",
+        "population": 52122
+      },
+      {
+        "name": "Perth Amboy",
+        "population": 51982
+      },
+      {
+        "name": "Plainfield",
+        "population": 50588
+      },
+      {
+        "name": "Sayreville",
+        "population": 44412
+      },
+      {
+        "name": "Hackensack",
+        "population": 44113
+      },
+      {
+        "name": "Kearny",
+        "population": 41664
+      },
+      {
+        "name": "Linden",
+        "population": 41301
+      },
+      {
+        "name": "Atlantic City",
+        "population": 39551
+      }
+    ]
+  },
+  {
+    "name": "Québec",
+    "code": "QC",
+    "country": "Canada",
+    "population": 8948570,
+    "cities": [
+      {
+        "name": "Montréal",
+        "population": 3678000
+      },
+      {
+        "name": "Québec",
+        "population": 624177
+      },
+      {
+        "name": "Sherbrooke",
+        "population": 139652
+      },
+      {
+        "name": "Trois-Rivières",
+        "population": 119693
+      }
+    ]
+  },
+  {
+    "name": "Virginia",
+    "code": "VA",
+    "country": "USA",
+    "population": 8715698,
+    "cities": [
+      {
+        "name": "Virginia Beach",
+        "population": 448479
+      },
+      {
+        "name": "Norfolk",
+        "population": 246139
+      },
+      {
+        "name": "Chesapeake",
+        "population": 230571
+      },
+      {
+        "name": "Richmond",
+        "population": 214114
+      },
+      {
+        "name": "Newport News",
+        "population": 182020
+      },
+      {
+        "name": "Alexandria",
+        "population": 148892
+      },
+      {
+        "name": "Hampton",
+        "population": 136699
+      },
+      {
+        "name": "Roanoke",
+        "population": 98465
+      },
+      {
+        "name": "Portsmouth",
+        "population": 96205
+      },
+      {
+        "name": "Suffolk",
+        "population": 85728
+      },
+      {
+        "name": "Lynchburg",
+        "population": 78014
+      },
+      {
+        "name": "Harrisonburg",
+        "population": 51395
+      },
+      {
+        "name": "Leesburg",
+        "population": 47673
+      },
+      {
+        "name": "Charlottesville",
+        "population": 44349
+      },
+      {
+        "name": "Blacksburg",
+        "population": 43609
+      },
+      {
+        "name": "Danville",
+        "population": 42907
+      },
+      {
+        "name": "Manassas",
+        "population": 41705
+      }
+    ]
+  },
+  {
+    "name": "Washington",
+    "code": "WA",
+    "country": "USA",
+    "population": 7812880,
+    "cities": [
+      {
+        "name": "Seattle",
+        "population": 652405
+      },
+      {
+        "name": "Spokane",
+        "population": 210721
+      },
+      {
+        "name": "Tacoma",
+        "population": 203446
+      },
+      {
+        "name": "Vancouver",
+        "population": 167405
+      },
+      {
+        "name": "Bellevue",
+        "population": 133992
+      },
+      {
+        "name": "Kent",
+        "population": 124435
+      },
+      {
+        "name": "Everett",
+        "population": 105370
+      },
+      {
+        "name": "Renton",
+        "population": 97003
+      },
+      {
+        "name": "Yakima",
+        "population": 93257
+      },
+      {
+        "name": "Federal Way",
+        "population": 92734
+      },
+      {
+        "name": "Spokane Valley",
+        "population": 91113
+      },
+      {
+        "name": "Kirkland",
+        "population": 84430
+      },
+      {
+        "name": "Bellingham",
+        "population": 82631
+      },
+      {
+        "name": "Kennewick",
+        "population": 76762
+      },
+      {
+        "name": "Auburn",
+        "population": 74860
+      },
+      {
+        "name": "Pasco",
+        "population": 67599
+      },
+      {
+        "name": "Marysville",
+        "population": 63269
+      },
+      {
+        "name": "Lakewood",
+        "population": 59097
+      },
+      {
+        "name": "Redmond",
+        "population": 57530
+      },
+      {
+        "name": "Shoreline",
+        "population": 54790
+      },
+      {
+        "name": "Richland",
+        "population": 52413
+      },
+      {
+        "name": "Sammamish",
+        "population": 50169
+      },
+      {
+        "name": "Burien",
+        "population": 49858
+      },
+      {
+        "name": "Olympia",
+        "population": 48338
+      },
+      {
+        "name": "Lacey",
+        "population": 44919
+      },
+      {
+        "name": "Edmonds",
+        "population": 40727
+      },
+      {
+        "name": "Bremerton",
+        "population": 39056
+      },
+      {
+        "name": "Puyallup",
+        "population": 38609
+      }
+    ]
+  },
+  {
+    "name": "Arizona",
+    "code": "AZ",
+    "country": "USA",
+    "population": 7431344,
+    "cities": [
+      {
+        "name": "Phoenix",
+        "population": 1513367
+      },
+      {
+        "name": "Tucson",
+        "population": 526116
+      },
+      {
+        "name": "Mesa",
+        "population": 457587
+      },
+      {
+        "name": "Chandler",
+        "population": 249146
+      },
+      {
+        "name": "Glendale",
+        "population": 234632
+      },
+      {
+        "name": "Gilbert",
+        "population": 229972
+      },
+      {
+        "name": "Scottsdale",
+        "population": 226918
+      },
+      {
+        "name": "Tempe",
+        "population": 168228
+      },
+      {
+        "name": "Peoria",
+        "population": 162592
+      },
+      {
+        "name": "Surprise",
+        "population": 123546
+      },
+      {
+        "name": "Yuma",
+        "population": 91923
+      },
+      {
+        "name": "Avondale",
+        "population": 78822
+      },
+      {
+        "name": "Goodyear",
+        "population": 72864
+      },
+      {
+        "name": "Flagstaff",
+        "population": 68667
+      },
+      {
+        "name": "Buckeye",
+        "population": 56683
+      },
+      {
+        "name": "Lake Havasu City",
+        "population": 52844
+      },
+      {
+        "name": "Casa Grande",
+        "population": 50111
+      },
+      {
+        "name": "Maricopa",
+        "population": 45508
+      },
+      {
+        "name": "Sierra Vista",
+        "population": 45129
+      },
+      {
+        "name": "Oro Valley",
+        "population": 41627
+      },
+      {
+        "name": "Prescott",
+        "population": 40590
+      },
+      {
+        "name": "Prescott Valley",
+        "population": 39791
+      },
+      {
+        "name": "Bullhead City",
+        "population": 39383
+      },
+      {
+        "name": "Marana",
+        "population": 38290
+      },
+      {
+        "name": "Apache Junction",
+        "population": 37130
+      }
+    ]
+  },
+  {
+    "name": "Tennessee",
+    "code": "TN",
+    "country": "USA",
+    "population": 7126489,
+    "cities": [
+      {
+        "name": "Memphis",
+        "population": 653450
+      },
+      {
+        "name": "Nashville-Davidson",
+        "population": 634464
+      },
+      {
+        "name": "Knoxville",
+        "population": 183270
+      },
+      {
+        "name": "Chattanooga",
+        "population": 173366
+      },
+      {
+        "name": "Clarksville",
+        "population": 142357
+      },
+      {
+        "name": "Murfreesboro",
+        "population": 117044
+      },
+      {
+        "name": "Franklin",
+        "population": 68886
+      },
+      {
+        "name": "Jackson",
+        "population": 67685
+      },
+      {
+        "name": "Johnson City",
+        "population": 65123
+      },
+      {
+        "name": "Bartlett",
+        "population": 58226
+      },
+      {
+        "name": "Hendersonville",
+        "population": 54068
+      },
+      {
+        "name": "Kingsport",
+        "population": 52962
+      },
+      {
+        "name": "Collierville",
+        "population": 47333
+      },
+      {
+        "name": "Smyrna",
+        "population": 43060
+      },
+      {
+        "name": "Cleveland",
+        "population": 42774
+      },
+      {
+        "name": "Brentwood",
+        "population": 40021
+      },
+      {
+        "name": "Germantown",
+        "population": 39375
+      }
+    ]
+  },
+  {
+    "name": "Massachusetts",
+    "code": "MA",
+    "country": "USA",
+    "population": 7001399,
+    "cities": [
+      {
+        "name": "Boston",
+        "population": 645966
+      },
+      {
+        "name": "Worcester",
+        "population": 182544
+      },
+      {
+        "name": "Springfield",
+        "population": 153703
+      },
+      {
+        "name": "Lowell",
+        "population": 108861
+      },
+      {
+        "name": "Cambridge",
+        "population": 107289
+      },
+      {
+        "name": "New Bedford",
+        "population": 95078
+      },
+      {
+        "name": "Brockton",
+        "population": 94089
+      },
+      {
+        "name": "Quincy",
+        "population": 93494
+      },
+      {
+        "name": "Lynn",
+        "population": 91589
+      },
+      {
+        "name": "Fall River",
+        "population": 88697
+      },
+      {
+        "name": "Newton",
+        "population": 87971
+      },
+      {
+        "name": "Somerville",
+        "population": 78804
+      },
+      {
+        "name": "Lawrence",
+        "population": 77657
+      },
+      {
+        "name": "Waltham",
+        "population": 62227
+      },
+      {
+        "name": "Haverhill",
+        "population": 62088
+      },
+      {
+        "name": "Malden",
+        "population": 60509
+      },
+      {
+        "name": "Medford",
+        "population": 57170
+      },
+      {
+        "name": "Taunton",
+        "population": 56069
+      },
+      {
+        "name": "Chicopee",
+        "population": 55717
+      },
+      {
+        "name": "Weymouth Town",
+        "population": 55419
+      },
+      {
+        "name": "Revere",
+        "population": 53756
+      },
+      {
+        "name": "Peabody",
+        "population": 52044
+      },
+      {
+        "name": "Methuen",
+        "population": 48514
+      },
+      {
+        "name": "Barnstable Town",
+        "population": 44641
+      },
+      {
+        "name": "Pittsfield",
+        "population": 44057
+      },
+      {
+        "name": "Attleboro",
+        "population": 43886
+      },
+      {
+        "name": "Everett",
+        "population": 42935
+      },
+      {
+        "name": "Salem",
+        "population": 42544
+      },
+      {
+        "name": "Westfield",
+        "population": 41301
+      },
+      {
+        "name": "Leominster",
+        "population": 41002
+      },
+      {
+        "name": "Beverly",
+        "population": 40664
+      },
+      {
+        "name": "Fitchburg",
+        "population": 40383
+      },
+      {
+        "name": "Holyoke",
+        "population": 40249
+      },
+      {
+        "name": "Marlborough",
+        "population": 39414
+      },
+      {
+        "name": "Woburn",
+        "population": 39083
+      },
+      {
+        "name": "Chelsea",
+        "population": 37670
+      }
+    ]
+  },
+  {
+    "name": "Indiana",
+    "code": "IN",
+    "country": "USA",
+    "population": 6862199,
+    "cities": [
+      {
+        "name": "Indianapolis",
+        "population": 843393
+      },
+      {
+        "name": "Fort Wayne",
+        "population": 256496
+      },
+      {
+        "name": "Evansville",
+        "population": 120310
+      },
+      {
+        "name": "South Bend",
+        "population": 100886
+      },
+      {
+        "name": "Carmel",
+        "population": 85927
+      },
+      {
+        "name": "Fishers",
+        "population": 83891
+      },
+      {
+        "name": "Bloomington",
+        "population": 82575
+      },
+      {
+        "name": "Hammond",
+        "population": 78967
+      },
+      {
+        "name": "Gary",
+        "population": 78450
+      },
+      {
+        "name": "Lafayette",
+        "population": 70373
+      },
+      {
+        "name": "Muncie",
+        "population": 70316
+      },
+      {
+        "name": "Terre Haute",
+        "population": 61025
+      },
+      {
+        "name": "Kokomo",
+        "population": 56895
+      },
+      {
+        "name": "Noblesville",
+        "population": 56540
+      },
+      {
+        "name": "Anderson",
+        "population": 55670
+      },
+      {
+        "name": "Greenwood",
+        "population": 53665
+      },
+      {
+        "name": "Elkhart",
+        "population": 51265
+      },
+      {
+        "name": "Mishawaka",
+        "population": 47989
+      },
+      {
+        "name": "Lawrence",
+        "population": 47135
+      },
+      {
+        "name": "Jeffersonville",
+        "population": 45929
+      },
+      {
+        "name": "Columbus",
+        "population": 45775
+      }
+    ]
+  },
+  {
+    "name": "Missouri",
+    "code": "MO",
+    "country": "USA",
+    "population": 6196448,
+    "cities": [
+      {
+        "name": "Kansas City",
+        "population": 467007
+      },
+      {
+        "name": "St. Louis",
+        "population": 318416
+      },
+      {
+        "name": "Springfield",
+        "population": 164122
+      },
+      {
+        "name": "Independence",
+        "population": 117240
+      },
+      {
+        "name": "Columbia",
+        "population": 115276
+      },
+      {
+        "name": "Lee's Summit",
+        "population": 93184
+      },
+      {
+        "name": "O'Fallon",
+        "population": 82809
+      },
+      {
+        "name": "St. Joseph",
+        "population": 77147
+      },
+      {
+        "name": "St. Charles",
+        "population": 67569
+      },
+      {
+        "name": "St. Peters",
+        "population": 54842
+      },
+      {
+        "name": "Blue Springs",
+        "population": 53294
+      },
+      {
+        "name": "Florissant",
+        "population": 52363
+      },
+      {
+        "name": "Joplin",
+        "population": 50789
+      },
+      {
+        "name": "Chesterfield",
+        "population": 47749
+      },
+      {
+        "name": "Jefferson City",
+        "population": 43330
+      },
+      {
+        "name": "Cape Girardeau",
+        "population": 38816
+      }
+    ]
+  },
+  {
+    "name": "Maryland",
+    "code": "MD",
+    "country": "USA",
+    "population": 6180253,
+    "cities": [
+      {
+        "name": "Baltimore",
+        "population": 622104
+      },
+      {
+        "name": "Frederick",
+        "population": 66893
+      },
+      {
+        "name": "Gaithersburg",
+        "population": 65690
+      },
+      {
+        "name": "Rockville",
+        "population": 64072
+      },
+      {
+        "name": "Bowie",
+        "population": 56759
+      },
+      {
+        "name": "Hagerstown",
+        "population": 40612
+      },
+      {
+        "name": "Annapolis",
+        "population": 38722
+      }
+    ]
+  },
+  {
+    "name": "Wisconsin",
+    "code": "WI",
+    "country": "USA",
+    "population": 5910955,
+    "cities": [
+      {
+        "name": "Milwaukee",
+        "population": 599164
+      },
+      {
+        "name": "Madison",
+        "population": 243344
+      },
+      {
+        "name": "Green Bay",
+        "population": 104779
+      },
+      {
+        "name": "Kenosha",
+        "population": 99889
+      },
+      {
+        "name": "Racine",
+        "population": 78199
+      },
+      {
+        "name": "Appleton",
+        "population": 73596
+      },
+      {
+        "name": "Waukesha",
+        "population": 71016
+      },
+      {
+        "name": "Eau Claire",
+        "population": 67545
+      },
+      {
+        "name": "Oshkosh",
+        "population": 66778
+      },
+      {
+        "name": "Janesville",
+        "population": 63820
+      },
+      {
+        "name": "West Allis",
+        "population": 60697
+      },
+      {
+        "name": "La Crosse",
+        "population": 51522
+      },
+      {
+        "name": "Sheboygan",
+        "population": 48725
+      },
+      {
+        "name": "Wauwatosa",
+        "population": 47134
+      },
+      {
+        "name": "Fond du Lac",
+        "population": 42970
+      },
+      {
+        "name": "New Berlin",
+        "population": 39834
+      },
+      {
+        "name": "Wausau",
+        "population": 39309
+      },
+      {
+        "name": "Brookfield",
+        "population": 37999
+      },
+      {
+        "name": "Greenfield",
+        "population": 37159
+      },
+      {
+        "name": "Beloit",
+        "population": 36888
+      }
+    ]
+  },
+  {
+    "name": "Colorado",
+    "code": "CO",
+    "country": "USA",
+    "population": 5877610,
+    "cities": [
+      {
+        "name": "Denver",
+        "population": 649495
+      },
+      {
+        "name": "Colorado Springs",
+        "population": 439886
+      },
+      {
+        "name": "Aurora",
+        "population": 345803
+      },
+      {
+        "name": "Fort Collins",
+        "population": 152061
+      },
+      {
+        "name": "Lakewood",
+        "population": 147214
+      },
+      {
+        "name": "Thornton",
+        "population": 127359
+      },
+      {
+        "name": "Arvada",
+        "population": 111707
+      },
+      {
+        "name": "Westminster",
+        "population": 110945
+      },
+      {
+        "name": "Pueblo",
+        "population": 108249
+      },
+      {
+        "name": "Centennial",
+        "population": 106114
+      },
+      {
+        "name": "Boulder",
+        "population": 103166
+      },
+      {
+        "name": "Greeley",
+        "population": 96539
+      },
+      {
+        "name": "Longmont",
+        "population": 89919
+      },
+      {
+        "name": "Loveland",
+        "population": 71334
+      },
+      {
+        "name": "Grand Junction",
+        "population": 59778
+      },
+      {
+        "name": "Broomfield",
+        "population": 59471
+      },
+      {
+        "name": "Castle Rock",
+        "population": 53063
+      },
+      {
+        "name": "Commerce City",
+        "population": 49799
+      },
+      {
+        "name": "Parker",
+        "population": 48608
+      },
+      {
+        "name": "Littleton",
+        "population": 44275
+      },
+      {
+        "name": "Northglenn",
+        "population": 37499
+      }
+    ]
+  },
+  {
+    "name": "Minnesota",
+    "code": "MN",
+    "country": "USA",
+    "population": 5737915,
+    "cities": [
+      {
+        "name": "Minneapolis",
+        "population": 400070
+      },
+      {
+        "name": "St. Paul",
+        "population": 294873
+      },
+      {
+        "name": "Rochester",
+        "population": 110742
+      },
+      {
+        "name": "Bloomington",
+        "population": 86319
+      },
+      {
+        "name": "Duluth",
+        "population": 86128
+      },
+      {
+        "name": "Brooklyn Park",
+        "population": 78373
+      },
+      {
+        "name": "Plymouth",
+        "population": 73987
+      },
+      {
+        "name": "St. Cloud",
+        "population": 66297
+      },
+      {
+        "name": "Woodbury",
+        "population": 65656
+      },
+      {
+        "name": "Eagan",
+        "population": 65453
+      },
+      {
+        "name": "Maple Grove",
+        "population": 65415
+      },
+      {
+        "name": "Eden Prairie",
+        "population": 62603
+      },
+      {
+        "name": "Coon Rapids",
+        "population": 62103
+      },
+      {
+        "name": "Burnsville",
+        "population": 61434
+      },
+      {
+        "name": "Blaine",
+        "population": 60407
+      },
+      {
+        "name": "Lakeville",
+        "population": 58562
+      },
+      {
+        "name": "Minnetonka",
+        "population": 51368
+      },
+      {
+        "name": "Apple Valley",
+        "population": 50201
+      },
+      {
+        "name": "Edina",
+        "population": 49376
+      },
+      {
+        "name": "St. Louis Park",
+        "population": 47411
+      },
+      {
+        "name": "Mankato",
+        "population": 40641
+      },
+      {
+        "name": "Maplewood",
+        "population": 39765
+      },
+      {
+        "name": "Moorhead",
+        "population": 39398
+      },
+      {
+        "name": "Shakopee",
+        "population": 39167
+      }
+    ]
+  },
+  {
+    "name": "British Columbia",
+    "code": "BC",
+    "country": "Canada",
+    "population": 5543403,
+    "cities": [
+      {
+        "name": "Vancouver",
+        "population": 2313328
+      },
+      {
+        "name": "Victoria",
+        "population": 289625
+      },
+      {
+        "name": "Abbotsford",
+        "population": 151683
+      },
+      {
+        "name": "Kelowna",
+        "population": 125109
+      }
+    ]
+  },
+  {
+    "name": "South Carolina",
+    "code": "SC",
+    "country": "USA",
+    "population": 5373555,
+    "cities": [
+      {
+        "name": "Columbia",
+        "population": 133358
+      },
+      {
+        "name": "Charleston",
+        "population": 127999
+      },
+      {
+        "name": "North Charleston",
+        "population": 104054
+      },
+      {
+        "name": "Mount Pleasant",
+        "population": 74885
+      },
+      {
+        "name": "Rock Hill",
+        "population": 69103
+      },
+      {
+        "name": "Greenville",
+        "population": 61397
+      },
+      {
+        "name": "Summerville",
+        "population": 46074
+      },
+      {
+        "name": "Sumter",
+        "population": 41190
+      },
+      {
+        "name": "Goose Creek",
+        "population": 39823
+      },
+      {
+        "name": "Hilton Head Island",
+        "population": 39412
+      },
+      {
+        "name": "Florence",
+        "population": 37792
+      },
+      {
+        "name": "Spartanburg",
+        "population": 37647
+      }
+    ]
+  },
+  {
+    "name": "Alabama",
+    "code": "AL",
+    "country": "USA",
+    "population": 5108468,
+    "cities": [
+      {
+        "name": "Birmingham",
+        "population": 212113
+      },
+      {
+        "name": "Montgomery",
+        "population": 201332
+      },
+      {
+        "name": "Mobile",
+        "population": 194899
+      },
+      {
+        "name": "Huntsville",
+        "population": 186254
+      },
+      {
+        "name": "Tuscaloosa",
+        "population": 95334
+      },
+      {
+        "name": "Hoover",
+        "population": 84126
+      },
+      {
+        "name": "Dothan",
+        "population": 68001
+      },
+      {
+        "name": "Auburn",
+        "population": 58582
+      },
+      {
+        "name": "Decatur",
+        "population": 55816
+      },
+      {
+        "name": "Madison",
+        "population": 45799
+      },
+      {
+        "name": "Florence",
+        "population": 40059
+      },
+      {
+        "name": "Phenix City",
+        "population": 37498
+      }
+    ]
+  },
+  {
+    "name": "Alberta",
+    "code": "AB",
+    "country": "Canada",
+    "population": 4756408,
+    "cities": [
+      {
+        "name": "Calgary",
+        "population": 1110000
+      },
+      {
+        "name": "Edmonton",
+        "population": 1058000
+      }
+    ]
+  },
+  {
+    "name": "Louisiana",
+    "code": "LA",
+    "country": "USA",
+    "population": 4573749,
+    "cities": [
+      {
+        "name": "New Orleans",
+        "population": 378715
+      },
+      {
+        "name": "Baton Rouge",
+        "population": 229426
+      },
+      {
+        "name": "Shreveport",
+        "population": 200327
+      },
+      {
+        "name": "Lafayette",
+        "population": 124276
+      },
+      {
+        "name": "Lake Charles",
+        "population": 74024
+      },
+      {
+        "name": "Kenner",
+        "population": 66975
+      },
+      {
+        "name": "Bossier City",
+        "population": 66333
+      },
+      {
+        "name": "Monroe",
+        "population": 49761
+      },
+      {
+        "name": "Alexandria",
+        "population": 48426
+      }
+    ]
+  },
+  {
+    "name": "Kentucky",
+    "code": "KY",
+    "country": "USA",
+    "population": 4526154,
+    "cities": [
+      {
+        "name": "Louisville/Jefferson County",
+        "population": 609893
+      },
+      {
+        "name": "Lexington-Fayette",
+        "population": 308428
+      },
+      {
+        "name": "Bowling Green",
+        "population": 61488
+      },
+      {
+        "name": "Owensboro",
+        "population": 58416
+      },
+      {
+        "name": "Covington",
+        "population": 40956
+      }
+    ]
+  },
+  {
+    "name": "Oregon",
+    "code": "OR",
+    "country": "USA",
+    "population": 4233358,
+    "cities": [
+      {
+        "name": "Portland",
+        "population": 609456
+      },
+      {
+        "name": "Salem",
+        "population": 160614
+      },
+      {
+        "name": "Eugene",
+        "population": 159190
+      },
+      {
+        "name": "Gresham",
+        "population": 109397
+      },
+      {
+        "name": "Hillsboro",
+        "population": 97368
+      },
+      {
+        "name": "Beaverton",
+        "population": 93542
+      },
+      {
+        "name": "Bend",
+        "population": 81236
+      },
+      {
+        "name": "Medford",
+        "population": 77677
+      },
+      {
+        "name": "Springfield",
+        "population": 60177
+      },
+      {
+        "name": "Corvallis",
+        "population": 55298
+      },
+      {
+        "name": "Albany",
+        "population": 51583
+      },
+      {
+        "name": "Tigard",
+        "population": 50444
+      },
+      {
+        "name": "Lake Oswego",
+        "population": 37610
+      },
+      {
+        "name": "Keizer",
+        "population": 37064
+      }
+    ]
+  },
+  {
+    "name": "Oklahoma",
+    "code": "OK",
+    "country": "USA",
+    "population": 4053824,
+    "cities": [
+      {
+        "name": "Oklahoma City",
+        "population": 610613
+      },
+      {
+        "name": "Tulsa",
+        "population": 398121
+      },
+      {
+        "name": "Norman",
+        "population": 118197
+      },
+      {
+        "name": "Broken Arrow",
+        "population": 103500
+      },
+      {
+        "name": "Lawton",
+        "population": 97151
+      },
+      {
+        "name": "Edmond",
+        "population": 87004
+      },
+      {
+        "name": "Moore",
+        "population": 58414
+      },
+      {
+        "name": "Midwest City",
+        "population": 56756
+      },
+      {
+        "name": "Enid",
+        "population": 50725
+      },
+      {
+        "name": "Stillwater",
+        "population": 47186
+      },
+      {
+        "name": "Muskogee",
+        "population": 38863
+      }
+    ]
+  },
+  {
+    "name": "Connecticut",
+    "code": "CT",
+    "country": "USA",
+    "population": 3617176,
+    "cities": [
+      {
+        "name": "Bridgeport",
+        "population": 147216
+      },
+      {
+        "name": "New Haven",
+        "population": 130660
+      },
+      {
+        "name": "Stamford",
+        "population": 126456
+      },
+      {
+        "name": "Hartford",
+        "population": 125017
+      },
+      {
+        "name": "Waterbury",
+        "population": 109676
+      },
+      {
+        "name": "Norwalk",
+        "population": 87776
+      },
+      {
+        "name": "Danbury",
+        "population": 83684
+      },
+      {
+        "name": "New Britain",
+        "population": 72939
+      },
+      {
+        "name": "Bristol",
+        "population": 60568
+      },
+      {
+        "name": "Meriden",
+        "population": 60456
+      },
+      {
+        "name": "West Haven",
+        "population": 55046
+      },
+      {
+        "name": "Milford",
+        "population": 51644
+      },
+      {
+        "name": "Middletown",
+        "population": 47333
+      },
+      {
+        "name": "Shelton",
+        "population": 40999
+      },
+      {
+        "name": "Norwich",
+        "population": 40347
+      }
+    ]
+  },
+  {
+    "name": "Utah",
+    "code": "UT",
+    "country": "USA",
+    "population": 3417734,
+    "cities": [
+      {
+        "name": "Salt Lake City",
+        "population": 191180
+      },
+      {
+        "name": "West Valley City",
+        "population": 133579
+      },
+      {
+        "name": "Provo",
+        "population": 116288
+      },
+      {
+        "name": "West Jordan",
+        "population": 110077
+      },
+      {
+        "name": "Orem",
+        "population": 91648
+      },
+      {
+        "name": "Sandy",
+        "population": 90231
+      },
+      {
+        "name": "Ogden",
+        "population": 84249
+      },
+      {
+        "name": "St. George",
+        "population": 76817
+      },
+      {
+        "name": "Layton",
+        "population": 70790
+      },
+      {
+        "name": "Taylorsville",
+        "population": 60519
+      },
+      {
+        "name": "South Jordan",
+        "population": 59366
+      },
+      {
+        "name": "Lehi",
+        "population": 54382
+      },
+      {
+        "name": "Logan",
+        "population": 48913
+      },
+      {
+        "name": "Murray",
+        "population": 48612
+      },
+      {
+        "name": "Draper",
+        "population": 45285
+      },
+      {
+        "name": "Bountiful",
+        "population": 43023
+      },
+      {
+        "name": "Riverton",
+        "population": 40921
+      },
+      {
+        "name": "Roy",
+        "population": 37733
+      },
+      {
+        "name": "Spanish Fork",
+        "population": 36956
+      }
+    ]
+  },
+  {
+    "name": "Iowa",
+    "code": "IA",
+    "country": "USA",
+    "population": 3207010,
+    "cities": [
+      {
+        "name": "Des Moines",
+        "population": 207510
+      },
+      {
+        "name": "Cedar Rapids",
+        "population": 128429
+      },
+      {
+        "name": "Davenport",
+        "population": 102157
+      },
+      {
+        "name": "Sioux City",
+        "population": 82459
+      },
+      {
+        "name": "Iowa City",
+        "population": 71591
+      },
+      {
+        "name": "Waterloo",
+        "population": 68366
+      },
+      {
+        "name": "Council Bluffs",
+        "population": 61969
+      },
+      {
+        "name": "Ames",
+        "population": 61792
+      },
+      {
+        "name": "West Des Moines",
+        "population": 61255
+      },
+      {
+        "name": "Dubuque",
+        "population": 58253
+      },
+      {
+        "name": "Ankeny",
+        "population": 51567
+      },
+      {
+        "name": "Urbandale",
+        "population": 41776
+      },
+      {
+        "name": "Cedar Falls",
+        "population": 40566
+      }
+    ]
+  },
+  {
+    "name": "Nevada",
+    "code": "NV",
+    "country": "USA",
+    "population": 3194176,
+    "cities": [
+      {
+        "name": "Las Vegas",
+        "population": 603488
+      },
+      {
+        "name": "Henderson",
+        "population": 270811
+      },
+      {
+        "name": "Reno",
+        "population": 233294
+      },
+      {
+        "name": "North Las Vegas",
+        "population": 226877
+      },
+      {
+        "name": "Sparks",
+        "population": 93282
+      },
+      {
+        "name": "Carson City",
+        "population": 54080
+      }
+    ]
+  },
+  {
+    "name": "Arkansas",
+    "code": "AR",
+    "country": "USA",
+    "population": 3067582,
+    "cities": [
+      {
+        "name": "Little Rock",
+        "population": 197357
+      },
+      {
+        "name": "Fort Smith",
+        "population": 87650
+      },
+      {
+        "name": "Fayetteville",
+        "population": 78960
+      },
+      {
+        "name": "Springdale",
+        "population": 75229
+      },
+      {
+        "name": "Jonesboro",
+        "population": 71551
+      },
+      {
+        "name": "North Little Rock",
+        "population": 66075
+      },
+      {
+        "name": "Conway",
+        "population": 63816
+      },
+      {
+        "name": "Rogers",
+        "population": 60112
+      },
+      {
+        "name": "Pine Bluff",
+        "population": 46094
+      },
+      {
+        "name": "Bentonville",
+        "population": 40167
+      }
+    ]
+  },
+  {
+    "name": "Kansas",
+    "code": "KS",
+    "country": "USA",
+    "population": 2940546,
+    "cities": [
+      {
+        "name": "Wichita",
+        "population": 386552
+      },
+      {
+        "name": "Overland Park",
+        "population": 181260
+      },
+      {
+        "name": "Kansas City",
+        "population": 148483
+      },
+      {
+        "name": "Olathe",
+        "population": 131885
+      },
+      {
+        "name": "Topeka",
+        "population": 127679
+      },
+      {
+        "name": "Lawrence",
+        "population": 90811
+      },
+      {
+        "name": "Shawnee",
+        "population": 64323
+      },
+      {
+        "name": "Manhattan",
+        "population": 56143
+      },
+      {
+        "name": "Lenexa",
+        "population": 50344
+      },
+      {
+        "name": "Salina",
+        "population": 47846
+      },
+      {
+        "name": "Hutchinson",
+        "population": 41889
+      }
+    ]
+  },
+  {
+    "name": "Mississippi",
+    "code": "MS",
+    "country": "USA",
+    "population": 2939690,
+    "cities": [
+      {
+        "name": "Jackson",
+        "population": 172638
+      },
+      {
+        "name": "Gulfport",
+        "population": 71012
+      },
+      {
+        "name": "Southaven",
+        "population": 50997
+      },
+      {
+        "name": "Hattiesburg",
+        "population": 47556
+      },
+      {
+        "name": "Biloxi",
+        "population": 44820
+      },
+      {
+        "name": "Meridian",
+        "population": 40921
+      }
+    ]
+  },
+  {
+    "name": "New Mexico",
+    "code": "NM",
+    "country": "USA",
+    "population": 2114302,
+    "cities": [
+      {
+        "name": "Albuquerque",
+        "population": 556495
+      },
+      {
+        "name": "Las Cruces",
+        "population": 101324
+      },
+      {
+        "name": "Rio Rancho",
+        "population": 91956
+      },
+      {
+        "name": "Santa Fe",
+        "population": 69976
+      },
+      {
+        "name": "Roswell",
+        "population": 48611
+      },
+      {
+        "name": "Farmington",
+        "population": 45426
+      },
+      {
+        "name": "Clovis",
+        "population": 39508
+      }
+    ]
+  },
+  {
+    "name": "Nebraska",
+    "code": "NE",
+    "country": "USA",
+    "population": 1978379,
+    "cities": [
+      {
+        "name": "Omaha",
+        "population": 434353
+      },
+      {
+        "name": "Lincoln",
+        "population": 268738
+      },
+      {
+        "name": "Bellevue",
+        "population": 53663
+      },
+      {
+        "name": "Grand Island",
+        "population": 50550
+      }
+    ]
+  },
+  {
+    "name": "Idaho",
+    "code": "ID",
+    "country": "USA",
+    "population": 1964726,
+    "cities": [
+      {
+        "name": "Boise City",
+        "population": 214237
+      },
+      {
+        "name": "Nampa",
+        "population": 86518
+      },
+      {
+        "name": "Meridian",
+        "population": 83596
+      },
+      {
+        "name": "Idaho Falls",
+        "population": 58292
+      },
+      {
+        "name": "Pocatello",
+        "population": 54350
+      },
+      {
+        "name": "Caldwell",
+        "population": 48957
+      },
+      {
+        "name": "Coeur d'Alene",
+        "population": 46402
+      },
+      {
+        "name": "Twin Falls",
+        "population": 45981
+      }
+    ]
+  },
+  {
+    "name": "West Virginia",
+    "code": "WV",
+    "country": "USA",
+    "population": 1770071,
+    "cities": [
+      {
+        "name": "Charleston",
+        "population": 50821
+      },
+      {
+        "name": "Huntington",
+        "population": 49177
+      }
+    ]
+  },
+  {
+    "name": "Manitoba",
+    "code": "MB",
+    "country": "Canada",
+    "population": 1454902,
+    "cities": [
+      {
+        "name": "Winnipeg",
+        "population": 632063
+      }
+    ]
+  },
+  {
+    "name": "Hawaii",
+    "code": "HI",
+    "country": "USA",
+    "population": 1435138,
+    "cities": [
+      {
+        "name": "Honolulu",
+        "population": 347884
+      }
+    ]
+  },
+  {
+    "name": "New Hampshire",
+    "code": "NH",
+    "country": "USA",
+    "population": 1402054,
+    "cities": [
+      {
+        "name": "Manchester",
+        "population": 110378
+      },
+      {
+        "name": "Nashua",
+        "population": 87137
+      },
+      {
+        "name": "Concord",
+        "population": 42419
+      }
+    ]
+  },
+  {
+    "name": "Maine",
+    "code": "ME",
+    "country": "USA",
+    "population": 1395722,
+    "cities": [
+      {
+        "name": "Portland",
+        "population": 66318
+      }
+    ]
+  },
+  {
+    "name": "Saskatchewan",
+    "code": "SK",
+    "country": "Canada",
+    "population": 1218976,
+    "cities": [
+      {
+        "name": "Saskatoon",
+        "population": 198958
+      },
+      {
+        "name": "Regina",
+        "population": 176183
+      }
+    ]
+  },
+  {
+    "name": "Montana",
+    "code": "MT",
+    "country": "USA",
+    "population": 1132812,
+    "cities": [
+      {
+        "name": "Billings",
+        "population": 109059
+      },
+      {
+        "name": "Missoula",
+        "population": 69122
+      },
+      {
+        "name": "Great Falls",
+        "population": 59351
+      },
+      {
+        "name": "Bozeman",
+        "population": 39860
+      }
+    ]
+  },
+  {
+    "name": "Rhode Island",
+    "code": "RI",
+    "country": "USA",
+    "population": 1095962,
+    "cities": [
+      {
+        "name": "Providence",
+        "population": 177994
+      },
+      {
+        "name": "Warwick",
+        "population": 81971
+      },
+      {
+        "name": "Cranston",
+        "population": 80566
+      },
+      {
+        "name": "Pawtucket",
+        "population": 71172
+      },
+      {
+        "name": "East Providence",
+        "population": 47149
+      },
+      {
+        "name": "Woonsocket",
+        "population": 41026
+      }
+    ]
+  },
+  {
+    "name": "Nova Scotia",
+    "code": "NS",
+    "country": "Canada",
+    "population": 1062916,
+    "cities": [
+      {
+        "name": "Halifax",
+        "population": 359111
+      }
+    ]
+  },
+  {
+    "name": "Delaware",
+    "code": "DE",
+    "country": "USA",
+    "population": 1031890,
+    "cities": [
+      {
+        "name": "Wilmington",
+        "population": 71525
+      },
+      {
+        "name": "Dover",
+        "population": 37366
+      }
+    ]
+  },
+  {
+    "name": "South Dakota",
+    "code": "SD",
+    "country": "USA",
+    "population": 919318,
+    "cities": [
+      {
+        "name": "Sioux Falls",
+        "population": 164676
+      },
+      {
+        "name": "Rapid City",
+        "population": 70812
+      }
+    ]
+  },
+  {
+    "name": "North Dakota",
+    "code": "ND",
+    "country": "USA",
+    "population": 783926,
+    "cities": [
+      {
+        "name": "Fargo",
+        "population": 113658
+      },
+      {
+        "name": "Bismarck",
+        "population": 67034
+      },
+      {
+        "name": "Grand Forks",
+        "population": 54932
+      },
+      {
+        "name": "Minot",
+        "population": 46321
+      }
+    ]
+  },
+  {
+    "name": "Alaska",
+    "code": "AK",
+    "country": "USA",
+    "population": 733406,
+    "cities": [
+      {
+        "name": "Anchorage",
+        "population": 300950
+      }
+    ]
+  },
+  {
+    "name": "District of Columbia",
+    "code": "DC",
+    "country": "USA",
+    "population": 678972,
+    "cities": [
+      {
+        "name": "Washington",
+        "population": 646449
+      }
+    ]
+  },
+  {
+    "name": "Vermont",
+    "code": "VT",
+    "country": "USA",
+    "population": 647464,
+    "cities": [
+      {
+        "name": "Burlington",
+        "population": 42284
+      }
+    ]
+  },
+  {
+    "name": "Wyoming",
+    "code": "WY",
+    "country": "USA",
+    "population": 584057,
+    "cities": [
+      {
+        "name": "Cheyenne",
+        "population": 62448
+      },
+      {
+        "name": "Casper",
+        "population": 59628
+      }
+    ]
+  },
+  {
+    "name": "Newfoundland and Labrador",
+    "code": "NL",
+    "country": "Canada",
+    "population": 538416,
+    "cities": [
+      {
+        "name": "Saint John’s",
+        "population": 131469
+      }
+    ]
+  }
+]

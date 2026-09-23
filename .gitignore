@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+saloon/node_modules/
+saloon/dist/
+
+# Session & Auth cache (WhatsApp Web, Puppeteer)
+.wwebjs_auth/
+.wwebjs_cache/
+
+# Temporary / Scratch files
+scratch/
+canadacities_extracted/
+uscities_extracted/
+*.log
+
+# Sensitive / Generated data
+scraped_leads.json
+active_device.txt
+devices.json
+.env
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
