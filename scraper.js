@@ -1,6 +1,5 @@
 const puppeteer = require('puppeteer-extra');
 const StealthPlugin = require('puppeteer-extra-plugin-stealth');
-const whatsapp = require('./whatsapp');
 const fs = require('fs');
 const path = require('path');
 
@@ -42,9 +41,9 @@ function resumeScraping() {
 }
 
 /**
- * Configures Puppeteer page request interception to block images, fonts, media, and trackers
+ * Configures Puppeteer page request interception to block heavy assets (images, fonts, media, trackers)
  */
-async function configurePage(page, isDetailWorker = true) {
+async function configurePage(page) {
     try {
         await page.setViewport({ width: 1280, height: 800 });
         await page.setRequestInterception(true);
@@ -85,7 +84,7 @@ async function configurePage(page, isDetailWorker = true) {
 }
 
 /**
- * Scrapes Google Maps for a given query, filters results, and yields them
+ * High-Speed Parallel Google Maps Scraper (30-40 leads/min target)
  */
 async function scrapeGoogleMaps({
     niche,
@@ -104,8 +103,8 @@ async function scrapeGoogleMaps({
     let browser = null;
 
     try {
-        onProgress('Launching browser...', 5);
-        // Detect local Google Chrome installation on Windows to utilize the user's Chrome execution context
+        onProgress('Launching browser engine...', 5);
+
         const chromePaths = [
             'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
             'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
@@ -148,232 +147,164 @@ async function scrapeGoogleMaps({
         });
 
         activeBrowser = browser;
+
         const targetLocations = Array.isArray(location) ? location : [location];
         let leadsScrapedCount = 0;
+        
+        // 3. In-Memory Dedup Set: O(1) Place ID set loaded at startup
         const sessionGatheredIds = new Set(existingUrls);
-        let limitedViewLogged = false;
+        
+        // Shared Atomic Queue for Parallel Tabs
+        let locationQueueIndex = 0;
+        function getNextLocation() {
+            if (locationQueueIndex >= targetLocations.length) return null;
+            const loc = targetLocations[locationQueueIndex];
+            const index = locationQueueIndex;
+            locationQueueIndex++;
+            return { loc, index };
+        }
 
-        for (let i = 0; i < targetLocations.length; i++) {
-            if (stopScrapingRequested) break;
-            if (leadsScrapedCount >= maxResults) break;
-            
-            // Pause check
-            while (pauseScrapingRequested && !stopScrapingRequested) {
-                await new Promise(r => setTimeout(r, 1000));
-            }
-            if (stopScrapingRequested) break;
+        // 1. Parallel Tabs Setup: 3 concurrent city-worker tabs in parallel
+        const NUM_PARALLEL_TABS = Math.min(3, targetLocations.length);
+        onProgress(`[Parallel Engine] Initializing ${NUM_PARALLEL_TABS} parallel worker tabs for ${targetLocations.length} locations...`, 10);
 
-            const currentLoc = targetLocations[i];
-            
-            // Calculate progress boundaries for this city
-            const startPercent = Math.floor((i / targetLocations.length) * 100);
-            const endPercent = Math.floor(((i + 1) / targetLocations.length) * 100);
-            const range = endPercent - startPercent;
-
-            onProgress(`[${i + 1}/${targetLocations.length}] Starting scan in ${currentLoc}...`, startPercent + 1);
-
+        async function cityWorkerTab(tabId) {
             const page = await browser.newPage();
-            await configurePage(page, false);
+            await configurePage(page);
 
-            const searchUrl = `https://www.google.com/maps/search/${encodeURIComponent(niche + ' in ' + currentLoc)}`;
-            onProgress(`[${currentLoc}] Navigating to search page...`, startPercent + 2);
-            
-            await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 60000 }).catch(async (err) => {
-                console.warn(`[${currentLoc}] Navigation took too long, proceeding:`, err.message);
-            });
-
-            // Check for limited view
-            if (!limitedViewLogged) {
-                const isLimitedView = await page.evaluate(() => {
-                    return document.body.textContent.includes('limited view') || 
-                           !!document.querySelector('button[aria-label*="limited view"]');
-                });
-                if (isLimitedView) {
-                    onProgress('⚠️ Google Maps is in "Limited View" (not signed in). Reviews count is hidden by Google and will default to 0.', startPercent + 5);
-                    limitedViewLogged = true;
+            while (!stopScrapingRequested && leadsScrapedCount < maxResults) {
+                // Pause check
+                while (pauseScrapingRequested && !stopScrapingRequested) {
+                    await new Promise(r => setTimeout(r, 1000));
                 }
-            }
+                if (stopScrapingRequested) break;
 
-            if (stopScrapingRequested) {
-                await page.close().catch(() => {});
-                break;
-            }
+                const item = getNextLocation();
+                if (!item) break; // Queue exhausted
 
-            // Check if redirected to a single place page directly
-            const currentUrl = page.url();
-            if (currentUrl.includes('/maps/place/')) {
-                onProgress(`[${currentLoc}] Redirected directly to single business page...`, startPercent + 5);
-                const business = await extractPlaceDetails(page, currentUrl);
-                if (business) {
-                    business.locationScraped = currentLoc;
-                    const passFilters = validateFilters(business, minReviews, maxReviews, websiteFilter);
-                    if (passFilters) {
-                        leadsScrapedCount++;
-                        onData(business);
-                    } else {
-                        if (!business.phone) {
-                            business.discarded = true;
-                            business.discardReason = "No phone number";
-                            onData(business);
+                const { loc: currentLoc, index: locIndex } = item;
+                const startPercent = Math.floor((locIndex / targetLocations.length) * 100);
+                const endPercent = Math.floor(((locIndex + 1) / targetLocations.length) * 100);
+                const range = endPercent - startPercent;
+
+                onProgress(`[Tab ${tabId}] Starting scan in ${currentLoc} (${locIndex + 1}/${targetLocations.length})...`, Math.min(99, startPercent + 1));
+
+                try {
+                    const searchUrl = `https://www.google.com/maps/search/${encodeURIComponent(niche + ' in ' + currentLoc)}`;
+                    await page.goto(searchUrl, { waitUntil: 'domcontentloaded', timeout: 45000 }).catch(() => {});
+
+                    if (stopScrapingRequested) break;
+
+                    // Handle single place direct redirect
+                    const currentUrl = page.url();
+                    if (currentUrl.includes('/maps/place/')) {
+                        const business = await extractPlaceDetails(page, currentUrl);
+                        if (business) {
+                            business.locationScraped = currentLoc;
+                            if (validateFilters(business, minReviews, maxReviews, websiteFilter)) {
+                                leadsScrapedCount++;
+                                onData(business);
+                            } else if (!business.phone) {
+                                business.discarded = true;
+                                business.discardReason = "No phone number";
+                                onData(business);
+                            }
+                        }
+                        if (leadsScrapedCount >= maxResults) break;
+                        continue;
+                    }
+
+                    // Wait for feed container
+                    const feedSelector = 'div[role="feed"]';
+                    const feedExists = await page.waitForSelector(feedSelector, { timeout: 8000 }).catch(() => null);
+
+                    if (!feedExists) {
+                        onProgress(`[Tab ${tabId}] No listings container in ${currentLoc}. Skipping.`, Math.min(99, startPercent + 5));
+                        continue;
+                    }
+
+                    const remainingTarget = maxResults - leadsScrapedCount;
+                    if (remainingTarget <= 0) break;
+
+                    // 2. Smarter Scrolling: Gather links using waitForFunction count checking
+                    const { newLinks, duplicatesCount } = await gatherPlaceLinks(
+                        page,
+                        feedSelector,
+                        remainingTarget,
+                        sessionGatheredIds,
+                        (msg) => {
+                            onProgress(`[Tab ${tabId}] [${currentLoc}] ${msg}`, Math.min(99, startPercent + 10));
+                        }
+                    );
+
+                    if (duplicatesCount > 0) {
+                        onProgress(`[Tab ${tabId}] Skipped ${duplicatesCount} duplicates in ${currentLoc}.`, Math.min(99, startPercent + 15));
+                    }
+
+                    if (stopScrapingRequested) break;
+
+                    if (newLinks.length > 0) {
+                        onProgress(`[Tab ${tabId}] Extracting ${newLinks.length} listings in ${currentLoc}...`, Math.min(99, startPercent + Math.floor(range * 0.3)));
+
+                        for (let k = 0; k < newLinks.length; k++) {
+                            if (stopScrapingRequested || leadsScrapedCount >= maxResults) break;
+
+                            while (pauseScrapingRequested && !stopScrapingRequested) {
+                                await new Promise(r => setTimeout(r, 1000));
+                            }
+                            if (stopScrapingRequested) break;
+
+                            const url = newLinks[k];
+                            const itemProgress = startPercent + Math.floor(range * 0.3) + Math.floor((k / newLinks.length) * range * 0.7);
+
+                            try {
+                                const business = await extractPlaceDetails(page, url);
+                                if (business) {
+                                    business.locationScraped = currentLoc;
+                                    if (validateFilters(business, minReviews, maxReviews, websiteFilter)) {
+                                        leadsScrapedCount++;
+                                        onData(business);
+                                        onProgress(`[Tab ${tabId}] Found lead (${leadsScrapedCount}/${maxResults}): "${business.name}"`, Math.min(99, itemProgress));
+                                    } else {
+                                        if (!business.phone) {
+                                            business.discarded = true;
+                                            business.discardReason = "No phone number";
+                                            onData(business);
+                                        }
+                                    }
+                                }
+                            } catch (err) {
+                                console.error(`[Tab ${tabId}] Error extracting detail ${url}:`, err.message);
+                            }
+
+                            // Minimal delay for max speed
+                            await new Promise(r => setTimeout(r, 150));
                         }
                     }
+                } catch (tabErr) {
+                    console.error(`[Tab ${tabId}] Error processing ${currentLoc}:`, tabErr.message);
                 }
-                await page.close().catch(() => {});
-                
-                if (leadsScrapedCount >= maxResults) {
-                    onProgress(`Reached target limit of ${maxResults} valid leads. Finishing scan.`, 100);
-                    break;
-                }
-                continue;
-            }
-
-            // Wait for results container
-            const feedSelector = 'div[role="feed"]';
-            const feedExists = await page.waitForSelector(feedSelector, { timeout: 10000 }).catch(() => null);
-
-            if (!feedExists) {
-                onProgress(`[${currentLoc}] No listings container found. Skipping location.`, startPercent + 10);
-                await page.close().catch(() => {});
-                continue;
-            }
-
-            // Scroll the results sidebar to gather place links
-            onProgress(`[${currentLoc}] Scrolling search results to gather links...`, startPercent + 10);
-            const remainingTarget = maxResults - leadsScrapedCount;
-            if (remainingTarget <= 0) {
-                await page.close().catch(() => {});
-                break;
-            }
-
-            const { newLinks, duplicatesCount } = await gatherPlaceLinks(page, feedSelector, remainingTarget, sessionGatheredIds, (msg, percent) => {
-                // Interpolate scroll progress: 30% of the city's range
-                const stepPercent = startPercent + Math.floor((percent / 100) * range * 0.3);
-                onProgress(`[${currentLoc}] ${msg}`, stepPercent);
-            });
-
-            if (duplicatesCount > 0) {
-                onProgress(`[${currentLoc}] Skipped ${duplicatesCount} duplicates already in history/session.`, startPercent + 15);
             }
 
             await page.close().catch(() => {});
-
-            if (stopScrapingRequested) break;
-
-            if (newLinks.length > 0) {
-                onProgress(`[${currentLoc}] Found ${newLinks.length} new listings. Extracting details...`, startPercent + Math.floor(range * 0.3));
-
-                // Extract details in parallel for this city's links
-                let processedCount = 0;
-                let linkIndex = 0;
-                const concurrency = Math.min(10, newLinks.length);
-
-                async function worker(workerId, pageInstance) {
-                    let page = pageInstance;
-                    let navCount = 0;
-                    while (linkIndex < newLinks.length && !stopScrapingRequested && leadsScrapedCount < maxResults) {
-                        const url = newLinks[linkIndex++];
-                        if (!url) break;
-
-                        // Pause check
-                        while (pauseScrapingRequested && !stopScrapingRequested) {
-                            await new Promise(r => setTimeout(r, 1000));
-                        }
-                        if (stopScrapingRequested) break;
-
-                        processedCount++;
-                        // Calculate detail extraction progress: 70% of the city's range
-                        const progressPercent = startPercent + Math.floor(range * 0.3) + Math.floor((processedCount / newLinks.length) * range * 0.7);
-                        onProgress(`[Tab ${workerId}] Processing item ${processedCount}/${newLinks.length}: ${url.substring(0, 45)}...`, progressPercent);
-
-                        try {
-                            // Recreate page if needed (to prevent memory bloat)
-                            navCount++;
-                            if (navCount > 50 || page.isClosed()) {
-                                try {
-                                    await page.close().catch(() => {});
-                                } catch (e) {}
-                                page = await browser.newPage();
-                                await configurePage(page, true);
-                                navCount = 1;
-                            }
-
-                            const business = await extractPlaceDetails(page, url);
-                            if (business) {
-                                business.locationScraped = currentLoc;
-                                const passFilters = validateFilters(business, minReviews, maxReviews, websiteFilter);
-                                if (passFilters) {
-                                    leadsScrapedCount++;
-                                    onData(business);
-                                } else {
-                                    // If it failed because it has NO phone number, send it as discarded to save to database
-                                    if (!business.phone) {
-                                        business.discarded = true;
-                                        business.discardReason = "No phone number";
-                                        onData(business);
-                                    }
-
-                                    const reasons = [];
-                                    if (!business.phone) reasons.push("No phone number");
-                                    if (websiteFilter === 'none' && business.website) reasons.push("Has website");
-                                    if (websiteFilter === 'must' && !business.website) reasons.push("No website");
-                                    if (business.reviewsCount < minReviews || business.reviewsCount > maxReviews) {
-                                        reasons.push(`Reviews count (${business.reviewsCount}) not in range [${minReviews}-${maxReviews === Infinity ? '∞' : maxReviews}]`);
-                                    }
-                                    onProgress(`[Tab ${workerId}] Discarded "${business.name}" (${reasons.join(', ')})`, progressPercent);
-                                }
-                            } else {
-                                onProgress(`[Tab ${workerId}] Failed to extract details for item ${processedCount}`, progressPercent);
-                            }
-                        } catch (err) {
-                            console.error(`[Tab ${workerId}] Error processing listing ${url}:`, err);
-                            if (err.message.includes('detached') || err.message.includes('crashed') || err.message.includes('closed') || err.message.includes('Session closed')) {
-                                onProgress(`[Tab ${workerId}] Tab crashed or frame detached. Recreating page...`, progressPercent);
-                                try {
-                                    await page.close().catch(() => {});
-                                } catch (e) {}
-                                try {
-                                    page = await browser.newPage();
-                                    await configurePage(page, true);
-                                    navCount = 1;
-                                } catch (recreateErr) {
-                                    console.error(`[Tab ${workerId}] Failed to recreate page after crash:`, recreateErr);
-                                }
-                            }
-                        }
-
-                        // Delay with randomized jitter
-                        const delay = 300 + Math.floor(Math.random() * 500);
-                        await new Promise(r => setTimeout(r, delay));
-                    }
-                    if (page) {
-                        await page.close().catch(() => {});
-                    }
-                }
-
-                // Spawn parallel worker promises for this city
-                const workerPromises = [];
-                for (let j = 1; j <= concurrency; j++) {
-                    if (stopScrapingRequested || leadsScrapedCount >= maxResults) break;
-                    const newPage = await browser.newPage();
-                    await configurePage(newPage, true);
-                    workerPromises.push(worker(j, newPage));
-                }
-
-                await Promise.all(workerPromises);
-            }
-
-            if (leadsScrapedCount >= maxResults) {
-                onProgress(`Reached target limit of ${maxResults} valid leads. Finishing scan.`, 100);
-                break;
-            }
         }
 
+        // Spawn parallel tab workers
+        const tabPromises = [];
+        for (let t = 1; t <= NUM_PARALLEL_TABS; t++) {
+            tabPromises.push(cityWorkerTab(t));
+        }
+
+        await Promise.all(tabPromises);
+
         if (!stopScrapingRequested && leadsScrapedCount < maxResults) {
-            onProgress('Scraping completed successfully.', 100);
+            onProgress(`Scraping finished. Total leads gathered: ${leadsScrapedCount}`, 100);
+        } else if (leadsScrapedCount >= maxResults) {
+            onProgress(`Target limit of ${maxResults} valid leads reached. Complete!`, 100);
         }
 
     } catch (error) {
-        console.error('Scraping error:', error);
+        console.error('High-speed scraping error:', error);
         onProgress(`Error during scraping: ${error.message}`, 100);
     } finally {
         if (browser) {
@@ -384,27 +315,24 @@ async function scrapeGoogleMaps({
 }
 
 /**
- * Scroll and collect place links
+ * 2. Smarter Scrolling: Gather place links using waitForFunction element count checks
  */
-async function gatherPlaceLinks(page, feedSelector, maxResults, existingUrls, onProgress) {
+async function gatherPlaceLinks(page, feedSelector, maxResults, sessionGatheredIds, onProgress) {
     let links = new Set();
     let duplicates = new Set();
-    let gatheredIds = new Set();
     let scrollAttempts = 0;
-    const maxScrollAttempts = 35; // prevent infinite loops
+    const maxScrollAttempts = 30;
     let lastLength = 0;
 
     while (links.size < maxResults && scrollAttempts < maxScrollAttempts) {
         if (stopScrapingRequested) break;
 
-        // Pause check
         while (pauseScrapingRequested && !stopScrapingRequested) {
             await new Promise(r => setTimeout(r, 1000));
         }
-
         if (stopScrapingRequested) break;
 
-        // Extract currently visible links in the DOM
+        // Extract visible links from DOM
         const visibleLinks = await page.evaluate(() => {
             const anchors = Array.from(document.querySelectorAll('a[href*="/maps/place/"]'));
             return anchors.map(a => a.href);
@@ -412,16 +340,12 @@ async function gatherPlaceLinks(page, feedSelector, maxResults, existingUrls, on
 
         visibleLinks.forEach(link => {
             const id = getGoogleMapsId(link);
-            if (existingUrls.has(id)) {
+            if (sessionGatheredIds.has(id)) {
                 duplicates.add(id);
                 return;
             }
-            if (gatheredIds.has(id)) {
-                return;
-            }
             if (links.size < maxResults) {
-                gatheredIds.add(id);
-                existingUrls.add(id);
+                sessionGatheredIds.add(id);
                 const cleaned = link.split('?')[0].split('#')[0].trim();
                 links.add(cleaned);
             }
@@ -430,30 +354,36 @@ async function gatherPlaceLinks(page, feedSelector, maxResults, existingUrls, on
         if (links.size >= maxResults) break;
 
         // Scroll feed down
-        const isEnd = await page.evaluate((selector) => {
+        await page.evaluate((selector) => {
             const feed = document.querySelector(selector);
-            if (!feed) return true;
-            
-            feed.scrollBy(0, 3000);
-            
-            // Check for end of list labels
-            const endLabels = ["You've reached the end of the list", "End of list", "No more results"];
-            const textContent = feed.textContent || "";
-            return endLabels.some(label => textContent.includes(label));
+            if (feed) feed.scrollBy(0, 3500);
         }, feedSelector);
 
-        if (isEnd && links.size === lastLength) {
-            // Wait extra just in case it is loading slowly
-            await new Promise(r => setTimeout(r, 2000));
+        // 2. Smarter Scrolling: waitForFunction count check instead of fixed delay
+        const currentCount = links.size;
+        await page.waitForFunction(
+            (selector, prevCount) => {
+                const feed = document.querySelector(selector);
+                if (!feed) return true;
+                const count = feed.querySelectorAll('a[href*="/maps/place/"]').length;
+                const endLabels = ["You've reached the end of the list", "End of list", "No more results"];
+                const textContent = feed.textContent || "";
+                const isEnd = endLabels.some(label => textContent.includes(label));
+                return count > prevCount || isEnd;
+            },
+            { timeout: 1200 },
+            feedSelector,
+            lastLength
+        ).catch(() => null);
+
+        if (links.size === lastLength) {
             scrollAttempts++;
-            continue;
+        } else {
+            scrollAttempts = 0; // reset stall counter on progress
         }
 
         lastLength = links.size;
-        scrollAttempts++;
-        onProgress(`Gathered ${links.size} new listing links...`, 20 + Math.min(scrollAttempts * 0.5, 15));
-        
-        await new Promise(r => setTimeout(r, 250));
+        onProgress(`Gathered ${links.size} listing links...`);
     }
 
     return {
@@ -463,24 +393,20 @@ async function gatherPlaceLinks(page, feedSelector, maxResults, existingUrls, on
 }
 
 /**
- * Navigate to a place URL and parse details
+ * 4. Decoupled Extraction: Pure DOM detail extraction (No WhatsApp validation blocking calls)
  */
 async function extractPlaceDetails(page, url) {
     try {
-        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 30000 });
+        await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 25000 });
         
-        // Wait up to 5s for the page title to load (first confirmation details pane loaded)
-        await page.waitForSelector('h1', { timeout: 6000 }).catch(() => null);
+        await page.waitForSelector('h1', { timeout: 5000 }).catch(() => null);
 
-        // Wait up to 3s for details pane elements (phone/website) to populate
+        // Wait up to 2.5s for phone/website elements to populate
         await page.waitForFunction(() => {
             const hasPhone = !!document.querySelector('a[href^="tel:"], [data-item-id^="phone:tel:"]');
             const hasWebsite = !!document.querySelector('[data-item-id="authority"], a[aria-label*="website"i]');
             return hasPhone || hasWebsite;
-        }, { timeout: 3000 }).catch(() => null);
-
-        // Settle for 800ms
-        await new Promise(r => setTimeout(r, 800));
+        }, { timeout: 2500 }).catch(() => null);
 
         const details = await page.evaluate(() => {
             // 1. Name
@@ -489,64 +415,28 @@ async function extractPlaceDetails(page, url) {
 
             // 2. Reviews Count
             let reviewsCount = 0;
-            
-            // Priority 1: Button with aria-label containing review/reviews
             const btn = document.querySelector('button[aria-label*="review"]');
             if (btn) {
                 const label = btn.getAttribute('aria-label');
                 const match = label.match(/([\d,]+)\s+reviews?/i);
-                if (match) {
-                    reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
-                }
+                if (match) reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
             }
 
-            // Priority 2: F7nice container (reviews count in parentheses)
             if (!reviewsCount) {
                 const f7 = document.querySelector('.F7nice');
                 if (f7) {
-                    const text = f7.textContent;
-                    const match = text.match(/\(([\d,]+)\)/);
-                    if (match) {
-                        reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
-                    }
+                    const match = f7.textContent.match(/\(([\d,]+)\)/);
+                    if (match) reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
                 }
             }
 
-            // Priority 3: Specific class (LQ7e0d), looking specifically for number in parentheses or matching "reviews"
             if (!reviewsCount) {
                 const lqEl = document.querySelector('.LQ7e0d');
                 if (lqEl && lqEl.textContent) {
-                    let match = lqEl.textContent.match(/\(([\d,]+)\)/);
-                    if (!match) {
-                        match = lqEl.textContent.match(/([\d,]+)\s+reviews?/i);
-                    }
-                    if (match) {
-                        reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
-                    }
+                    let match = lqEl.textContent.match(/\(([\d,]+)\)/) || lqEl.textContent.match(/([\d,]+)\s+reviews?/i);
+                    if (match) reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
                 }
             }
-
-            // Priority 4: General DOM fallback for text matching "\d+ reviews" or "(\d+)"
-            if (!reviewsCount) {
-                const spans = Array.from(document.querySelectorAll('span, button, a'));
-                for (const el of spans) {
-                    const text = el.textContent.trim();
-                    if (/^[\d,]+\s+reviews?$/i.test(text)) {
-                        const match = text.match(/([\d,]+)/);
-                        if (match) {
-                            reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
-                            break;
-                        }
-                    } else {
-                        const match = text.match(/^\(([\d,]+)\)$/);
-                        if (match) {
-                            reviewsCount = parseInt(match[1].replace(/,/g, ''), 10);
-                            break;
-                        }
-                    }
-                }
-            }
-
 
             // 3. Website
             let website = null;
@@ -579,9 +469,7 @@ async function extractPlaceDetails(page, url) {
                 if (phoneEl) {
                     const label = phoneEl.getAttribute('aria-label');
                     const match = label.match(/Phone:\s*(.+)$/i);
-                    if (match) {
-                        phone = match[1].trim();
-                    }
+                    if (match) phone = match[1].trim();
                 }
             }
 
@@ -595,21 +483,13 @@ async function extractPlaceDetails(page, url) {
 
         details.url = url;
 
-        // WhatsApp Check (Always verify WhatsApp status automatically)
-        if (details.phone) {
-            const verifyResult = await whatsapp.verifyNumber(details.phone);
-            details.whatsappRegistered = verifyResult.registered;
-            details.whatsappFormatted = verifyResult.formatted;
-            details.whatsappLink = `https://wa.me/${details.whatsappFormatted}`;
-        } else {
-            details.whatsappRegistered = false;
-            details.whatsappFormatted = '';
-            details.whatsappLink = '';
-        }
+        // 4. Decoupled Pipeline: Default WhatsApp attributes (No blocking network calls during scrape)
+        details.whatsappRegistered = null;
+        details.whatsappFormatted = details.phone ? details.phone.replace(/[^0-9+]/g, '') : '';
+        details.whatsappLink = details.whatsappFormatted ? `https://wa.me/${details.whatsappFormatted}` : '';
 
         return details;
     } catch (err) {
-        console.error(`Error extracting place details from ${url}:`, err);
         if (err.message.includes('detached') || err.message.includes('crashed') || err.message.includes('closed') || err.message.includes('Session closed')) {
             throw err;
         }
@@ -618,27 +498,22 @@ async function extractPlaceDetails(page, url) {
 }
 
 /**
- * Filter out according to target rules:
- * - Must HAVE a phone number
- * - Must NOT HAVE a website
- * - Must be within review counts
+ * 5. Preserve Existing Filters
  */
 function validateFilters(business, minReviews, maxReviews, websiteFilter = 'none') {
     if (!business.phone) {
-        return false; // MUST have phone number
+        return false;
     }
     
-    // Website filter checks
     if (websiteFilter === 'none' && business.website) {
-        return false; // MUST NOT have website
+        return false;
     }
     if (websiteFilter === 'must' && !business.website) {
-        return false; // MUST have website
+        return false;
     }
-    // if 'any', we bypass checking website!
 
     if (business.reviewsCount < minReviews || business.reviewsCount > maxReviews) {
-        return false; // Must fit reviews filter
+        return false;
     }
     return true;
 }
