@@ -12,26 +12,7 @@ const WebSocket = require('ws');
 const path = require('path');
 const fs = require('fs');
 const scraper = require('./scraper');
-const facebookScraper = require('./facebook_scraper');
 const whatsapp = require('./whatsapp');
-
-/**
- * Normalise Facebook Page URL to extract username/ID for duplicate checks
- */
-function getFacebookUsername(url) {
-    if (!url) return '';
-    try {
-        const parsed = new URL(url);
-        const pathParts = parsed.pathname.split('/').filter(Boolean);
-        if (pathParts.length > 0) {
-            if (pathParts[0] === 'pages' && pathParts.length > 2) {
-                return pathParts[2];
-            }
-            return pathParts[0];
-        }
-    } catch (e) {}
-    return url;
-}
 
 /**
  * Extract unique Google Place ID or CID from URL
@@ -527,7 +508,7 @@ wss.on('connection', (ws) => {
                         break;
                     }
 
-                    const { mode = 'google', niche, location, selectedStates, minReviews, maxReviews, maxResults, headless, sendAutoMessage, waMode, messageTemplate, messageDelay, websiteFilter, skipScanned } = data;
+                    const { niche, location, selectedStates, minReviews, maxReviews, maxResults, headless, sendAutoMessage, waMode, messageTemplate, messageDelay, websiteFilter, skipScanned } = data;
 
                     activeWhatsAppMode = waMode || (sendAutoMessage ? 'text' : 'off');
                     const needWhatsApp = (activeWhatsAppMode !== 'off');
@@ -627,7 +608,6 @@ wss.on('connection', (ws) => {
                     activeScrapeState = {
                         isScraping: true,
                         isPaused: false,
-                        mode: mode,
                         niche,
                         locationText: location,
                         selectedStates: selectedStates || [],
@@ -648,7 +628,7 @@ wss.on('connection', (ws) => {
 
                         const existingUrls = new Set(scrapedLeadsDb.map(l => {
                             if (!l.url) return '';
-                            return mode === 'facebook' ? getFacebookUsername(l.url) : getGoogleMapsId(l.url);
+                            return getGoogleMapsId(l.url);
                         }).filter(Boolean));
 
                         const onProgressCallback = (msg, percent) => {
@@ -677,11 +657,7 @@ wss.on('connection', (ws) => {
                             // Check if duplicate and update in-place, or append
                             const existsIndex = scrapedLeadsDb.findIndex(l => {
                                 if (l.url && business.url) {
-                                    if (mode === 'facebook') {
-                                        return getFacebookUsername(l.url) === getFacebookUsername(business.url);
-                                    } else {
-                                        return getGoogleMapsId(l.url) === getGoogleMapsId(business.url);
-                                    }
+                                    return getGoogleMapsId(l.url) === getGoogleMapsId(business.url);
                                 }
                                 return l.url === business.url;
                             });
@@ -721,31 +697,18 @@ wss.on('connection', (ws) => {
                             }
                         };
 
-                        if (mode === 'facebook') {
-                            await facebookScraper.scrapeFacebook({
-                                niche,
-                                location: locations,
-                                maxResults: targetLimit,
-                                headless: !!headless,
-                                websiteFilter: websiteFilter || 'none',
-                                existingUrls: existingUrls,
-                                onProgress: onProgressCallback,
-                                onData: onDataCallback
-                            });
-                        } else {
-                            await scraper.scrapeGoogleMaps({
-                                niche,
-                                location: locations,
-                                minReviews: parseInt(minReviews, 10) || 0,
-                                maxReviews: parseInt(maxReviews, 10) || Infinity,
-                                maxResults: targetLimit,
-                                headless: !!headless,
-                                websiteFilter: websiteFilter || 'none',
-                                existingUrls: existingUrls,
-                                onProgress: onProgressCallback,
-                                onData: onDataCallback
-                            });
-                        }
+                        await scraper.scrapeGoogleMaps({
+                            niche,
+                            location: locations,
+                            minReviews: parseInt(minReviews, 10) || 0,
+                            maxReviews: parseInt(maxReviews, 10) || Infinity,
+                            maxResults: targetLimit,
+                            headless: !!headless,
+                            websiteFilter: websiteFilter || 'none',
+                            existingUrls: existingUrls,
+                            onProgress: onProgressCallback,
+                            onData: onDataCallback
+                        });
                     })().then(async () => {
                         activeScrapingPromise = null;
                         activeScrapeState.isScraping = false;
@@ -774,7 +737,6 @@ wss.on('connection', (ws) => {
                 case 'pause-scrape':
                     sendAppLog(ws, 'Pausing scanner and messaging queue...');
                     scraper.pauseScraping();
-                    facebookScraper.pauseScraping();
                     isMessagingPaused = true;
                     activeScrapeState.isPaused = true;
                     broadcast({
@@ -791,7 +753,6 @@ wss.on('connection', (ws) => {
                     }
                     sendAppLog(ws, 'Resuming scanner and messaging queue...');
                     scraper.resumeScraping();
-                    facebookScraper.resumeScraping();
                     isMessagingPaused = false;
                     activeScrapeState.isPaused = false;
                     if (messageQueue.length > 0 && !isProcessingQueue) {
@@ -808,7 +769,6 @@ wss.on('connection', (ws) => {
                     sendAppLog(ws, 'Stopping scraper and clearing messaging queue...');
                     isStoppedByUser = true;
                     scraper.stopScraping();
-                    facebookScraper.stopScraping();
                     messageQueue = [];
                     isMessagingPaused = false;
                     lastProgress = { msg: 'Stopped', percent: 0 };

@@ -7,7 +7,6 @@ let waActiveEditUrl = null;
 let waActiveItemTemplate = null;
 let waEditingQueueUrls = {};
 let lastQueueData = null;
-let currentScrapeMode = 'google'; // 'google' or 'facebook'
 
 // DOM Elements
 const searchForm = document.getElementById('search-form');
@@ -20,7 +19,6 @@ const inputHeadless = document.getElementById('input-headless');
 const inputSkipScanned = document.getElementById('input-skip-scanned');
 const inputWebsiteFilter = document.getElementById('input-website-filter');
 
-// Add new messaging elements
 function getWhatsAppMode() {
     const checked = document.querySelector('input[name="wa-mode"]:checked');
     return checked ? checked.value : 'off';
@@ -51,8 +49,6 @@ const btnDownloadCsv = document.getElementById('btn-download-csv');
 const btnRecheckWa = document.getElementById('btn-recheck-wa');
 const btnClearDb = document.getElementById('btn-clear-db');
 
-const btnModeMaps = document.getElementById('btn-mode-maps');
-const btnModeFb = document.getElementById('btn-mode-fb');
 const groupMinReviews = document.getElementById('group-min-reviews');
 const groupMaxReviews = document.getElementById('group-max-reviews');
 
@@ -288,26 +284,14 @@ function addLeadToTable(lead) {
         msgBadgeHtml = '<span class="badge whatsapp-no" title="Skipped: WhatsApp not verified or no phone">Skipped 🚫</span>';
     }
 
-    // reviews / Facebook Ads formatting
+    // reviews formatting
     const reviews = lead.reviewsCount !== undefined ? lead.reviewsCount : '0';
-    let column5Html = '';
-    let actionButtonsHtml = '';
-    
-    if (lead.facebookAdLink) {
-        column5Html = `<a href="${lead.facebookAdLink}" target="_blank" style="color: var(--color-warning); text-decoration: underline; font-weight: 600;">View Ads 📊</a>`;
-        actionButtonsHtml = `
-            <a href="${lead.url}" target="_blank" class="btn-table-action">👥 Page</a>
-            ${lead.whatsappLink ? `<a href="${lead.whatsappLink}" target="_blank" class="btn-table-action btn-wa-chat">💬 Chat</a>` : ''}
-            ${lead.website ? `<a href="${lead.website}" target="_blank" class="btn-table-action">🌐 Web</a>` : ''}
-        `;
-    } else {
-        column5Html = `${reviews} reviews`;
-        actionButtonsHtml = `
-            <a href="${lead.url}" target="_blank" class="btn-table-action">🗺️ Maps</a>
-            ${lead.whatsappLink ? `<a href="${lead.whatsappLink}" target="_blank" class="btn-table-action btn-wa-chat">💬 Chat</a>` : ''}
-            ${lead.website ? `<a href="${lead.website}" target="_blank" class="btn-table-action">🌐 Web</a>` : ''}
-        `;
-    }
+    const column5Html = `${reviews} reviews`;
+    const actionButtonsHtml = `
+        <a href="${lead.url}" target="_blank" class="btn-table-action">🗺️ Maps</a>
+        ${lead.whatsappLink ? `<a href="${lead.whatsappLink}" target="_blank" class="btn-table-action btn-wa-chat">💬 Chat</a>` : ''}
+        ${lead.website ? `<a href="${lead.website}" target="_blank" class="btn-table-action">🌐 Web</a>` : ''}
+    `;
 
     const urlIdSanitized = btoa(lead.url).replace(/[^a-z0-9]/gi, '');
     let tr = document.getElementById(`row-${urlIdSanitized}`);
@@ -1363,65 +1347,9 @@ function bindPersistenceListeners() {
         radio.addEventListener('change', saveFormState);
     });
 
-    // Checkboxes for locations
-    document.addEventListener('change', (e) => {
-        if (e.target && e.target.name === 'selected-state') {
-            saveFormState();
-        }
-    });
-
     // Select all/clear buttons
     [btnUsaSelectAll, btnUsaClearAll, btnCanadaSelectAll, btnCanadaClearAll].forEach(btn => {
         if (btn) btn.addEventListener('click', saveFormState);
-    });
-}
-
-function setScrapeMode(mode) {
-    currentScrapeMode = mode;
-    saveFormState();
-
-    if (mode === 'facebook') {
-        btnModeFb.classList.add('active');
-        btnModeFb.style.background = 'var(--color-accent)';
-        btnModeFb.style.color = '#000000';
-        btnModeFb.style.boxShadow = '0 0 10px var(--color-accent-glow)';
-
-        btnModeMaps.classList.remove('active');
-        btnModeMaps.style.background = 'transparent';
-        btnModeMaps.style.color = 'var(--text-main)';
-        btnModeMaps.style.boxShadow = 'none';
-
-        if (groupMinReviews) groupMinReviews.style.display = 'none';
-        if (groupMaxReviews) groupMaxReviews.style.display = 'none';
-
-        const reviewsHeader = document.querySelector('#results-table thead th:nth-child(5)');
-        if (reviewsHeader) reviewsHeader.textContent = 'Facebook Ads';
-    } else {
-        btnModeMaps.classList.add('active');
-        btnModeMaps.style.background = 'var(--color-accent)';
-        btnModeMaps.style.color = '#000000';
-        btnModeMaps.style.boxShadow = '0 0 10px var(--color-accent-glow)';
-
-        btnModeFb.classList.remove('active');
-        btnModeFb.style.background = 'transparent';
-        btnModeFb.style.color = 'var(--text-main)';
-        btnModeFb.style.boxShadow = 'none';
-
-        if (groupMinReviews) groupMinReviews.style.display = 'block';
-        if (groupMaxReviews) groupMaxReviews.style.display = 'block';
-
-        const reviewsHeader = document.querySelector('#results-table thead th:nth-child(5)');
-        if (reviewsHeader) reviewsHeader.textContent = 'Reviews';
-    }
-}
-
-if (btnModeMaps && btnModeFb) {
-    btnModeMaps.addEventListener('click', () => {
-        setScrapeMode('google');
-    });
-
-    btnModeFb.addEventListener('click', () => {
-        setScrapeMode('facebook');
     });
 }
 
