@@ -39,8 +39,37 @@ if (fs.existsSync(locationsDbPath)) {
     }
 }
 
-// Load scraped leads database (persistence)
-const leadsDbPath = path.join(__dirname, 'scraped_leads.json');
+// Daily Cap Logic (Hardcoded or environment-configured per tier)
+const DAILY_CAP = parseInt(process.env.DAILY_CAP || '40000', 10);
+const usageStatsPath = path.join(process.cwd(), 'usage_stats.json');
+
+function getDailyUsage() {
+    const now = Date.now();
+    let stats = { date: new Date().toDateString(), count: 0, resetTimestamp: now + 86400000 };
+    if (fs.existsSync(usageStatsPath)) {
+        try {
+            const saved = JSON.parse(fs.readFileSync(usageStatsPath, 'utf8'));
+            if (now >= saved.resetTimestamp || new Date().toDateString() !== saved.date) {
+                stats = { date: new Date().toDateString(), count: 0, resetTimestamp: now + 86400000 };
+            } else {
+                stats = saved;
+            }
+        } catch (e) {}
+    }
+    return stats;
+}
+
+function incrementDailyUsage(amount = 1) {
+    const stats = getDailyUsage();
+    stats.count += amount;
+    try {
+        fs.writeFileSync(usageStatsPath, JSON.stringify(stats, null, 2), 'utf8');
+    } catch (e) {}
+    return stats.count;
+}
+
+// Load scraped leads database (persistence in executable working directory)
+const leadsDbPath = path.join(process.cwd(), 'scraped_leads.json');
 let scrapedLeadsDb = [];
 if (fs.existsSync(leadsDbPath)) {
     try {
@@ -78,7 +107,14 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // Serve frontend files from "public" folder
-app.use(express.static(path.join(__dirname, 'public')));
+const publicDir = path.join(__dirname, 'public');
+app.use(express.static(publicDir));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(publicDir, 'index.html'));
+});
+app.get('/locations_db.json', (req, res) => {
+    res.sendFile(path.join(publicDir, 'locations_db.json'));
+});
 
 // Create HTTP server
 const server = http.createServer(app);
@@ -508,6 +544,17 @@ wss.on('connection', (ws) => {
                         break;
                     }
 
+                    const currentUsage = getDailyUsage();
+                    if (currentUsage.count >= DAILY_CAP) {
+                        const hoursLeft = Math.max(1, Math.ceil((currentUsage.resetTimestamp - Date.now()) / (1000 * 60 * 60)));
+                        sendAppLog(ws, `[Daily Cap Error] Daily scraping limit of ${DAILY_CAP.toLocaleString()} leads reached for today! Resets in ~${hoursLeft} hours.`);
+                        ws.send(JSON.stringify({
+                            type: 'scrape-finished',
+                            data: { success: false, error: `Daily cap of ${DAILY_CAP.toLocaleString()} leads reached for today. Resets in ~${hoursLeft} hours.` }
+                        }));
+                        break;
+                    }
+
                     const { niche, location, selectedStates, minReviews, maxReviews, maxResults, headless, sendAutoMessage, waMode, messageTemplate, messageDelay, websiteFilter, skipScanned } = data;
 
                     activeWhatsAppMode = waMode || (sendAutoMessage ? 'text' : 'off');
@@ -666,6 +713,11 @@ wss.on('connection', (ws) => {
                                 if (!business.discarded) {
                                     totalScrapedLeadsCount++;
                                     activeScrapeState.sessionLeadsCount++;
+                                    const updatedCount = incrementDailyUsage(1);
+                                    if (updatedCount >= DAILY_CAP) {
+                                        sendAppLog(ws, `[Daily Cap] Daily scraping limit of ${DAILY_CAP.toLocaleString()} leads reached for today! Stopping scraper.`);
+                                        scraper.stopScraping();
+                                    }
                                 }
                                 sendAppLog(ws, `[Scraper] Found NEW business: "${business.name}" (Phone: ${business.phone || 'N/A'}, Reviews: ${business.reviewsCount || 0})`);
                             } else {
@@ -944,9 +996,40 @@ if (whatsapp.sessionExists && whatsapp.sessionExists()) {
     whatsapp.initialize(handleWhatsAppStatusChange);
 }
 
-// Start Web Server
-server.listen(PORT, () => {
-    console.log(`=========================================`);
-    console.log(`Business Finder Server running on: http://localhost:${PORT}`);
-    console.log(`=========================================`);
-});
+// Start Web Server with automatic open port detection & robust browser launch
+function startServerOnPort(targetPort) {
+    server.listen(targetPort, () => {
+        const actualPort = server.address().port;
+        const startUrl = `http://localhost:${actualPort}`;
+        console.log(`=========================================`);
+        console.log(`Lead Finder Pro running on: ${startUrl}`);
+        console.log(`Daily Scraping Cap: ${DAILY_CAP.toLocaleString()} leads/day`);
+        console.log(`=========================================`);
+
+        // Open browser automatically using OS-native commands
+        const { exec } = require('child_process');
+        if (process.platform === 'win32') {
+            exec(`cmd.exe /c start ${startUrl}`, (err) => {
+                if (err) exec(`powershell -Command "Start-Process '${startUrl}'"`);
+            });
+        } else if (process.platform === 'darwin') {
+            exec(`open ${startUrl}`);
+        } else {
+            exec(`xdg-open ${startUrl}`);
+        }
+    });
+
+    server.on('error', (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.log(`Port ${targetPort} is in use. Trying port ${targetPort + 1}...`);
+            setTimeout(() => {
+                server.close();
+                startServerOnPort(targetPort + 1);
+            }, 300);
+        } else {
+            console.error('Server error:', err);
+        }
+    });
+}
+
+startServerOnPort(PORT);

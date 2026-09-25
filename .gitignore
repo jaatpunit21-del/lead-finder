@@ -24,3 +24,8 @@ devices.json
 Thumbs.db
 .vscode/
 .idea/
+
+# Large build binaries & dist folder
+dist/
+
+

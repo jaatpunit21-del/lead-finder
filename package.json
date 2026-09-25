@@ -1,11 +1,23 @@
 {
-  "name": "business-finder",
+  "name": "lead-finder",
   "version": "1.0.0",
-  "description": "Scrapes Google Maps and validates WhatsApp presence for USA & Canada businesses without websites",
+  "description": "Lead Finder Pro - USA & Canada Business Scraper",
   "main": "server.js",
+  "bin": "server.js",
+  "pkg": {
+    "assets": [
+      "public/**/*",
+      "public/locations_db.json"
+    ],
+    "targets": [
+      "node18-win-x64"
+    ],
+    "outputPath": "dist"
+  },
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "build:all": "node build_all.js"
   },
   "dependencies": {
     "express": "^4.19.2",
