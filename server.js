@@ -396,31 +396,19 @@ async function processMessageQueue() {
 }
 
 wss.on('connection', (ws) => {
-    console.log('Client connected to WebSocket. Wiping all scraping session data for a clean start...');
+    console.log('Client connected to WebSocket.');
 
-    // Stop active scraping if running
-    if (scraper.isScrapingActive()) {
-        scraper.stopScraping();
-    }
+    ws.on('error', (err) => {
+        console.error('WebSocket client socket error:', err.message);
+    });
 
-    // Clear persistent leads database
-    scrapedLeadsDb = [];
-    saveLeadsDb();
-
-    // Clear messaging queue
-    messageQueue = [];
-    isMessagingPaused = false;
-
-    // Clear server log buffer
-    serverLogBuffer.length = 0;
-
-    // Send empty log history on connection
+    // Send log history on connection
     ws.send(JSON.stringify({
         type: 'log-history',
-        data: []
+        data: serverLogBuffer
     }));
 
-    // Send current WhatsApp status and devices list on connection (WhatsApp stays active)
+    // Send current WhatsApp status and devices list on connection
     ws.send(JSON.stringify({
         type: 'whatsapp-status',
         data: whatsapp.getStatus()
@@ -429,10 +417,10 @@ wss.on('connection', (ws) => {
         type: 'whatsapp-devices-list',
         data: whatsapp.getDevices()
     }));
-    // Send empty scraped leads on connection
+    // Send stored scraped leads on connection
     ws.send(JSON.stringify({
         type: 'initial-leads',
-        data: []
+        data: scrapedLeadsDb
     }));
     // Send reset active scraping status and last progress on connection
     activeScrapeState = {
@@ -996,13 +984,35 @@ if (whatsapp.sessionExists && whatsapp.sessionExists()) {
     whatsapp.initialize(handleWhatsAppStatusChange);
 }
 
+// Heartbeat ping interval to keep WebSocket connections alive
+setInterval(() => {
+    wss.clients.forEach((client) => {
+        if (client.readyState === WebSocket.OPEN) {
+            client.send(JSON.stringify({ type: 'ping' }));
+        }
+    });
+}, 15000);
+
 // Start Web Server with automatic open port detection & robust browser launch
 function startServerOnPort(targetPort) {
+    const onError = (err) => {
+        if (err.code === 'EADDRINUSE') {
+            console.log(`Port ${targetPort} is in use. Trying port ${targetPort + 1}...`);
+            server.removeListener('error', onError);
+            startServerOnPort(targetPort + 1);
+        } else {
+            console.error('Server error:', err);
+        }
+    };
+
+    server.once('error', onError);
+
     server.listen(targetPort, () => {
+        server.removeListener('error', onError);
         const actualPort = server.address().port;
         const startUrl = `http://localhost:${actualPort}`;
         console.log(`=========================================`);
-        console.log(`Lead Finder Pro running on: ${startUrl}`);
+        console.log(`Global Lead Finder Pro running on: ${startUrl}`);
         console.log(`Daily Scraping Cap: ${DAILY_CAP.toLocaleString()} leads/day`);
         console.log(`=========================================`);
 
@@ -1016,18 +1026,6 @@ function startServerOnPort(targetPort) {
             exec(`open ${startUrl}`);
         } else {
             exec(`xdg-open ${startUrl}`);
-        }
-    });
-
-    server.on('error', (err) => {
-        if (err.code === 'EADDRINUSE') {
-            console.log(`Port ${targetPort} is in use. Trying port ${targetPort + 1}...`);
-            setTimeout(() => {
-                server.close();
-                startServerOnPort(targetPort + 1);
-            }, 300);
-        } else {
-            console.error('Server error:', err);
         }
     });
 }

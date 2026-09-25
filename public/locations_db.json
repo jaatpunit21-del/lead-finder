@@ -4570,5 +4570,178 @@
         "population": 131469
       }
     ]
+  },
+  {
+    "name": "United Kingdom",
+    "code": "UK",
+    "country": "United Kingdom",
+    "population": 67330000,
+    "cities": [
+      { "name": "London", "population": 8982000 },
+      { "name": "Birmingham", "population": 1149000 },
+      { "name": "Glasgow", "population": 635600 },
+      { "name": "Manchester", "population": 553230 },
+      { "name": "Liverpool", "population": 498042 },
+      { "name": "Edinburgh", "population": 488050 },
+      { "name": "Bristol", "population": 467099 },
+      { "name": "Leeds", "population": 503000 }
+    ]
+  },
+  {
+    "name": "Germany",
+    "code": "DE",
+    "country": "Germany",
+    "population": 83200000,
+    "cities": [
+      { "name": "Berlin", "population": 3769000 },
+      { "name": "Hamburg", "population": 1845000 },
+      { "name": "Munich", "population": 1472000 },
+      { "name": "Cologne", "population": 1085000 },
+      { "name": "Frankfurt", "population": 753056 },
+      { "name": "Stuttgart", "population": 634830 }
+    ]
+  },
+  {
+    "name": "France",
+    "code": "FR",
+    "country": "France",
+    "population": 67750000,
+    "cities": [
+      { "name": "Paris", "population": 2161000 },
+      { "name": "Marseille", "population": 870700 },
+      { "name": "Lyon", "population": 522900 },
+      { "name": "Toulouse", "population": 493400 },
+      { "name": "Nice", "population": 342600 }
+    ]
+  },
+  {
+    "name": "Spain",
+    "code": "ES",
+    "country": "Spain",
+    "population": 47420000,
+    "cities": [
+      { "name": "Madrid", "population": 3223000 },
+      { "name": "Barcelona", "population": 1620000 },
+      { "name": "Valencia", "population": 791413 },
+      { "name": "Seville", "population": 688711 }
+    ]
+  },
+  {
+    "name": "Italy",
+    "code": "IT",
+    "country": "Italy",
+    "population": 59000000,
+    "cities": [
+      { "name": "Rome", "population": 2873000 },
+      { "name": "Milan", "population": 1378000 },
+      { "name": "Naples", "population": 959500 },
+      { "name": "Turin", "population": 870950 }
+    ]
+  },
+  {
+    "name": "Netherlands",
+    "code": "NL",
+    "country": "Netherlands",
+    "population": 17700000,
+    "cities": [
+      { "name": "Amsterdam", "population": 872680 },
+      { "name": "Rotterdam", "population": 651630 },
+      { "name": "The Hague", "population": 548320 },
+      { "name": "Utrecht", "population": 361699 }
+    ]
+  },
+  {
+    "name": "Australia",
+    "code": "AU",
+    "country": "Australia",
+    "population": 25690000,
+    "cities": [
+      { "name": "Sydney", "population": 5312000 },
+      { "name": "Melbourne", "population": 5078000 },
+      { "name": "Brisbane", "population": 2560000 },
+      { "name": "Perth", "population": 2125000 },
+      { "name": "Adelaide", "population": 1376000 }
+    ]
+  },
+  {
+    "name": "India",
+    "code": "IN",
+    "country": "India",
+    "population": 1400000000,
+    "cities": [
+      { "name": "Mumbai", "population": 20961000 },
+      { "name": "Delhi", "population": 32941000 },
+      { "name": "Bangalore", "population": 13193000 },
+      { "name": "Hyderabad", "population": 10534000 },
+      { "name": "Chennai", "population": 11503000 },
+      { "name": "Kolkata", "population": 15133000 },
+      { "name": "Pune", "population": 6987000 },
+      { "name": "Ahmedabad", "population": 8450000 }
+    ]
+  },
+  {
+    "name": "United Arab Emirates",
+    "code": "UAE",
+    "country": "United Arab Emirates",
+    "population": 9890000,
+    "cities": [
+      { "name": "Dubai", "population": 3331000 },
+      { "name": "Abu Dhabi", "population": 1483000 },
+      { "name": "Sharjah", "population": 1274000 }
+    ]
+  },
+  {
+    "name": "Japan",
+    "code": "JP",
+    "country": "Japan",
+    "population": 125700000,
+    "cities": [
+      { "name": "Tokyo", "population": 13960000 },
+      { "name": "Yokohama", "population": 3740000 },
+      { "name": "Osaka", "population": 2691000 },
+      { "name": "Nagoya", "population": 2296000 }
+    ]
+  },
+  {
+    "name": "Brazil",
+    "code": "BR",
+    "country": "Brazil",
+    "population": 214300000,
+    "cities": [
+      { "name": "São Paulo", "population": 12330000 },
+      { "name": "Rio de Janeiro", "population": 6748000 },
+      { "name": "Brasília", "population": 3055000 }
+    ]
+  },
+  {
+    "name": "Mexico",
+    "code": "MX",
+    "country": "Mexico",
+    "population": 128900000,
+    "cities": [
+      { "name": "Mexico City", "population": 9209000 },
+      { "name": "Guadalajara", "population": 1385000 },
+      { "name": "Monterrey", "population": 1142000 }
+    ]
+  },
+  {
+    "name": "Singapore",
+    "code": "SG",
+    "country": "Singapore",
+    "population": 5450000,
+    "cities": [
+      { "name": "Singapore", "population": 5450000 }
+    ]
+  },
+  {
+    "name": "South Africa",
+    "code": "ZA",
+    "country": "South Africa",
+    "population": 59310000,
+    "cities": [
+      { "name": "Johannesburg", "population": 5635000 },
+      { "name": "Cape Town", "population": 4618000 },
+      { "name": "Durban", "population": 3442000 }
+    ]
   }
 ]

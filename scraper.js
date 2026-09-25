@@ -465,10 +465,10 @@ async function extractPlaceDetails(page, url) {
                 }
             }
             if (!phone) {
-                const phoneEl = document.querySelector('button[aria-label*="Phone:"], a[aria-label*="Phone:"]');
+                const phoneEl = document.querySelector('button[aria-label*="Phone:" i], a[aria-label*="Phone:" i], button[aria-label*="Tel" i], a[aria-label*="Tel" i], button[data-tooltip*="phone" i]');
                 if (phoneEl) {
-                    const label = phoneEl.getAttribute('aria-label');
-                    const match = label.match(/Phone:\s*(.+)$/i);
+                    const label = phoneEl.getAttribute('aria-label') || phoneEl.getAttribute('data-tooltip') || '';
+                    const match = label.match(/(?:Phone|Tel|Téléphone|Telefon|Teléfono):\s*(.+)$/i) || label.match(/([\+\d\s\-\(\)]{7,})/);
                     if (match) phone = match[1].trim();
                 }
             }

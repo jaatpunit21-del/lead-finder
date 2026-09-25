@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business Finder Pro - USA & Canada Leads Scraper</title>
+    <title>Global Business Finder Pro - Worldwide Leads Scraper</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -14,10 +14,10 @@
         <!-- Top Navigation Bar -->
         <header class="app-header">
             <div class="logo-area">
-                <span class="logo-icon">🔍</span>
-                <h1>Business Finder <span class="accent-text">Pro</span></h1>
+                <span class="logo-icon">🌐</span>
+                <h1>Global Business Finder <span class="accent-text">Pro</span></h1>
             </div>
-            <div class="header-tag">USA & Canada Leads Extractor</div>
+            <div class="header-tag">Worldwide / All Countries Supported 🌎</div>
         </header>
 
         <!-- Main Dashboard Layout -->
@@ -27,20 +27,20 @@
             <section class="panel panel-search">
                 <div class="panel-header">
                     <h2>Scrape Settings</h2>
-                    <p class="panel-subtitle">Define search niche, target locations, and filters</p>
+                    <p class="panel-subtitle">Define search niche, target locations worldwide, and filters</p>
                 </div>
 
                 <form id="search-form" class="search-form">
                     <div class="form-group">
                         <label for="input-niche">Niche/Business Type</label>
-                        <input type="text" id="input-niche" placeholder="e.g. Cafes, Restaurants, Plumbers" required value="Cafes">
+                        <input type="text" id="input-niche" placeholder="e.g. Cafes, Restaurants, Plumbers, Gyms" required value="Cafes">
                     </div>
 
                     <div class="form-group checkbox-group" style="margin-bottom: 0.75rem;">
                         <label class="toggle-switch">
                             <input type="checkbox" id="toggle-location-mode">
                             <span class="slider"></span>
-                            <span class="label-text">Select States/Provinces (Population Priority)</span>
+                            <span class="label-text">Select Presets by Region (Population Priority)</span>
                         </label>
                     </div>
 
@@ -54,18 +54,20 @@
                     </div>
 
                     <div id="location-manual-group" class="form-group">
-                        <label for="input-location">Locations (One per line, or separated by semicolons)</label>
-                        <textarea id="input-location" rows="3" placeholder="e.g.&#10;Toronto, ON&#10;Vancouver, BC&#10;Seattle, WA" required style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.65rem 0.85rem; font-family: var(--font-sans); font-size: 0.9rem; resize: vertical; line-height: 1.4;">Toronto, ON</textarea>
+                        <label for="input-location">Locations (Any city, state, or country worldwide)</label>
+                        <textarea id="input-location" rows="3" placeholder="e.g.&#10;London, UK&#10;Dubai, UAE&#10;Sydney, Australia&#10;Toronto, Canada&#10;New York, USA&#10;Mumbai, India" required style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.65rem 0.85rem; font-family: var(--font-sans); font-size: 0.9rem; resize: vertical; line-height: 1.4;">London, UK</textarea>
                     </div>
 
                     <div id="location-checklist-group" class="form-group" style="display: none; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; background-color: rgba(255, 255, 255, 0.01);">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
-                            <label style="margin: 0; font-weight: 600;">USA & Canada States/Provinces</label>
+                            <label style="margin: 0; font-weight: 600;">Global Preset Regions</label>
                             <span id="selected-states-count" class="counter-badge" style="font-size: 0.75rem; padding: 2px 6px;">0 selected</span>
                         </div>
-                        <div class="location-tabs" style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
-                            <button type="button" id="btn-tab-usa" class="btn btn-secondary btn-tab active" style="flex: 1; padding: 0.35rem; font-size: 0.8rem; border-radius: 4px;">USA States</button>
-                            <button type="button" id="btn-tab-canada" class="btn btn-secondary btn-tab" style="flex: 1; padding: 0.35rem; font-size: 0.8rem; border-radius: 4px;">Canada Provinces</button>
+                        <div class="location-tabs" style="display: flex; gap: 0.35rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
+                            <button type="button" id="btn-tab-usa" class="btn btn-secondary btn-tab active" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">USA</button>
+                            <button type="button" id="btn-tab-canada" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Canada</button>
+                            <button type="button" id="btn-tab-europe" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Europe</button>
+                            <button type="button" id="btn-tab-global" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Global</button>
                         </div>
                         
                         <!-- USA Panel -->
@@ -74,7 +76,7 @@
                                 <button type="button" id="btn-usa-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
                                 <button type="button" id="btn-usa-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
                             </div>
-                            <div id="usa-states-list" class="checklist-grid" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
+                            <div id="usa-states-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
                                 <!-- Dynamically populated -->
                             </div>
                         </div>
@@ -85,7 +87,29 @@
                                 <button type="button" id="btn-canada-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
                                 <button type="button" id="btn-canada-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
                             </div>
-                            <div id="canada-provinces-list" class="checklist-grid" style="max-height: 200px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
+                            <div id="canada-provinces-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
+                                <!-- Dynamically populated -->
+                            </div>
+                        </div>
+
+                        <!-- Europe Panel -->
+                        <div id="panel-europe-checklist" class="tab-panel" style="display: none;">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <button type="button" id="btn-europe-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
+                                <button type="button" id="btn-europe-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
+                            </div>
+                            <div id="europe-countries-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
+                                <!-- Dynamically populated -->
+                            </div>
+                        </div>
+
+                        <!-- Global Regions Panel -->
+                        <div id="panel-global-checklist" class="tab-panel" style="display: none;">
+                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
+                                <button type="button" id="btn-global-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
+                                <button type="button" id="btn-global-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
+                            </div>
+                            <div id="global-regions-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
                                 <!-- Dynamically populated -->
                             </div>
                         </div>

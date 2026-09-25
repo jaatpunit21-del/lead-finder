@@ -106,28 +106,58 @@ const locationChecklistGroup = document.getElementById('location-checklist-group
 const selectedStatesCount = document.getElementById('selected-states-count');
 const btnTabUsa = document.getElementById('btn-tab-usa');
 const btnTabCanada = document.getElementById('btn-tab-canada');
+const btnTabEurope = document.getElementById('btn-tab-europe');
+const btnTabGlobal = document.getElementById('btn-tab-global');
+
 const panelUsaChecklist = document.getElementById('panel-usa-checklist');
 const panelCanadaChecklist = document.getElementById('panel-canada-checklist');
+const panelEuropeChecklist = document.getElementById('panel-europe-checklist');
+const panelGlobalChecklist = document.getElementById('panel-global-checklist');
+
 const usaStatesList = document.getElementById('usa-states-list');
 const canadaProvincesList = document.getElementById('canada-provinces-list');
+const europeCountriesList = document.getElementById('europe-countries-list');
+const globalRegionsList = document.getElementById('global-regions-list');
+
 const btnUsaSelectAll = document.getElementById('btn-usa-select-all');
 const btnUsaClearAll = document.getElementById('btn-usa-clear-all');
 const btnCanadaSelectAll = document.getElementById('btn-canada-select-all');
 const btnCanadaClearAll = document.getElementById('btn-canada-clear-all');
+const btnEuropeSelectAll = document.getElementById('btn-europe-select-all');
+const btnEuropeClearAll = document.getElementById('btn-europe-clear-all');
+const btnGlobalSelectAll = document.getElementById('btn-global-select-all');
+const btnGlobalClearAll = document.getElementById('btn-global-clear-all');
 
 let locationsDatabase = [];
 
+let isConnectingWs = false;
+let wsReconnectTimer = null;
+
 // Connect to WebSocket Server
 function connectWebSocket() {
+    if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) {
+        return;
+    }
+
     const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
     const wsUrl = `${protocol}//${window.location.host}`;
     
     appendLog('System', `Connecting to server at ${wsUrl}...`);
     
-    ws = new WebSocket(wsUrl);
+    try {
+        ws = new WebSocket(wsUrl);
+    } catch (err) {
+        console.error('WebSocket creation error:', err);
+        scheduleReconnect();
+        return;
+    }
 
     ws.onopen = () => {
         appendLog('System', 'Connected to backend server successfully!');
+        if (wsReconnectTimer) {
+            clearTimeout(wsReconnectTimer);
+            wsReconnectTimer = null;
+        }
     };
 
     ws.onmessage = (event) => {
@@ -202,6 +232,11 @@ function connectWebSocket() {
                 case 'whatsapp-devices-list':
                     handleWhatsAppDevicesList(data);
                     break;
+                case 'ping':
+                    if (ws && ws.readyState === WebSocket.OPEN) {
+                        ws.send(JSON.stringify({ type: 'pong' }));
+                    }
+                    break;
                 default:
                     console.warn('Unknown message type received:', type);
             }
@@ -212,12 +247,21 @@ function connectWebSocket() {
 
     ws.onclose = () => {
         appendLog('System', 'Connection to server lost. Retrying in 3 seconds...');
-        setTimeout(connectWebSocket, 3000);
+        scheduleReconnect();
     };
 
     ws.onerror = (err) => {
         console.error('WebSocket error:', err);
     };
+}
+
+function scheduleReconnect() {
+    if (!wsReconnectTimer) {
+        wsReconnectTimer = setTimeout(() => {
+            wsReconnectTimer = null;
+            connectWebSocket();
+        }, 3000);
+    }
 }
 
 // Append logs to our terminal widget
@@ -1156,8 +1200,12 @@ async function loadLocationsDatabase() {
 }
 
 function populateChecklists() {
-    usaStatesList.innerHTML = '';
-    canadaProvincesList.innerHTML = '';
+    if (usaStatesList) usaStatesList.innerHTML = '';
+    if (canadaProvincesList) canadaProvincesList.innerHTML = '';
+    if (europeCountriesList) europeCountriesList.innerHTML = '';
+    if (globalRegionsList) globalRegionsList.innerHTML = '';
+
+    const europeCountries = ['United Kingdom', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands'];
 
     locationsDatabase.forEach(state => {
         const item = document.createElement('label');
@@ -1175,9 +1223,13 @@ function populateChecklists() {
         item.querySelector('input').addEventListener('change', updateSelectedStatesCount);
 
         if (state.country === 'USA') {
-            usaStatesList.appendChild(item);
+            if (usaStatesList) usaStatesList.appendChild(item);
+        } else if (state.country === 'Canada') {
+            if (canadaProvincesList) canadaProvincesList.appendChild(item);
+        } else if (europeCountries.includes(state.country)) {
+            if (europeCountriesList) europeCountriesList.appendChild(item);
         } else {
-            canadaProvincesList.appendChild(item);
+            if (globalRegionsList) globalRegionsList.appendChild(item);
         }
     });
     
@@ -1198,38 +1250,72 @@ function updateSelectedStatesCount() {
 }
 
 // Tab Switching Listeners
-btnTabUsa.addEventListener('click', () => {
-    btnTabUsa.classList.add('active');
-    btnTabCanada.classList.remove('active');
-    panelUsaChecklist.style.display = 'block';
-    panelCanadaChecklist.style.display = 'none';
-});
+function switchTab(activeBtn, activePanel) {
+    [btnTabUsa, btnTabCanada, btnTabEurope, btnTabGlobal].forEach(btn => {
+        if (btn) btn.classList.remove('active');
+    });
+    [panelUsaChecklist, panelCanadaChecklist, panelEuropeChecklist, panelGlobalChecklist].forEach(panel => {
+        if (panel) panel.style.display = 'none';
+    });
+    if (activeBtn) activeBtn.classList.add('active');
+    if (activePanel) activePanel.style.display = 'block';
+}
 
-btnTabCanada.addEventListener('click', () => {
-    btnTabCanada.classList.add('active');
-    btnTabUsa.classList.remove('active');
-    panelCanadaChecklist.style.display = 'block';
-    panelUsaChecklist.style.display = 'none';
-});
+if (btnTabUsa) btnTabUsa.addEventListener('click', () => switchTab(btnTabUsa, panelUsaChecklist));
+if (btnTabCanada) btnTabCanada.addEventListener('click', () => switchTab(btnTabCanada, panelCanadaChecklist));
+if (btnTabEurope) btnTabEurope.addEventListener('click', () => switchTab(btnTabEurope, panelEuropeChecklist));
+if (btnTabGlobal) btnTabGlobal.addEventListener('click', () => switchTab(btnTabGlobal, panelGlobalChecklist));
 
 // Select / Clear All Listeners
-btnUsaSelectAll.addEventListener('click', () => {
+if (btnUsaSelectAll) btnUsaSelectAll.addEventListener('click', () => {
     document.querySelectorAll('input[name="selected-state"][data-country="USA"]').forEach(cb => cb.checked = true);
     updateSelectedStatesCount();
 });
 
-btnUsaClearAll.addEventListener('click', () => {
+if (btnUsaClearAll) btnUsaClearAll.addEventListener('click', () => {
     document.querySelectorAll('input[name="selected-state"][data-country="USA"]').forEach(cb => cb.checked = false);
     updateSelectedStatesCount();
 });
 
-btnCanadaSelectAll.addEventListener('click', () => {
+if (btnCanadaSelectAll) btnCanadaSelectAll.addEventListener('click', () => {
     document.querySelectorAll('input[name="selected-state"][data-country="Canada"]').forEach(cb => cb.checked = true);
     updateSelectedStatesCount();
 });
 
-btnCanadaClearAll.addEventListener('click', () => {
+if (btnCanadaClearAll) btnCanadaClearAll.addEventListener('click', () => {
     document.querySelectorAll('input[name="selected-state"][data-country="Canada"]').forEach(cb => cb.checked = false);
+    updateSelectedStatesCount();
+});
+
+if (btnEuropeSelectAll) btnEuropeSelectAll.addEventListener('click', () => {
+    const europeCountries = ['United Kingdom', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands'];
+    document.querySelectorAll('input[name="selected-state"]').forEach(cb => {
+        if (europeCountries.includes(cb.getAttribute('data-country'))) cb.checked = true;
+    });
+    updateSelectedStatesCount();
+});
+
+if (btnEuropeClearAll) btnEuropeClearAll.addEventListener('click', () => {
+    const europeCountries = ['United Kingdom', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands'];
+    document.querySelectorAll('input[name="selected-state"]').forEach(cb => {
+        if (europeCountries.includes(cb.getAttribute('data-country'))) cb.checked = false;
+    });
+    updateSelectedStatesCount();
+});
+
+if (btnGlobalSelectAll) btnGlobalSelectAll.addEventListener('click', () => {
+    const excludedCountries = ['USA', 'Canada', 'United Kingdom', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands'];
+    document.querySelectorAll('input[name="selected-state"]').forEach(cb => {
+        if (!excludedCountries.includes(cb.getAttribute('data-country'))) cb.checked = true;
+    });
+    updateSelectedStatesCount();
+});
+
+if (btnGlobalClearAll) btnGlobalClearAll.addEventListener('click', () => {
+    const excludedCountries = ['USA', 'Canada', 'United Kingdom', 'Germany', 'France', 'Spain', 'Italy', 'Netherlands'];
+    document.querySelectorAll('input[name="selected-state"]').forEach(cb => {
+        if (!excludedCountries.includes(cb.getAttribute('data-country'))) cb.checked = false;
+    });
     updateSelectedStatesCount();
 });
 
