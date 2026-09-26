@@ -290,10 +290,23 @@
                                 </div>
 
                                 <div class="form-row">
-                                    <div class="form-field col-6">
-                                        <label for="input-max-results" class="field-label">MAX RESULTS TO SCAN</label>
-                                        <input type="number" id="input-max-results" class="input-control" min="1" max="1000000" value="100">
+                                    <div class="form-field col-12">
+                                        <div class="field-label-row">
+                                            <label for="input-max-results" class="field-label">MAX RESULTS TO SEARCH</label>
+                                            <span class="field-hint" style="color: var(--accent-neon); font-weight: 600;">Choose exact limit</span>
+                                        </div>
+                                        <input type="number" id="input-max-results" class="input-control" min="1" max="1000000" value="100" placeholder="e.g. 25, 50, 100, 500">
+                                        <div class="quick-count-row" style="display: flex; gap: 0.35rem; margin-top: 0.4rem; flex-wrap: wrap;">
+                                            <button type="button" class="btn-count-chip" data-count="25">25</button>
+                                            <button type="button" class="btn-count-chip" data-count="50">50</button>
+                                            <button type="button" class="btn-count-chip active" data-count="100">100</button>
+                                            <button type="button" class="btn-count-chip" data-count="250">250</button>
+                                            <button type="button" class="btn-count-chip" data-count="500">500</button>
+                                            <button type="button" class="btn-count-chip" data-count="1000">1,000</button>
+                                        </div>
                                     </div>
+                                </div>
+                                <div class="form-row" style="margin-top: 0.5rem;">
                                     <div class="form-field col-6" id="group-min-reviews">
                                         <label for="input-min-reviews" class="field-label">MIN REVIEWS</label>
                                         <input type="number" id="input-min-reviews" class="input-control" min="0" value="0">

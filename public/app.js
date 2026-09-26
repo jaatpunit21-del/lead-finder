@@ -3,10 +3,15 @@ let ws = null;
 let scrapedLeads = [];
 let isScraping = false;
 let sessionLeadsCount = 0;
+let currentScrapeMode = 'maps';
 let waActiveEditUrl = null;
 let waActiveItemTemplate = null;
 let waEditingQueueUrls = {};
 let lastQueueData = null;
+
+function setScrapeMode(mode) {
+    currentScrapeMode = mode || 'maps';
+}
 
 // DOM Elements
 const searchForm = document.getElementById('search-form');
@@ -1551,9 +1556,48 @@ function bindPersistenceListeners() {
     });
 }
 
+// Quick Result Count Chips Handler
+function initCountChips() {
+    const chips = document.querySelectorAll('.btn-count-chip');
+    if (!chips || chips.length === 0) return;
+
+    function syncChipsWithInput() {
+        const val = inputMaxResults ? inputMaxResults.value.trim() : '';
+        chips.forEach(chip => {
+            if (chip.getAttribute('data-count') === val) {
+                chip.classList.add('active');
+            } else {
+                chip.classList.remove('active');
+            }
+        });
+    }
+
+    chips.forEach(chip => {
+        chip.addEventListener('click', () => {
+            const count = chip.getAttribute('data-count');
+            if (inputMaxResults && count) {
+                inputMaxResults.value = count;
+                syncChipsWithInput();
+                saveFormState();
+                if (typeof showToast === 'function') {
+                    showToast(`Search limit set to ${Number(count).toLocaleString()} leads`, 'success');
+                }
+            }
+        });
+    });
+
+    if (inputMaxResults) {
+        inputMaxResults.addEventListener('input', syncChipsWithInput);
+        inputMaxResults.addEventListener('change', syncChipsWithInput);
+    }
+
+    syncChipsWithInput();
+}
+
 // Initialize connection and load locations
 loadLocationsDatabase().then(() => {
     loadFormState();
     bindPersistenceListeners();
+    initCountChips();
 });
 connectWebSocket();

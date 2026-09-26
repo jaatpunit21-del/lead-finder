@@ -934,6 +934,10 @@ wss.on('connection', (ws) => {
                     });
                     break;
 
+                case 'ping':
+                case 'pong':
+                    break;
+
                 default:
                     console.log('Unknown WebSocket message type:', type);
             }

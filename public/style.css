@@ -882,6 +882,34 @@ body {
     color: var(--accent-neon);
 }
 
+.btn-count-chip {
+    flex: 1;
+    min-width: 45px;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    padding: 0.35rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    text-align: center;
+}
+
+.btn-count-chip:hover {
+    border-color: var(--accent-neon);
+    color: var(--text-primary);
+}
+
+.btn-count-chip.active {
+    background-color: var(--accent-neon-muted);
+    border-color: var(--accent-neon);
+    color: var(--accent-neon);
+    font-weight: 700;
+    box-shadow: 0 0 8px var(--accent-neon-glow);
+}
+
 .preset-actions {
     display: flex;
     gap: 0.5rem;
