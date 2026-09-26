@@ -3,370 +3,488 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Global Business Finder Pro - Worldwide Leads Scraper</title>
+    <title>Global Lead Finder Pro - Premium Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <!-- Top Navigation Bar -->
-        <header class="app-header">
-            <div class="logo-area">
-                <span class="logo-icon">🌐</span>
-                <h1>Global Business Finder <span class="accent-text">Pro</span></h1>
+    <div class="app-wrapper">
+        
+        <!-- Left Sidebar Navigation -->
+        <aside class="app-sidebar">
+            <div class="sidebar-brand">
+                <div class="brand-icon">🌐</div>
+                <div class="brand-text">
+                    <h1>LeadFinder <span class="brand-badge">PRO</span></h1>
+                    <span class="brand-subtitle">Worldwide B2B Extractor</span>
+                </div>
             </div>
-            <div class="header-tag">Worldwide / All Countries Supported 🌎</div>
-        </header>
 
-        <!-- Main Dashboard Layout -->
-        <main class="dashboard-grid">
+            <nav class="nav-menu">
+                <a href="#panel-terminal" class="nav-item active" id="nav-dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+                <a href="#panel-scanner" class="nav-item" id="nav-scanner">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-label">Scanner Controls</span>
+                </a>
+                <a href="#panel-leads" class="nav-item" id="nav-leads">
+                    <span class="nav-icon">📋</span>
+                    <span class="nav-label">Found Leads</span>
+                </a>
+                <a href="#panel-whatsapp-module" class="nav-item" id="nav-settings">
+                    <span class="nav-icon">💬</span>
+                    <span class="nav-label">WhatsApp Accounts</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status-card">
+                    <div class="status-row">
+                        <span class="status-label">SERVER STATUS</span>
+                        <span id="ws-server-status" class="status-value online">● CONNECTED</span>
+                    </div>
+                    <div class="status-row">
+                        <span class="status-label">WHATSAPP</span>
+                        <span id="sidebar-wa-status" class="status-value">OFFLINE</span>
+                    </div>
+                    <div class="cap-info">
+                        <div class="cap-header">
+                            <span>DAILY CAP USAGE</span>
+                            <span id="sidebar-cap-text">0 / 40,000</span>
+                        </div>
+                        <div class="cap-bar-bg">
+                            <div id="sidebar-cap-fill" class="cap-bar-fill" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Body Layout -->
+        <div class="app-body">
             
-            <!-- Left Panel: Settings & Search Form -->
-            <section class="panel panel-search">
-                <div class="panel-header">
-                    <h2>Scrape Settings</h2>
-                    <p class="panel-subtitle">Define search niche, target locations worldwide, and filters</p>
+            <!-- Top Header Bar -->
+            <header class="top-header">
+                <div class="header-left">
+                    <div class="scanner-status-pill stopped" id="app-status-badge">
+                        <span class="status-dot" id="app-status-dot"></span>
+                        <span class="status-text" id="app-status-text">STOPPED</span>
+                    </div>
+                    <div class="header-stat">
+                        <span class="stat-label">TOTAL LEADS</span>
+                        <span class="stat-value" id="header-leads-count">0</span>
+                    </div>
                 </div>
 
-                <form id="search-form" class="search-form">
-                    <div class="form-group">
-                        <label for="input-niche">Niche/Business Type</label>
-                        <input type="text" id="input-niche" placeholder="e.g. Cafes, Restaurants, Plumbers, Gyms" required value="Cafes">
-                    </div>
-
-                    <div class="form-group checkbox-group" style="margin-bottom: 0.75rem;">
-                        <label class="toggle-switch">
-                            <input type="checkbox" id="toggle-location-mode">
-                            <span class="slider"></span>
-                            <span class="label-text">Select Presets by Region (Population Priority)</span>
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="input-website-filter">Website Filter</label>
-                        <select id="input-website-filter" style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.65rem 0.85rem; font-family: var(--font-sans); font-size: 0.9rem; width: 100%; box-sizing: border-box; outline: none;">
-                            <option value="none" selected>Must NOT have website (No Website)</option>
-                            <option value="must">Must HAVE website (With Website)</option>
-                            <option value="any">Any (Don't check website)</option>
-                        </select>
-                    </div>
-
-                    <div id="location-manual-group" class="form-group">
-                        <label for="input-location">Locations (Any city, state, or country worldwide)</label>
-                        <textarea id="input-location" rows="3" placeholder="e.g.&#10;London, UK&#10;Dubai, UAE&#10;Sydney, Australia&#10;Toronto, Canada&#10;New York, USA&#10;Mumbai, India" required style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.65rem 0.85rem; font-family: var(--font-sans); font-size: 0.9rem; resize: vertical; line-height: 1.4;">London, UK</textarea>
-                    </div>
-
-                    <div id="location-checklist-group" class="form-group" style="display: none; border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; background-color: rgba(255, 255, 255, 0.01);">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
-                            <label style="margin: 0; font-weight: 600;">Global Preset Regions</label>
-                            <span id="selected-states-count" class="counter-badge" style="font-size: 0.75rem; padding: 2px 6px;">0 selected</span>
+                <div class="header-center">
+                    <div class="progress-bar-container">
+                        <div class="progress-labels">
+                            <span class="progress-title" id="progress-title-text">Scanner Progress</span>
+                            <span class="progress-percent" id="progress-text">0%</span>
                         </div>
-                        <div class="location-tabs" style="display: flex; gap: 0.35rem; margin-bottom: 0.75rem; flex-wrap: wrap;">
-                            <button type="button" id="btn-tab-usa" class="btn btn-secondary btn-tab active" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">USA</button>
-                            <button type="button" id="btn-tab-canada" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Canada</button>
-                            <button type="button" id="btn-tab-europe" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Europe</button>
-                            <button type="button" id="btn-tab-global" class="btn btn-secondary btn-tab" style="flex: 1; min-width: 60px; padding: 0.35rem; font-size: 0.75rem; border-radius: 4px;">Global</button>
+                        <div class="progress-track">
+                            <div id="progress-bar" class="progress-fill" style="width: 0%"></div>
                         </div>
+                    </div>
+                </div>
+
+                <div class="header-right">
+                    <button id="btn-download" class="btn btn-primary" disabled>
+                        <span class="btn-icon">📥</span> Export Excel
+                    </button>
+                    <button id="btn-download-csv" class="btn btn-secondary" disabled>
+                        <span class="btn-icon">📄</span> CSV
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="main-content">
+                <div class="content-grid">
+                    
+                    <!-- Center Main Panel: Logs & Leads Table -->
+                    <div class="center-column">
                         
-                        <!-- USA Panel -->
-                        <div id="panel-usa-checklist" class="tab-panel active">
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <button type="button" id="btn-usa-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
-                                <button type="button" id="btn-usa-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
+                        <!-- Terminal Log Panel -->
+                        <section class="card card-terminal" id="panel-terminal">
+                            <div class="card-header">
+                                <div class="header-title">
+                                    <span class="card-icon">⚡</span>
+                                    <div>
+                                        <h2>Live Console & Execution Trace</h2>
+                                        <p class="card-subtitle">Real-time telemetry stream from Puppeteer & WebSocket workers</p>
+                                    </div>
+                                </div>
+                                <div class="terminal-actions">
+                                    <label class="checkbox-label" style="font-size: 0.75rem; margin-right: 0.5rem; color: var(--text-muted);">
+                                        <input type="checkbox" id="toggle-autoscroll" checked> Auto-Scroll
+                                    </label>
+                                    <button type="button" id="btn-clear-terminal" class="btn btn-icon-only" title="Clear console logs">🗑️</button>
+                                </div>
                             </div>
-                            <div id="usa-states-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
-                                <!-- Dynamically populated -->
+                            
+                            <div class="terminal-window">
+                                <div class="terminal-bar">
+                                    <div class="terminal-dots">
+                                        <span class="dot red"></span>
+                                        <span class="dot yellow"></span>
+                                        <span class="dot green"></span>
+                                    </div>
+                                    <span class="terminal-title">lead-finder-core.sys — console</span>
+                                </div>
+                                <div id="terminal-logs" class="terminal-body">
+                                    <div class="log-line log-system">[System] Global Lead Finder Pro Dashboard Initialized. Select target options and click Start Scanner.</div>
+                                </div>
                             </div>
-                        </div>
+                        </section>
 
-                        <!-- Canada Panel -->
-                        <div id="panel-canada-checklist" class="tab-panel" style="display: none;">
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <button type="button" id="btn-canada-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
-                                <button type="button" id="btn-canada-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
+                        <!-- Found Businesses Table Panel -->
+                        <section class="card card-leads" id="panel-leads">
+                            <div class="card-header flex-between">
+                                <div class="header-title">
+                                    <span class="card-icon">🏢</span>
+                                    <div>
+                                        <h2>Found Businesses <span id="results-count" class="counter-badge">0</span> <span id="session-count" class="session-badge" style="display: none;">+0 this run</span></h2>
+                                        <p class="card-subtitle">Verified leads matching phone, website, and review count filters</p>
+                                    </div>
+                                </div>
+                                <div class="table-tools">
+                                    <input type="text" id="input-table-search" class="search-input-field" placeholder="🔎 Search results...">
+                                    <button type="button" id="btn-recheck-wa" class="btn btn-secondary btn-sm" title="Recheck WhatsApp registration status">
+                                        <span>🔄</span> Recheck WA
+                                    </button>
+                                    <button type="button" id="btn-clear-db" class="btn btn-danger-outline btn-sm" title="Clear lead database">
+                                        <span>🗑️</span> Clear
+                                    </button>
+                                </div>
                             </div>
-                            <div id="canada-provinces-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
-                                <!-- Dynamically populated -->
-                            </div>
-                        </div>
 
-                        <!-- Europe Panel -->
-                        <div id="panel-europe-checklist" class="tab-panel" style="display: none;">
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <button type="button" id="btn-europe-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
-                                <button type="button" id="btn-europe-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
+                            <div class="table-wrapper">
+                                <table id="results-table" class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Business Name</th>
+                                            <th>Phone Number</th>
+                                            <th>WhatsApp Status</th>
+                                            <th>Message Status</th>
+                                            <th>Reviews</th>
+                                            <th style="text-align: right;">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="results-tbody">
+                                        <tr class="empty-row">
+                                            <td colspan="6">
+                                                <div class="empty-state">
+                                                    <span class="empty-icon">📍</span>
+                                                    <p>No business leads collected yet. Launch scanner to populate results.</p>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
-                            <div id="europe-countries-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
-                                <!-- Dynamically populated -->
-                            </div>
-                        </div>
+                        </section>
 
-                        <!-- Global Regions Panel -->
-                        <div id="panel-global-checklist" class="tab-panel" style="display: none;">
-                            <div style="display: flex; gap: 0.5rem; margin-bottom: 0.5rem;">
-                                <button type="button" id="btn-global-select-all" class="btn btn-secondary" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Select All</button>
-                                <button type="button" id="btn-global-clear-all" class="btn btn-outline-danger" style="font-size: 0.7rem; padding: 2px 6px; flex-grow: 1;">Clear All</button>
-                            </div>
-                            <div id="global-regions-list" class="checklist-grid" style="max-height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 6px; padding-right: 4px; border: 1px solid var(--border-color); border-radius: 4px; padding: 6px; background-color: var(--bg-tertiary);">
-                                <!-- Dynamically populated -->
-                            </div>
-                        </div>
                     </div>
 
-                    <div class="form-row-2">
-                        <div class="form-group">
-                            <label for="input-max-results">Max Results to Scan</label>
-                            <input type="number" id="input-max-results" min="1" max="1000000" value="100">
-                        </div>
-                        <div class="form-group" id="group-min-reviews">
-                            <label for="input-min-reviews">Min Reviews</label>
-                            <input type="number" id="input-min-reviews" min="0" value="0">
-                        </div>
-                    </div>
-
-                    <div class="form-row-2">
-                        <div class="form-group" id="group-max-reviews">
-                            <label for="input-max-reviews">Max Reviews</label>
-                            <input type="number" id="input-max-reviews" min="0" placeholder="No limit">
-                        </div>
-                        <div class="form-group checkbox-group" style="display: flex; flex-direction: column; gap: 0.75rem;">
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="input-headless" checked>
-                                <span class="slider"></span>
-                                <span class="label-text">Headless Mode</span>
-                            </label>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="input-skip-scanned" checked>
-                                <span class="slider"></span>
-                                <span class="label-text" title="Skip cities already completed in your database leads.">Skip Scanned Cities</span>
-                            </label>
-                        </div>
-                    </div>
-
-                    <!-- Auto Messaging Config -->
-                    <div id="wa-messaging-section" class="form-group toggle-group-special" style="display: block; border-color: rgba(16, 185, 129, 0.25); background-color: rgba(16, 185, 129, 0.03);">
-                        <label style="margin-bottom: 0.5rem; display: block; color: var(--color-success); font-weight: 700; text-shadow: 0 0 3px rgba(0, 255, 65, 0.2)">WhatsApp Action Mode</label>
-                        <div class="mode-select-group" style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.4rem; margin-bottom: 0.5rem;">
-                            <label class="mode-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 0.5rem 0.25rem; border-radius: 4px; cursor: pointer; text-align: center; font-size: 0.7rem; font-weight: 600; color: var(--text-main);">
-                                <input type="radio" name="wa-mode" value="off" id="mode-off" style="margin-bottom: 3px;" checked> Disabled
-                            </label>
-                            <label class="mode-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 0.5rem 0.25rem; border-radius: 4px; cursor: pointer; text-align: center; font-size: 0.7rem; font-weight: 600; color: var(--text-main);">
-                                <input type="radio" name="wa-mode" value="check" id="mode-check" style="margin-bottom: 3px;"> Only Check
-                            </label>
-                            <label class="mode-btn" style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.25rem; background: var(--bg-tertiary); border: 1px solid var(--border-color); padding: 0.5rem 0.25rem; border-radius: 4px; cursor: pointer; text-align: center; font-size: 0.7rem; font-weight: 600; color: var(--text-main);">
-                                <input type="radio" name="wa-mode" value="text" id="mode-text" style="margin-bottom: 3px;"> Text if Have
-                            </label>
-                        </div>
-                        <div id="wa-message-inputs" style="display: none; margin-top: 1rem; flex-direction: column; gap: 0.75rem;">
-                            <div class="form-group">
-                                <label for="input-message-delay">Delay between messages (seconds)</label>
-                                <input type="number" id="input-message-delay" min="10" max="600" value="60">
-                                <p class="panel-subtitle" style="font-size: 0.75rem; color: var(--color-warning);">⚠️ Recommended: 45-60s to prevent spam flagging.</p>
+                    <!-- Right Column: Scanner Form & WhatsApp Module -->
+                    <div class="right-column">
+                        
+                        <!-- Scanner Control Form Card -->
+                        <section class="card card-scanner" id="panel-scanner">
+                            <div class="card-header">
+                                <div class="header-title">
+                                    <span class="card-icon">🎯</span>
+                                    <div>
+                                        <h2>Scanner Controls</h2>
+                                        <p class="card-subtitle">Set niche, location queries, and scraping criteria</p>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="input-message-template">Message Template (Use {name} for business name)</label>
-                                <textarea id="input-message-template" rows="8" style="background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.65rem 0.85rem; font-family: var(--font-sans); font-size: 0.85rem; resize: vertical; line-height: 1.4;"></textarea>
+
+                            <form id="search-form" class="scanner-form">
+                                
+                                <div class="form-field">
+                                    <label for="input-niche" class="field-label">NICHE / INDUSTRY TYPE</label>
+                                    <input type="text" id="input-niche" class="input-control" placeholder="e.g. Cafes, Plumbers, Gyms, Salons" required value="Cafes">
+                                </div>
+
+                                <div class="form-field">
+                                    <div class="field-label-row">
+                                        <label class="field-label">LOCATION QUERY MODE</label>
+                                        <label class="toggle-switch-sm">
+                                            <input type="checkbox" id="toggle-location-mode">
+                                            <span class="slider"></span>
+                                            <span class="toggle-text">Use Region Presets</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-field">
+                                    <label for="input-website-filter" class="field-label">WEBSITE REQUIREMENT</label>
+                                    <select id="input-website-filter" class="select-control">
+                                        <option value="none" selected>Must NOT have website (No Website)</option>
+                                        <option value="must">Must HAVE website (With Website)</option>
+                                        <option value="any">Any (Don't check website)</option>
+                                    </select>
+                                </div>
+
+                                <!-- Manual Location Input Group -->
+                                <div id="location-manual-group" class="form-field">
+                                    <label for="input-location" class="field-label">TARGET LOCATIONS (ONE PER LINE)</label>
+                                    <textarea id="input-location" class="textarea-control" rows="3" placeholder="e.g.&#10;London, UK&#10;Dubai, UAE&#10;Sydney, Australia&#10;New York, USA" required>London, UK</textarea>
+                                </div>
+
+                                <!-- Checklist Preset Region Group -->
+                                <div id="location-checklist-group" class="preset-checklist-card" style="display: none;">
+                                    <div class="preset-header">
+                                        <span class="preset-title">GLOBAL REGION PRESETS</span>
+                                        <span id="selected-states-count" class="badge-count">0 selected</span>
+                                    </div>
+                                    <div class="region-tabs-row">
+                                        <button type="button" id="btn-tab-usa" class="tab-chip active">USA</button>
+                                        <button type="button" id="btn-tab-canada" class="tab-chip">Canada</button>
+                                        <button type="button" id="btn-tab-europe" class="tab-chip">Europe</button>
+                                        <button type="button" id="btn-tab-global" class="tab-chip">Global</button>
+                                    </div>
+                                    
+                                    <!-- USA Panel -->
+                                    <div id="panel-usa-checklist" class="tab-panel active">
+                                        <div class="preset-actions">
+                                            <button type="button" id="btn-usa-select-all" class="btn-micro">Select All</button>
+                                            <button type="button" id="btn-usa-clear-all" class="btn-micro danger">Clear All</button>
+                                        </div>
+                                        <div id="usa-states-list" class="checklist-grid"></div>
+                                    </div>
+
+                                    <!-- Canada Panel -->
+                                    <div id="panel-canada-checklist" class="tab-panel" style="display: none;">
+                                        <div class="preset-actions">
+                                            <button type="button" id="btn-canada-select-all" class="btn-micro">Select All</button>
+                                            <button type="button" id="btn-canada-clear-all" class="btn-micro danger">Clear All</button>
+                                        </div>
+                                        <div id="canada-provinces-list" class="checklist-grid"></div>
+                                    </div>
+
+                                    <!-- Europe Panel -->
+                                    <div id="panel-europe-checklist" class="tab-panel" style="display: none;">
+                                        <div class="preset-actions">
+                                            <button type="button" id="btn-europe-select-all" class="btn-micro">Select All</button>
+                                            <button type="button" id="btn-europe-clear-all" class="btn-micro danger">Clear All</button>
+                                        </div>
+                                        <div id="europe-countries-list" class="checklist-grid"></div>
+                                    </div>
+
+                                    <!-- Global Panel -->
+                                    <div id="panel-global-checklist" class="tab-panel" style="display: none;">
+                                        <div class="preset-actions">
+                                            <button type="button" id="btn-global-select-all" class="btn-micro">Select All</button>
+                                            <button type="button" id="btn-global-clear-all" class="btn-micro danger">Clear All</button>
+                                        </div>
+                                        <div id="global-regions-list" class="checklist-grid"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-field col-6">
+                                        <label for="input-max-results" class="field-label">MAX RESULTS TO SCAN</label>
+                                        <input type="number" id="input-max-results" class="input-control" min="1" max="1000000" value="100">
+                                    </div>
+                                    <div class="form-field col-6" id="group-min-reviews">
+                                        <label for="input-min-reviews" class="field-label">MIN REVIEWS</label>
+                                        <input type="number" id="input-min-reviews" class="input-control" min="0" value="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-field col-6" id="group-max-reviews">
+                                        <label for="input-max-reviews" class="field-label">MAX REVIEWS</label>
+                                        <input type="number" id="input-max-reviews" class="input-control" min="0" placeholder="Unlimited">
+                                    </div>
+                                    <div class="form-field col-6 flex-center-vertical">
+                                        <label class="toggle-switch-sm">
+                                            <input type="checkbox" id="input-headless" checked>
+                                            <span class="slider"></span>
+                                            <span class="toggle-text">Headless Mode</span>
+                                        </label>
+                                        <label class="toggle-switch-sm" style="margin-top: 0.5rem;">
+                                            <input type="checkbox" id="input-skip-scanned" checked>
+                                            <span class="slider"></span>
+                                            <span class="toggle-text">Skip Scanned Cities</span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <!-- WhatsApp Automation Config Box -->
+                                <div id="wa-messaging-section" class="wa-action-box">
+                                    <label class="field-label accent-green">WHATSAPP AUTOMATION MODE</label>
+                                    <div class="mode-grid">
+                                        <label class="mode-card">
+                                            <input type="radio" name="wa-mode" value="off" id="mode-off" checked>
+                                            <span>Disabled</span>
+                                        </label>
+                                        <label class="mode-card">
+                                            <input type="radio" name="wa-mode" value="check" id="mode-check">
+                                            <span>Only Verify</span>
+                                        </label>
+                                        <label class="mode-card">
+                                            <input type="radio" name="wa-mode" value="text" id="mode-text">
+                                            <span>Auto Message</span>
+                                        </label>
+                                    </div>
+                                    
+                                    <div id="wa-message-inputs" class="wa-inputs-collapsible" style="display: none;">
+                                        <div class="form-field" style="margin-top: 0.75rem;">
+                                            <label for="input-message-delay" class="field-label">MESSAGE DELAY (SECONDS)</label>
+                                            <input type="number" id="input-message-delay" class="input-control" min="10" max="600" value="60">
+                                            <span class="field-hint warning">⚠️ Recommended: 45-60s to prevent spam detection.</span>
+                                        </div>
+                                        <div class="form-field" style="margin-top: 0.75rem;">
+                                            <label for="input-message-template" class="field-label">MESSAGE TEMPLATE ({name} = Business Name)</label>
+                                            <textarea id="input-message-template" class="textarea-control" rows="4"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Action Buttons -->
+                                <div class="scanner-actions">
+                                    <button type="submit" id="btn-start" class="btn btn-neon-start">
+                                        <span>🚀</span> Start Scanner
+                                    </button>
+                                    <button type="button" id="btn-pause" class="btn btn-amber-pause" disabled>
+                                        <span>⏸️</span> Pause
+                                    </button>
+                                    <button type="button" id="btn-stop" class="btn btn-red-stop" disabled>
+                                        <span>⏹️</span> Stop
+                                    </button>
+                                </div>
+
+                            </form>
+                        </section>
+
+                        <!-- WhatsApp Profile Manager Card -->
+                        <section class="card card-whatsapp" id="panel-whatsapp-module">
+                            <div class="card-header">
+                                <div class="header-title">
+                                    <span class="card-icon">📱</span>
+                                    <div>
+                                        <h2>WhatsApp Profiles</h2>
+                                        <p class="card-subtitle">Linked device management & verifier status</p>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
+
+                            <div class="wa-manager-content">
+                                <div class="form-field">
+                                    <label for="wa-device-select" class="field-label">ACTIVE ACCOUNT PROFILE</label>
+                                    <div class="select-with-btns">
+                                        <select id="wa-device-select" class="select-control"></select>
+                                        <button type="button" id="btn-wa-add-device" class="btn btn-icon" title="Add profile">+</button>
+                                        <button type="button" id="btn-wa-delete-device" class="btn btn-icon danger" title="Delete profile">🗑️</button>
+                                    </div>
+                                </div>
+
+                                <div class="wa-status-box">
+                                    <div class="status-indicator-bar">
+                                        <div id="wa-status-dot" class="dot-indicator disconnected"></div>
+                                        <span id="wa-status-text" class="status-name">Disconnected</span>
+                                    </div>
+
+                                    <div id="wa-body-disconnected" class="wa-state-body active">
+                                        <p class="state-desc">Connect a WhatsApp account to verify lead phone numbers and send automated messages.</p>
+                                        <button id="btn-wa-init" class="btn btn-secondary w-100">Initialize WhatsApp Client</button>
+                                    </div>
+
+                                    <div id="wa-body-initializing" class="wa-state-body">
+                                        <div class="loader-spinner"></div>
+                                        <p class="state-desc">Initializing browser instance. Generating QR code...</p>
+                                    </div>
+
+                                    <div id="wa-body-qr" class="wa-state-body">
+                                        <p class="state-desc">Scan with WhatsApp (Linked Devices):</p>
+                                        <div class="qr-wrapper">
+                                            <img id="wa-qr-img" src="" alt="WhatsApp QR">
+                                        </div>
+                                    </div>
+
+                                    <div id="wa-body-connected" class="wa-state-body">
+                                        <div class="verified-badge">🛡️ ACCOUNT AUTHORIZED</div>
+                                        <p class="state-desc">WhatsApp Client is connected and active.</p>
+                                        <button id="btn-wa-logout" class="btn btn-danger-outline w-100">Disconnect Account</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
                     </div>
 
-                    <div class="actions-group">
-                        <button type="submit" id="btn-start" class="btn btn-primary">
-                            <span class="icon">🚀</span> Start
-                        </button>
-                        <button type="button" id="btn-pause" class="btn btn-warning" disabled>
-                            <span class="icon">⏸️</span> Pause
-                        </button>
-                        <button type="button" id="btn-stop" class="btn btn-danger" disabled>
-                            <span class="icon">⏹️</span> Stop
-                        </button>
-                    </div>
-                </form>
-            </section>
-
-            <!-- Right Panel: WhatsApp Session Management -->
-            <section class="panel panel-whatsapp" id="panel-whatsapp-module">
-                <div class="panel-header">
-                    <h2>WhatsApp Accounts</h2>
-                    <p class="panel-subtitle">Manage and switch between linked WhatsApp profiles</p>
                 </div>
-                <div class="whatsapp-status-card">
-                    <!-- Multi-device Select Dropdown -->
-                    <div class="form-group" style="margin-bottom: 0.5rem; gap: 0.5rem;">
-                        <label for="wa-device-select">Active WhatsApp Profile</label>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <select id="wa-device-select" style="flex-grow: 1; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-bright); padding: 0.5rem; font-family: var(--font-sans); font-size: 0.9rem;">
-                                <!-- Will be dynamically populated -->
-                            </select>
-                            <button type="button" id="btn-wa-add-device" class="btn btn-secondary" style="padding: 0.5rem 0.85rem;" title="Add new account">+</button>
-                            <button type="button" id="btn-wa-delete-device" class="btn btn-outline-danger" style="padding: 0.5rem 0.85rem;" title="Delete selected account">🗑️</button>
-                        </div>
-                    </div>
+            </main>
+        </div>
 
-                    <div class="status-indicator">
-                        <div id="wa-status-dot" class="status-dot disconnected"></div>
-                        <span id="wa-status-text">Disconnected</span>
-                    </div>
-
-                    <div id="wa-body-disconnected" class="wa-body active">
-                        <p class="wa-description">
-                            Check phone numbers actively registered on WhatsApp. Click initialize to view the connection QR code.
-                        </p>
-                        <button id="btn-wa-init" class="btn btn-secondary">Initialize WhatsApp Client</button>
-                    </div>
-
-                    <div id="wa-body-initializing" class="wa-body">
-                        <div class="spinner"></div>
-                        <p>Launching browser environment. Please wait...</p>
-                    </div>
-
-                    <div id="wa-body-qr" class="wa-body">
-                        <p class="wa-instructions">Scan this QR code with WhatsApp (Linked Devices) to authorize connection:</p>
-                        <div class="qr-container">
-                            <img id="wa-qr-img" src="" alt="WhatsApp QR Code">
-                        </div>
-                        <p class="wa-timer">QR codes refresh dynamically.</p>
-                    </div>
-
-                    <div id="wa-body-connected" class="wa-body">
-                        <div class="success-badge">🛡️ Authorized</div>
-                        <p class="wa-connected-desc">WhatsApp verifier is connected and online. Phone numbers will be actively pre-validated.</p>
-                        <button id="btn-wa-logout" class="btn btn-outline-danger">Disconnect WhatsApp</button>
-                    </div>
-                </div>
-            </section>
-        </main>
-
-        <!-- Live Activity & Console Panel -->
-        <section class="panel panel-activity">
-            <div class="panel-header flex-header">
-                <div>
-                    <h2>Live Activity Logs</h2>
-                    <p class="panel-subtitle">Real-time terminal trace of scraper execution</p>
-                </div>
-                <div class="progress-container-inline">
-                    <div class="progress-bar-wrapper">
-                        <div id="progress-bar" class="progress-bar" style="width: 0%"></div>
-                    </div>
-                    <span id="progress-text">0%</span>
-                </div>
-            </div>
-            <div class="terminal-window">
-                <div class="terminal-header">
-                    <span class="dot red"></span>
-                    <span class="dot yellow"></span>
-                    <span class="dot green"></span>
-                    <span class="title">terminal - business-finder-scraper</span>
-                </div>
-                <div id="terminal-logs" class="terminal-body">
-                    <div class="log-line system">[System] Welcome to Business Finder Pro. Set parameters and click Start.</div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Results Table Panel -->
-        <section class="panel panel-results">
-            <div class="panel-header flex-header">
-                <div>
-                    <h2>Found Businesses <span id="results-count" class="counter-badge">0</span><span id="session-count" class="session-badge" style="display: none;">+0 in this scan</span></h2>
-                    <p class="panel-subtitle">Filtered leads satisfying: phone number present, no website, and correct review limits</p>
-                </div>
-                <div class="results-actions" style="display: flex; gap: 0.5rem; align-items: center;">
-                    <button type="button" id="btn-recheck-wa" class="btn btn-secondary" style="border-color: var(--color-accent); color: var(--color-accent); font-size: 0.85rem; padding: 0.5rem 0.75rem;">
-                        <span class="icon">🔄</span> Recheck WA
-                    </button>
-                    <button type="button" id="btn-clear-db" class="btn btn-outline-danger" style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">
-                        <span class="icon">🗑️</span> Clear Leads
-                    </button>
-                    <button id="btn-download" class="btn btn-success" disabled style="font-size: 0.85rem; padding: 0.5rem 0.75rem;">
-                        <span class="icon">⬇️</span> Export Excel
-                    </button>
-                    <button id="btn-download-csv" class="btn btn-secondary" disabled style="font-size: 0.85rem; padding: 0.5rem 0.75rem; border-color: var(--border-color); color: var(--text-main);">
-                        <span class="icon">⬇️</span> Export CSV
-                    </button>
-                </div>
-            </div>
-            
-            <div class="table-scroll-container">
-                <table id="results-table">
-                    <thead>
-                        <tr>
-                            <th>Business Name</th>
-                            <th>Phone Number</th>
-                            <th>WhatsApp Status</th>
-                            <th>Message Status</th>
-                            <th>Reviews</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody id="results-tbody">
-                        <tr class="empty-row">
-                            <td colspan="6">No business leads scraped yet. Start a scan to view data.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
     </div>
 
     <!-- Floating WhatsApp Queue HUD -->
     <div id="wa-hud-container" class="wa-hud-container minimized">
         <div id="wa-hud-header" class="wa-hud-header">
-            <h3>💬 WhatsApp Queue HUD</h3>
+            <div class="hud-header-title">
+                <span>💬</span>
+                <h3>WhatsApp Queue HUD</h3>
+            </div>
             <button id="wa-hud-toggle-btn" class="wa-hud-toggle-btn">▲</button>
         </div>
         <div class="wa-hud-body">
-            <div class="wa-hud-status-row" style="display: flex; justify-content: space-between; align-items: center; padding-bottom: 8px; border-bottom: 1px dashed var(--border-color); margin-bottom: 8px;">
+            <div class="wa-hud-status-row">
                 <div>
-                    <span>Status:</span>
-                    <span id="wa-hud-status" class="success-badge" style="background-color: transparent; border-color: var(--text-muted); color: var(--text-muted); box-shadow: none;">Idle</span>
+                    <span class="hud-label">STATUS:</span>
+                    <span id="wa-hud-status" class="hud-status-badge">Idle</span>
                 </div>
-                <button id="btn-hud-toggle-queue" class="btn-hud-action" style="font-size: 0.7rem; padding: 2px 6px; border: 1px solid var(--border-color); background: transparent; color: var(--text-bright); cursor: pointer; border-radius: 4px; display: none;">Pause Msg</button>
+                <button id="btn-hud-toggle-queue" class="btn-micro" style="display: none;">Pause Msg</button>
             </div>
             
-            <!-- Active dispatch details -->
             <div id="wa-hud-active-dispatch" class="wa-hud-active-dispatch" style="display: none;">
-                <div class="wa-hud-active-dispatch-title">ACTIVE DISPATCH:</div>
-                <div id="wa-hud-active-name" class="wa-hud-active-name">Salon Name</div>
+                <div class="hud-section-label">ACTIVE DISPATCH</div>
+                <div id="wa-hud-active-name" class="wa-hud-active-name">Salons</div>
                 <div class="wa-hud-active-timer">
-                    <span id="wa-hud-active-phone">1234567890</span>
+                    <span id="wa-hud-active-phone">+1234567890</span>
                     <span id="wa-hud-active-countdown">Waiting: 60s</span>
                 </div>
                 <div class="wa-hud-progress-bar-bg">
                     <div id="wa-hud-progress-bar-fill" class="wa-hud-progress-bar-fill"></div>
                 </div>
-                <div class="hud-item-btn-group" style="margin-top: 8px; display: flex; gap: 5px; justify-content: flex-end;">
-                    <button id="btn-hud-active-edit" class="btn-hud-action" title="Edit message text">✏️ Edit</button>
-                    <button id="btn-hud-active-skip" class="btn-hud-action danger" title="Skip this message">❌ Skip</button>
+                <div class="hud-action-row">
+                    <button id="btn-hud-active-edit" class="btn-micro">✏️ Edit</button>
+                    <button id="btn-hud-active-skip" class="btn-micro danger">❌ Skip</button>
                 </div>
-                <div id="wa-hud-active-edit-panel" class="wa-hud-edit-panel" style="display: none; margin-top: 8px;">
-                    <textarea id="wa-hud-active-edit-text" class="hud-edit-textarea" rows="4" style="width: 100%; font-family: var(--font-mono); font-size: 0.75rem; background-color: var(--bg-tertiary); border: 1px solid var(--border-color); color: #fff; padding: 4px; resize: vertical;"></textarea>
-                    <div class="hud-edit-btn-row" style="margin-top: 4px; display: flex; gap: 5px; justify-content: flex-end;">
-                        <button id="btn-hud-active-save" class="btn-hud-action success">Save 💾</button>
-                        <button id="btn-hud-active-cancel" class="btn-hud-action">✕</button>
+                <div id="wa-hud-active-edit-panel" class="wa-hud-edit-panel" style="display: none;">
+                    <textarea id="wa-hud-active-edit-text" class="textarea-control" rows="3"></textarea>
+                    <div class="hud-action-row" style="margin-top: 4px;">
+                        <button id="btn-hud-active-save" class="btn-micro success">Save 💾</button>
+                        <button id="btn-hud-active-cancel" class="btn-micro">Cancel</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Upcoming Queue List -->
             <div id="wa-hud-queue-section" class="wa-hud-queue-section" style="display: none;">
-                <div class="wa-hud-history-title">UPCOMING QUEUE:</div>
-                <div id="wa-hud-queue-list" class="wa-hud-queue-list" style="display: flex; flex-direction: column; gap: 4px; max-height: 110px; overflow-y: auto;">
-                    <!-- Dynamic pending queue items go here -->
-                </div>
+                <div class="hud-section-label">UPCOMING QUEUE</div>
+                <div id="wa-hud-queue-list" class="wa-hud-queue-list"></div>
             </div>
 
-            <!-- Recent dispatches history list -->
             <div class="wa-hud-history">
-                <div class="wa-hud-history-title">RECENT DISPATCHES:</div>
+                <div class="hud-section-label">RECENT DISPATCHES</div>
                 <div id="wa-hud-history-list" class="wa-hud-history-list">
-                    <div class="empty-row" style="font-size: 0.7rem; text-align: center; color: var(--text-muted);">No messages dispatched yet.</div>
+                    <div class="empty-row-text">No messages dispatched yet.</div>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="toast-container"></div>
 
     <script src="app.js"></script>
 </body>

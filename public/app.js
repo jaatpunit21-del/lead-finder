@@ -183,12 +183,20 @@ function connectWebSocket() {
                     break;
                 case 'initial-leads':
                     scrapedLeads = data.filter(l => !l.discarded);
-                    resultsCount.textContent = scrapedLeads.length;
+                    if (resultsCount) resultsCount.textContent = scrapedLeads.length;
+                    const headerLeadsCount = document.getElementById('header-leads-count');
+                    if (headerLeadsCount) headerLeadsCount.textContent = scrapedLeads.length;
+
                     resultsTbody.innerHTML = '';
                     if (scrapedLeads.length === 0) {
                         resultsTbody.innerHTML = `
                             <tr class="empty-row">
-                                <td colspan="6">No business leads scraped yet. Start a scan to view data.</td>
+                                <td colspan="6">
+                                    <div class="empty-state">
+                                        <span class="empty-icon">📍</span>
+                                        <p>No business leads collected yet. Launch scanner to populate results.</p>
+                                    </div>
+                                </td>
                             </tr>
                         `;
                         btnDownload.disabled = true;
@@ -264,23 +272,88 @@ function scheduleReconnect() {
     }
 }
 
-// Append logs to our terminal widget
+// UI Status Sync
+function updateAppStatus(status) {
+    const badge = document.getElementById('app-status-badge');
+    const dot = document.getElementById('app-status-dot');
+    const text = document.getElementById('app-status-text');
+
+    if (!badge || !text) return;
+
+    badge.className = 'scanner-status-pill';
+
+    if (status === 'RUNNING') {
+        badge.classList.add('running');
+        text.textContent = 'RUNNING';
+    } else if (status === 'PAUSED') {
+        badge.classList.add('paused');
+        text.textContent = 'PAUSED';
+    } else {
+        badge.classList.add('stopped');
+        text.textContent = 'STOPPED';
+    }
+}
+
+// Toast Notification System
+function showToast(message, type = 'info') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const toast = document.createElement('div');
+    toast.className = `toast toast-${type}`;
+    
+    let icon = 'ℹ️';
+    if (type === 'success') icon = '✅';
+    if (type === 'error') icon = '❌';
+    if (type === 'warning') icon = '⚠️';
+
+    toast.innerHTML = `<span>${icon}</span> <span>${escapeHtml(message)}</span>`;
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(10px)';
+        toast.style.transition = 'all 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+    }, 3500);
+}
+
+// Append logs to our terminal widget with color coding
 function appendLog(timestamp, message) {
     const isSystem = timestamp === 'System';
     const logLine = document.createElement('div');
-    logLine.className = `log-line ${isSystem ? 'system' : ''}`;
+    
+    let typeClass = 'log-info';
+    const lower = (message || '').toLowerCase();
+    if (lower.includes('error') || lower.includes('failed') || lower.includes('aborted') || lower.includes('exception')) {
+        typeClass = 'log-error';
+    } else if (lower.includes('warn') || lower.includes('pause') || lower.includes('stopped') || lower.includes('cap limit')) {
+        typeClass = 'log-warning';
+    } else if (lower.includes('found new') || lower.includes('connected') || lower.includes('success') || lower.includes('completed') || lower.includes('ready')) {
+        typeClass = 'log-success';
+    } else if (isSystem || lower.includes('[system]')) {
+        typeClass = 'log-system';
+    }
+
+    logLine.className = `log-line ${typeClass}`;
     logLine.textContent = isSystem ? `[${timestamp}] ${message}` : `[${timestamp}] ${message}`;
     
-    terminalLogs.appendChild(logLine);
-    
-    // Auto-scroll terminal to bottom
-    terminalLogs.scrollTop = terminalLogs.scrollHeight;
+    if (terminalLogs) {
+        terminalLogs.appendChild(logLine);
+        const toggleAutoScroll = document.getElementById('toggle-autoscroll');
+        if (!toggleAutoScroll || toggleAutoScroll.checked) {
+            terminalLogs.scrollTop = terminalLogs.scrollHeight;
+        }
+    }
 }
 
 // Update progress indicators
 function updateProgressBar(percent, msg) {
-    progressBar.style.width = `${percent}%`;
-    progressText.textContent = `${percent}%`;
+    if (progressBar) progressBar.style.width = `${percent}%`;
+    if (progressText) progressText.textContent = `${percent}%`;
+    
+    const sidebarFill = document.getElementById('sidebar-cap-fill');
+    if (sidebarFill) sidebarFill.style.width = `${percent}%`;
 }
 
 // Handle WhatsApp message send status
@@ -422,19 +495,23 @@ function handleScrapeFinished(data) {
     isScraping = false;
     btnStart.disabled = false;
     btnPause.disabled = true;
-    btnPause.innerHTML = '<span class="icon">⏸️</span> Pause';
-    btnPause.className = 'btn btn-warning';
+    btnPause.innerHTML = '<span>⏸️</span> Pause';
+    btnPause.className = 'btn btn-amber-pause';
     btnStop.disabled = true;
     
-    // Reset form states
+    // Reset form states & status
     toggleInputs(false);
+    updateAppStatus('STOPPED');
 
     if (data.stopped) {
         appendLog('System', 'Scraper stopped by user request.');
+        showToast('Scanner stopped', 'warning');
     } else if (data.success) {
         appendLog('System', 'Scraper finished scanning all targets.');
+        showToast('Scanner finished successfully!', 'success');
     } else {
         appendLog('System', `Scraper finished with error: ${data.error}`);
+        showToast(`Scanner error: ${data.error}`, 'error');
     }
 }
 
@@ -442,15 +519,19 @@ function handleScrapeFinished(data) {
 function handleScrapePaused(data) {
     const { paused } = data;
     if (paused) {
-        btnPause.innerHTML = '<span class="icon">▶️</span> Resume';
-        btnPause.className = 'btn btn-success';
+        btnPause.innerHTML = '<span>▶️</span> Resume';
+        btnPause.className = 'btn btn-primary';
         appendLog('System', 'Scanner and queue paused.');
         toggleInputs(true, true);
+        updateAppStatus('PAUSED');
+        showToast('Scanner paused', 'warning');
     } else {
-        btnPause.innerHTML = '<span class="icon">⏸️</span> Pause';
-        btnPause.className = 'btn btn-warning';
+        btnPause.innerHTML = '<span>⏸️</span> Pause';
+        btnPause.className = 'btn btn-amber-pause';
         appendLog('System', 'Scanner and queue resumed.');
         toggleInputs(true, false);
+        updateAppStatus('RUNNING');
+        showToast('Scanner resumed', 'info');
     }
 }
 
@@ -464,11 +545,13 @@ function handleScrapeState(data) {
         toggleInputs(true, data.isPaused);
         
         if (data.isPaused) {
-            btnPause.innerHTML = '<span class="icon">▶️</span> Resume';
-            btnPause.className = 'btn btn-success';
+            btnPause.innerHTML = '<span>▶️</span> Resume';
+            btnPause.className = 'btn btn-primary';
+            updateAppStatus('PAUSED');
         } else {
-            btnPause.innerHTML = '<span class="icon">⏸️</span> Pause';
-            btnPause.className = 'btn btn-warning';
+            btnPause.innerHTML = '<span>⏸️</span> Pause';
+            btnPause.className = 'btn btn-amber-pause';
+            updateAppStatus('RUNNING');
         }
 
         // Restore active search configuration in form fields
@@ -506,10 +589,11 @@ function handleScrapeState(data) {
     } else {
         btnStart.disabled = false;
         btnPause.disabled = true;
-        btnPause.innerHTML = '<span class="icon">⏸️</span> Pause';
-        btnPause.className = 'btn btn-warning';
+        btnPause.innerHTML = '<span>⏸️</span> Pause';
+        btnPause.className = 'btn btn-amber-pause';
         btnStop.disabled = true;
         toggleInputs(false);
+        updateAppStatus('STOPPED');
 
         // Hide session count badge
         const sessionCountBadge = document.getElementById('session-count');
@@ -810,13 +894,14 @@ searchForm.addEventListener('submit', (e) => {
     btnPause.disabled = false;
     btnStop.disabled = false;
     toggleInputs(true);
+    updateAppStatus('RUNNING');
+    showToast('🚀 Scanner started! Fetching leads...', 'success');
 });
 
 btnPause.addEventListener('click', () => {
     if (!isScraping) return;
     
-    // Toggled state check: if the button is success (Resume state), trigger resume, else pause
-    const isCurrentlyPaused = btnPause.classList.contains('btn-success');
+    const isCurrentlyPaused = btnPause.classList.contains('btn-primary');
     if (isCurrentlyPaused) {
         ws.send(JSON.stringify({ type: 'resume-scrape' }));
     } else {
@@ -827,6 +912,7 @@ btnPause.addEventListener('click', () => {
 btnStop.addEventListener('click', () => {
     if (!isScraping) return;
     ws.send(JSON.stringify({ type: 'stop-scrape' }));
+    showToast('⏹️ Stopping scanner...', 'warning');
 });
 
 // WhatsApp Queue HUD Minimization toggler
@@ -901,6 +987,7 @@ btnRecheckWa.addEventListener('click', () => {
     const yes = confirm(`Are you sure you want to verify WhatsApp registration status for all ${scrapedLeads.length} leads? This will check them sequentially.`);
     if (yes) {
         ws.send(JSON.stringify({ type: 'whatsapp-recheck-all' }));
+        showToast('🔄 Rechecking WhatsApp registration...', 'info');
     }
 });
 
@@ -909,6 +996,7 @@ btnClearDb.addEventListener('click', () => {
     const yes = confirm('Are you sure you want to permanently clear all scraped leads from disk and reset the dashboard? This action cannot be undone.');
     if (yes) {
         ws.send(JSON.stringify({ type: 'clear-leads-db' }));
+        showToast('🗑️ Lead database cleared', 'warning');
     }
 });
 
@@ -1010,6 +1098,7 @@ btnDownload.addEventListener('click', () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    showToast(`📊 Exported ${scrapedLeads.length} leads to Excel`, 'success');
 });
 
 // CSV Export logic
@@ -1055,7 +1144,30 @@ btnDownloadCsv.addEventListener('click', () => {
     link.click();
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
+    showToast(`📄 Exported ${scrapedLeads.length} leads to CSV`, 'success');
 });
+
+// Clear console log listener
+const btnClearTerminal = document.getElementById('btn-clear-terminal');
+if (btnClearTerminal) {
+    btnClearTerminal.addEventListener('click', () => {
+        if (terminalLogs) terminalLogs.innerHTML = '';
+        showToast('Console logs cleared', 'info');
+    });
+}
+
+// Live table search input listener
+const inputTableSearch = document.getElementById('input-table-search');
+if (inputTableSearch) {
+    inputTableSearch.addEventListener('input', () => {
+        const query = inputTableSearch.value.toLowerCase().trim();
+        const rows = resultsTbody.querySelectorAll('tr:not(.empty-row)');
+        rows.forEach(row => {
+            const text = row.textContent.toLowerCase();
+            row.style.display = text.includes(query) ? '' : 'none';
+        });
+    });
+}
 
 // Multi-device select UI handler
 function handleWhatsAppDevicesList(data) {
